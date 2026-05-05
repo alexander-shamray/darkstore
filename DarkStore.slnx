@@ -1,0 +1,45 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/ANALYSIS_AND_CHANGES.md" />
+    <File Path="docs/AUTH_AND_IDENTITY.md" />
+    <File Path="docs/BRAND_GUIDELINES.md" />
+    <File Path="docs/COMPETITOR_ANALYSIS.md" />
+    <File Path="docs/CONFIGURATION_GUIDE.md" />
+    <File Path="docs/CUSTOMER_JOURNEY_MAP.md" />
+    <File Path="docs/CUSTOMER_SUPPORT_GUIDE.md" />
+    <File Path="docs/DARK_STORE_PROJECT_SUMMARY.md" />
+    <File Path="docs/DATABASE_SCHEMA.md" />
+    <File Path="docs/FINANCIAL_MODEL.md" />
+    <File Path="docs/GROWTH_HACKS.md" />
+    <File Path="docs/IMPROVEMENT_PLAN.md" />
+    <File Path="docs/index.md" />
+    <File Path="docs/INDEX_OPERATIONS.md" />
+    <File Path="docs/INDEX_TECHNICAL.md" />
+    <File Path="docs/INTEGRATIONS.md" />
+    <File Path="docs/LEGAL_REQUIREMENTS.md" />
+    <File Path="docs/LOGGING_AND_AUDIT_STRATEGY.md" />
+    <File Path="docs/MANUAL_ACTIONS.md" />
+    <File Path="docs/MARKETING_STRATEGY.md" />
+    <File Path="docs/OPERATIONS_MANUAL.md" />
+    <File Path="docs/PROJECT_CREATION_STEPS.md" />
+    <File Path="docs/RISKS_AND_MITIGATION.md" />
+    <File Path="docs/ROADMAP_12_MONTHS.md" />
+    <File Path="docs/SOLUTION_COMPARISON.md" />
+    <File Path="docs/TEAM_STRUCTURE.md" />
+    <File Path="docs/TECH_STACK.md" />
+    <File Path="docs/TESTING_STRATEGY.md" />
+    <File Path="docs/Костанай.pdf" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/DarkStore.API/DarkStore.API.csproj" />
+    <Project Path="src/DarkStore.Application/DarkStore.Application.csproj" />
+    <Project Path="src/DarkStore.Domain/DarkStore.Domain.csproj" />
+    <Project Path="src/DarkStore.Infrastructure/DarkStore.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DarkStore.UnitTests/DarkStore.UnitTests.csproj" />
+  </Folder>
+</Solution>

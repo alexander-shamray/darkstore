@@ -1,0 +1,397 @@
+﻿name: 🧪 Tests — Full Suite
+
+# Полный тест пайплайн:
+#   1. backend-unit        — Unit + Architecture тесты (быстро, < 2мин)
+#   2. backend-integration — Integration тесты с Testcontainers (SQL Server + Redis)
+#   3. frontend-unit       — Angular Jest тесты
+#   4. coverage-report     — Объединённый отчёт покрытия + Quality Gate
+#
+# Триггеры:
+#   - PR → main (блокирует мерж при провале)
+#   - push → main (уже после мержа, для верификации)
+#
+# Требует Docker на ubuntu-latest (Testcontainers) — доступен в GitHub-hosted runners.
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  NODE_VERSION: '22.x'
+  # Порог покрытия (% строк). Блокирует PR при провале.
+  COVERAGE_THRESHOLD: '70'
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # JOB 1: Backend Unit Tests + Architecture Tests
+  # Самый быстрый job — выполняется первым, блокирует остальные при провале
+  # ─────────────────────────────────────────────────────────────────────────────
+  backend-unit:
+    name: 🔬 Backend — Unit & Architecture Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx') }}
+          restore-keys: ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Check code formatting (blocks PR with formatting violations)
+        run: dotnet format --verify-no-changes --verbosity diagnostic
+
+      - name: Build (Release — без re-compile в тестах)
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run Unit Tests with coverage
+        run: |
+          dotnet test tests/DarkStore.UnitTests/DarkStore.UnitTests.csproj \
+            --configuration Release \
+            --no-build \
+            --verbosity normal \
+            --logger "trx;LogFileName=unit-results.trx" \
+            --logger "github" \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./coverage/unit \
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+
+      - name: Run Architecture Tests
+        run: |
+          dotnet test tests/DarkStore.ArchitectureTests/DarkStore.ArchitectureTests.csproj \
+            --configuration Release \
+            --no-build \
+            --verbosity normal \
+            --logger "trx;LogFileName=arch-results.trx" \
+            --logger "github" \
+            --results-directory ./coverage/architecture
+
+      - name: Upload Unit Test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unit-test-results
+          path: |
+            ./coverage/unit/*.trx
+            ./coverage/architecture/*.trx
+          retention-days: 14
+
+      - name: Upload Unit coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-unit
+          path: ./coverage/unit/**/coverage.cobertura.xml
+          retention-days: 14
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # JOB 2: Backend Integration Tests (Testcontainers — требует Docker)
+  # Запускается параллельно с frontend-unit, зависит от backend-unit
+  # ─────────────────────────────────────────────────────────────────────────────
+  backend-integration:
+    name: 🔗 Backend — Integration Tests
+    runs-on: ubuntu-latest
+    needs: backend-unit
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx') }}
+          restore-keys: ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build (Release)
+        run: dotnet build --configuration Release --no-restore
+
+      # Docker уже доступен на ubuntu-latest — Testcontainers использует его автоматически
+      - name: Verify Docker is available (Testcontainers)
+        run: docker info
+
+      - name: Pull Testcontainer images (кэш)
+        run: |
+          docker pull mcr.microsoft.com/mssql/server:2022-latest &
+          docker pull redis:7-alpine &
+          wait
+
+      - name: Run Integration Tests with coverage
+        run: |
+          dotnet test tests/DarkStore.IntegrationTests/DarkStore.IntegrationTests.csproj \
+            --configuration Release \
+            --no-build \
+            --verbosity normal \
+            --logger "trx;LogFileName=integration-results.trx" \
+            --logger "github" \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./coverage/integration \
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+        env:
+          # Testcontainers — использовать Docker-in-Docker (default на GitHub runners)
+          TESTCONTAINERS_RYUK_DISABLED: false
+          DOTNET_ENVIRONMENT: Test
+
+      - name: Upload Integration Test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-test-results
+          path: ./coverage/integration/*.trx
+          retention-days: 14
+
+      - name: Upload Integration coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-integration
+          path: ./coverage/integration/**/coverage.cobertura.xml
+          retention-days: 14
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # JOB 3: Frontend Unit Tests (Angular + Jest)
+  # Запускается параллельно с backend-integration
+  # ─────────────────────────────────────────────────────────────────────────────
+  frontend-unit:
+    name: 🅰️ Frontend — Unit Tests (Jest)
+    runs-on: ubuntu-latest
+    needs: backend-unit
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: npm audit (blocks on high/critical CVEs)
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
+      - name: Build Angular (проверка TypeScript компиляции)
+        run: npm run build -- --configuration production
+
+      - name: Run Jest Unit Tests with coverage
+        run: |
+          npm run test -- \
+            --ci \
+            --coverage \
+            --coverageReporters=cobertura \
+            --coverageReporters=text-summary \
+            --reporters=default \
+            --reporters=jest-junit
+        env:
+          JEST_JUNIT_OUTPUT_DIR: ./test-results
+          JEST_JUNIT_OUTPUT_NAME: frontend-unit-results.xml
+
+      - name: Upload Frontend test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frontend-unit-results
+          path: frontend/test-results/frontend-unit-results.xml
+          retention-days: 14
+
+      - name: Upload Frontend coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-frontend
+          path: frontend/coverage/cobertura-coverage.xml
+          retention-days: 14
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # JOB 4: Coverage Report + Quality Gate
+  # Объединяет покрытие из всех job и проверяет пороги
+  # ─────────────────────────────────────────────────────────────────────────────
+  coverage-report:
+    name: 📊 Coverage Report & Quality Gate
+    runs-on: ubuntu-latest
+    needs: [ backend-unit, backend-integration, frontend-unit ]
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: coverage-*
+          path: ./all-coverage
+          merge-multiple: true
+
+      - name: Setup .NET (для ReportGenerator)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate combined HTML coverage report (Backend)
+        run: |
+          reportgenerator \
+            -reports:"./all-coverage/**/coverage.cobertura.xml" \
+            -targetdir:"./coverage-report/backend" \
+            -reporttypes:"Html;Cobertura;MarkdownSummaryGithub;Badges" \
+            -title:"DarkStore Backend Coverage" \
+            -historydir:"./coverage-history"
+
+      - name: Check Backend coverage threshold
+        id: coverage-check
+        run: |
+          # Извлечь line-rate из объединённого Cobertura XML
+          COVERAGE=$(python3 -c "
+          import xml.etree.ElementTree as ET
+          tree = ET.parse('./coverage-report/backend/Cobertura.xml')
+          root = tree.getroot()
+          rate = float(root.attrib.get('line-rate', 0)) * 100
+          print(f'{rate:.1f}')
+          ")
+          echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+          echo "### 📊 Backend Coverage: **${COVERAGE}%** (порог: ${{ env.COVERAGE_THRESHOLD }}%)" >> $GITHUB_STEP_SUMMARY
+
+          # Провалить если ниже порога
+          if (( $(echo "$COVERAGE < ${{ env.COVERAGE_THRESHOLD }}" | bc -l) )); then
+            echo "❌ Coverage ${COVERAGE}% is below threshold ${{ env.COVERAGE_THRESHOLD }}%"
+            exit 1
+          else
+            echo "✅ Coverage ${COVERAGE}% meets threshold ${{ env.COVERAGE_THRESHOLD }}%"
+          fi
+
+      - name: Publish coverage to PR comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request'
+        with:
+          path: coverage-report/backend/SummaryGithub.md
+
+      - name: Upload combined coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-html
+          path: ./coverage-report/
+          retention-days: 30
+
+      - name: Write Job Summary
+        if: always()
+        run: |
+          echo "## 🧪 Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend Unit + Architecture | ${{ needs.backend-unit.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend Integration | ${{ needs.backend-integration.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend Unit (Jest) | ${{ needs.frontend-unit.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📈 Backend Line Coverage: **${{ steps.coverage-check.outputs.coverage }}%** (порог: ${{ env.COVERAGE_THRESHOLD }}%)" >> $GITHUB_STEP_SUMMARY
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # JOB 5: Publish Test Results (аннотации на PR)
+  # ─────────────────────────────────────────────────────────────────────────────
+  publish-test-results:
+    name: 📋 Publish Test Results
+    runs-on: ubuntu-latest
+    needs: [ backend-unit, backend-integration, frontend-unit ]
+    if: always()
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Download backend unit results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-test-results"
+          path: ./test-results
+          merge-multiple: true
+
+      - name: Publish .NET Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: |
+            ./test-results/**/*.trx
+          check_name: "Backend Test Results"
+          comment_mode: always
+          fail_on: "test failures"
+
+      - name: Publish Frontend Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: ./test-results/**/frontend-unit-results.xml
+          check_name: "Frontend Test Results"
+          comment_mode: always
+          fail_on: "test failures"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # JOB 6: CodeQL SAST — Security Analysis (C# + TypeScript)
+  # Free on public repos; required for payment-handling application.
+  # Runs on push to main + all PRs (can be slow, runs in parallel with tests).
+  # ─────────────────────────────────────────────────────────────────────────────
+  codeql:
+    name: 🔐 CodeQL — ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp', 'typescript' ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+
+      - uses: actions/setup-dotnet@v4
+        if: matrix.language == 'csharp'
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build for CodeQL (C#)
+        if: matrix.language == 'csharp'
+        run: dotnet build --configuration Release
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"

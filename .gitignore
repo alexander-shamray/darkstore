@@ -1,0 +1,25 @@
+﻿# MkDocs generated site (публикуется отдельной командой в ветку gh-pages)
+site/
+
+# .NET build output
+**/bin/
+**/obj/
+
+# User secrets & local settings
+**/appsettings.Development.json
+**/secrets.json
+**/*.user
+
+# Rider / VS
+.idea/
+.vs/
+*.DotSettings.user
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+

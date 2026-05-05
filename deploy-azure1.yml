@@ -1,0 +1,127 @@
+name: PR Check — Build and Test
+
+# Быстрый PR check: уязвимости → сборка → unit + arch тесты → покрытие
+# Полный пайплайн (integration + frontend + E2E) — в .github/workflows/test.yml
+# Документация по стратегии тестирования: TESTING_STRATEGY.md
+
+on:
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  NODE_VERSION: '22.x'
+  COVERAGE_THRESHOLD: '70'
+
+jobs:
+  build-and-test:
+    name: 🔨 Build, Vuln Scan & Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.slnx') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Check for vulnerable packages
+        run: dotnet list package --vulnerable --include-transitive 2>&1 | tee vuln.txt; grep -q "has the following vulnerable packages" vuln.txt && exit 1 || exit 0
+
+      - name: Enforce code formatting (dotnet format)
+        run: dotnet format --verify-no-changes --verbosity diagnostic
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run Unit Tests with coverage
+        run: |
+          dotnet test tests/DarkStore.UnitTests/DarkStore.UnitTests.csproj \
+            --configuration Release \
+            --no-build \
+            --verbosity normal \
+            --logger "trx;LogFileName=unit-results.trx" \
+            --logger "github" \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./coverage/unit \
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+
+      - name: Run Architecture Tests
+        run: |
+          dotnet test tests/DarkStore.ArchitectureTests/DarkStore.ArchitectureTests.csproj \
+            --configuration Release \
+            --no-build \
+            --verbosity normal \
+            --logger "trx;LogFileName=arch-results.trx" \
+            --logger "github" \
+            --results-directory ./coverage/architecture
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate coverage report + check threshold
+        run: |
+          reportgenerator \
+            -reports:"./coverage/unit/**/coverage.cobertura.xml" \
+            -targetdir:"./coverage-html" \
+            -reporttypes:"Html;Cobertura;MarkdownSummaryGithub;Badges"
+
+          COVERAGE=$(python3 -c "
+          import xml.etree.ElementTree as ET
+          tree = ET.parse('./coverage-html/Cobertura.xml')
+          root = tree.getroot()
+          rate = float(root.attrib.get('line-rate', 0)) * 100
+          print(f'{rate:.1f}')
+          ")
+          echo "### 📊 Backend Coverage: **${COVERAGE}%** (порог: ${{ env.COVERAGE_THRESHOLD }}%)" >> $GITHUB_STEP_SUMMARY
+
+          if (( $(echo "$COVERAGE < ${{ env.COVERAGE_THRESHOLD }}" | bc -l) )); then
+            echo "❌ Coverage ${COVERAGE}% is below threshold ${{ env.COVERAGE_THRESHOLD }}%"
+            exit 1
+          else
+            echo "✅ Coverage ${COVERAGE}% passes"
+          fi
+
+      - name: Publish coverage summary to PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: always()
+        with:
+          path: coverage-html/SummaryGithub.md
+
+      - name: Publish Test Results annotations
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            ./coverage/unit/*.trx
+            ./coverage/architecture/*.trx
+          check_name: "PR — Unit & Architecture Tests"
+          fail_on: "test failures"
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr-coverage-report
+          path: |
+            ./coverage-html/
+            ./coverage/unit/*.trx
+            ./coverage/architecture/*.trx
+          retention-days: 7

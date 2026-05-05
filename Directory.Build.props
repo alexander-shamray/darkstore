@@ -1,0 +1,36 @@
+﻿<Project>
+  <!--
+    Directory.Build.props — applied to ALL projects in the solution automatically.
+    Centralises quality settings so they can't drift per-project.
+
+    Docs: https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-by-directory
+  -->
+  <PropertyGroup>
+    <!-- Nullable reference types ON everywhere — no silent null deref bugs -->
+    <Nullable>enable</Nullable>
+
+    <!-- Treat all compiler warnings as errors — keeps code clean -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- Latest Roslyn analysis rules (.NET 10) -->
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <!-- Implicit usings ON — less boilerplate -->
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Deterministic builds — reproducible artifacts in CI -->
+    <Deterministic>true</Deterministic>
+
+    <!-- Embedded debug symbols — smaller binaries without separate .pdb files -->
+    <DebugType>embedded</DebugType>
+
+    <!-- Enforce code style on build -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <!-- Test projects — relax TreatWarningsAsErrors to avoid friction in test code -->
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>
+

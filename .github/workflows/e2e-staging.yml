@@ -1,0 +1,202 @@
+﻿name: 🎭 E2E Tests — Staging
+
+# E2E (Playwright) тесты на Staging окружении.
+# Запускается АВТОМАТИЧЕСКИ после успешного деплоя в Staging (из deploy-azure2.yml).
+# Также можно запустить вручную (workflow_dispatch) с выбором target URL.
+#
+# Браузеры: Chromium (Desktop), Pixel 7 (Android Chrome), iPhone 14 (Safari)
+# Критические сценарии: Auth OTP, Catalog → Cart → Checkout, Order Tracking, Payment Redirect
+#
+# При ПРОВАЛЕ E2E:
+#   - Telegram alert отправляется в тот же чат
+#   - Деплой в Production блокируется (deploy-azure2.yml проверяет статус этого workflow)
+#   - Видео и скриншоты упавших тестов загружаются как артефакты
+
+on:
+  # Вызов из deploy-azure2.yml после deploy-staging
+  workflow_call:
+    inputs:
+      staging_url:
+        description: 'URL Staging окружения'
+        required: true
+        type: string
+    secrets:
+      TELEGRAM_CHAT_ID:
+        required: true
+      TELEGRAM_BOT_TOKEN:
+        required: true
+
+  # Ручной запуск для отладки
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'URL для E2E тестов (по умолчанию — Staging)'
+        required: false
+        default: ''
+        type: string
+      test_suite:
+        description: 'Набор тестов'
+        required: false
+        default: 'critical'
+        type: choice
+        options:
+          - critical      # только критические сценарии (~5 мин)
+          - smoke         # smoke тесты (~2 мин)
+          - all           # все тесты (~15 мин)
+
+env:
+  NODE_VERSION: '22.x'
+
+jobs:
+  e2e-tests:
+    name: 🎭 Playwright E2E — ${{ matrix.suite }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false   # продолжать другие suite при провале одного
+      matrix:
+        suite: ${{ fromJSON(
+          github.event_name == 'workflow_dispatch' && inputs.test_suite == 'all'
+          && '["critical", "smoke"]'
+          || github.event_name == 'workflow_dispatch' && inputs.test_suite == 'smoke'
+          && '["smoke"]'
+          || '["critical"]'
+        ) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium webkit
+
+      # Определить целевой URL (workflow_call → staging_url, workflow_dispatch → input или fallback)
+      - name: Resolve target URL
+        id: url
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_call" ]; then
+            echo "url=${{ inputs.staging_url }}" >> $GITHUB_OUTPUT
+          elif [ -n "${{ github.event.inputs.target_url }}" ]; then
+            echo "url=${{ github.event.inputs.target_url }}" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://${{ secrets.AZURE_WEBAPP_NAME_STAGING }}.azurewebsites.net" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Wait for Staging to be ready
+        run: |
+          echo "Проверка доступности Staging: ${{ steps.url.outputs.url }}"
+          for i in {1..12}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ steps.url.outputs.url }}/health" || echo "000")
+            if [ "$STATUS" == "200" ]; then
+              echo "✅ Staging доступен (попытка $i)"
+              break
+            fi
+            echo "⏳ Попытка $i/12 — статус $STATUS. Ожидание 10 сек..."
+            sleep 10
+            if [ $i -eq 12 ]; then
+              echo "❌ Staging недоступен после 2 мин ожидания"
+              exit 1
+            fi
+          done
+
+      - name: Run Playwright E2E Tests — ${{ matrix.suite }}
+        working-directory: frontend
+        run: |
+          npx playwright test \
+            --project=chromium \
+            --project=mobile-chrome \
+            --project=mobile-safari \
+            e2e/${{ matrix.suite }}/ \
+            --reporter=github \
+            --reporter=junit:playwright-results-${{ matrix.suite }}.xml \
+            --reporter=html:playwright-report-${{ matrix.suite }}
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.url.outputs.url }}
+          CI: true
+          # Тестовые учётные данные (отдельный тестовый аккаунт на Staging)
+          E2E_TEST_PHONE: ${{ secrets.E2E_TEST_PHONE }}
+          E2E_TEST_OTP_BYPASS: ${{ secrets.E2E_TEST_OTP_BYPASS }}
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ matrix.suite }}
+          path: |
+            frontend/playwright-report-${{ matrix.suite }}/
+            frontend/playwright-results-${{ matrix.suite }}.xml
+          retention-days: 14
+
+      - name: Notify Telegram — E2E Passed
+        if: success()
+        uses: appleboy/telegram-action@v1.0.0
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ✅ **E2E тесты пройдены** — ${{ matrix.suite }}
+
+            🌐 URL: ${{ steps.url.outputs.url }}
+            🎭 Suite: ${{ matrix.suite }}
+            📱 Браузеры: Chromium, Android Chrome, iPhone Safari
+            🔗 Logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            ---
+            *Dark Store CI/CD*
+
+      - name: Notify Telegram — E2E FAILED
+        if: failure()
+        uses: appleboy/telegram-action@v1.0.0
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ❌ **E2E тесты ПРОВАЛЕНЫ** — ${{ matrix.suite }}
+
+            🌐 URL: ${{ steps.url.outputs.url }}
+            🎭 Suite: ${{ matrix.suite }}
+            ⚠️ **Деплой в Production заблокирован!**
+            🔍 Логи: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            📸 Скриншоты: загружены как артефакт playwright-report-${{ matrix.suite }}
+
+            ---
+            *Dark Store CI/CD*
+
+  publish-e2e-results:
+    name: 📋 Publish E2E Results
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    if: always()
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Download E2E results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: playwright-report-*
+          path: ./e2e-results
+          merge-multiple: true
+
+      - name: Publish E2E Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: ./e2e-results/**/*.xml
+          check_name: "E2E Test Results (Staging)"
+          comment_mode: always
+          fail_on: "test failures"
+

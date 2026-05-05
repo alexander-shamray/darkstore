@@ -1,0 +1,112 @@
+﻿name: 🔄 Rollback Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_sha:
+        description: 'GitHub SHA коммита для отката (скопируй из истории Actions)'
+        required: true
+        type: string
+      environment:
+        description: 'Окружение для отката'
+        required: true
+        default: 'production'
+        type: choice
+        options: ['production', 'staging']
+      reason:
+        description: 'Причина отката (для аудита)'
+        required: true
+        type: string
+
+env:
+  DOTNET_VERSION: '10.0.x'
+
+jobs:
+  rollback:
+    name: 🔄 Rollback → ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Validate SHA input
+        run: |
+          SHA="${{ github.event.inputs.target_sha }}"
+          if [[ ! "$SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "❌ Некорректный SHA: $SHA"
+            exit 1
+          fi
+          echo "✅ SHA валиден: $SHA"
+
+      - name: Download artifact for target SHA
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: deploy-azure2.yml
+          commit: ${{ github.event.inputs.target_sha }}
+          name: app-publish-${{ github.event.inputs.target_sha }}
+          path: ./publish
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy rollback to ${{ github.event.inputs.environment }}
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ github.event.inputs.environment == 'production' && secrets.AZURE_WEBAPP_NAME || secrets.AZURE_WEBAPP_NAME_STAGING }}
+          package: ./publish
+
+      - name: Azure Logout
+        if: always()
+        run: az logout
+
+      - name: Health check after rollback
+        run: |
+          APP_NAME=${{ github.event.inputs.environment == 'production' && secrets.AZURE_WEBAPP_NAME || secrets.AZURE_WEBAPP_NAME_STAGING }}
+          echo "Ожидание запуска..."
+          sleep 20
+          curl -f https://${APP_NAME}.azurewebsites.net/health || exit 1
+          echo "✅ Health check пройден после отката"
+
+      - name: Notify Telegram — Rollback completed
+        uses: appleboy/telegram-action@v1.0.0
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            🔄 **Dark Store — ОТКАТ выполнен**
+
+            📌 Окружение: ${{ github.event.inputs.environment }}
+            ⏪ Откат до SHA: ${{ github.event.inputs.target_sha }}
+            📝 Причина: ${{ github.event.inputs.reason }}
+            👤 Инициатор: ${{ github.actor }}
+            🕐 Время: ${{ github.run_started_at }}
+
+            ---
+            *Dark Store CI/CD*
+
+      - name: Notify Telegram — Rollback FAILED
+        if: failure()
+        uses: appleboy/telegram-action@v1.0.0
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ❌ **Dark Store — ОТКАТ ПРОВАЛИЛСЯ!**
+
+            📌 Окружение: ${{ github.event.inputs.environment }}
+            ⏪ Целевой SHA: ${{ github.event.inputs.target_sha }}
+            👤 Инициатор: ${{ github.actor }}
+            🔍 Логи: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            ⚠️ НЕМЕДЛЕННО проверить состояние приложения!
+            ---
+            *Dark Store CI/CD*
+

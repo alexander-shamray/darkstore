@@ -1,0 +1,121 @@
+site_name: Dark Store — Документация проекта
+site_description: Сервис быстрой доставки продуктов в Костанае. Полная документация для заказчика и команды.
+site_author: Dark Store Team
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: ru
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Тёмная тема
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Светлая тема
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.tabs.link
+    - content.code.copy
+    - toc.follow
+  logo: https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff
+  favicon: https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff
+
+plugins:
+  - search:
+      lang: ru
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - tables
+  - toc:
+      permalink: true
+      title: Содержание
+  - attr_list
+  - md_in_html
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com
+      name: GitHub репозиторий
+  generator: false
+
+copyright: "© 2026 Dark Store. Все права защищены."
+
+nav:
+  - 🏠 Главная: index.md
+
+  - 🎯 О проекте:
+    - Обзор проекта: DARK_STORE_PROJECT_SUMMARY.md
+    - Анализ конкурентов: COMPETITOR_ANALYSIS.md
+    - Сравнение решений: SOLUTION_COMPARISON.md
+
+  - 💰 Бизнес:
+    - Финансовая модель: FINANCIAL_MODEL.md
+    - Структура команды: TEAM_STRUCTURE.md
+    - Путь клиента: CUSTOMER_JOURNEY_MAP.md
+    - Маркетинговая стратегия: MARKETING_STRATEGY.md
+    - Growth Hacking: GROWTH_HACKS.md
+
+  - 📅 Дорожная карта:
+    - Роадмап на 12 месяцев: ROADMAP_12_MONTHS.md
+
+  - ⚙️ Операции:
+    - Операционный индекс: INDEX_OPERATIONS.md
+    - Инструкция по операциям: OPERATIONS_MANUAL.md
+    - Руководство поддержки: CUSTOMER_SUPPORT_GUIDE.md
+
+  - ⚖️ Риски и право:
+    - Риски и митигация: RISKS_AND_MITIGATION.md
+    - Правовые требования: LEGAL_REQUIREMENTS.md
+
+  - 🎨 Бренд:
+    - Гайдлайны бренда: BRAND_GUIDELINES.md
+
+  - 🔧 Технический раздел:
+    - Технический индекс: INDEX_TECHNICAL.md
+    - Технологический стек: TECH_STACK.md
+    - Схема базы данных: DATABASE_SCHEMA.md
+    - Аутентификация и авторизация: AUTH_AND_IDENTITY.md
+    - Интеграции: INTEGRATIONS.md
+    - Конфигурация: CONFIGURATION_GUIDE.md
+    - Логирование и аудит: LOGGING_AND_AUDIT_STRATEGY.md
+    - Стратегия тестирования: TESTING_STRATEGY.md
+    - Создание проекта: PROJECT_CREATION_STEPS.md
+
+  - 📋 Планы и задачи:
+    - Анализ и изменения: ANALYSIS_AND_CHANGES.md
+    - План улучшений: IMPROVEMENT_PLAN.md
+    - Ручные действия (чеклист): MANUAL_ACTIONS.md
+

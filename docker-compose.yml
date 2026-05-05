@@ -1,0 +1,76 @@
+﻿# docker-compose.yml — Local development + integration test environment
+#
+# Spins up both SQL Server instances (Azure SQL + KZ Local) and Redis so
+# developers can run integration tests locally without needing the real
+# Azure subscription or Beeline KZ VPS connection.
+#
+# Usage:
+#   docker-compose up -d         # start all services in background
+#   docker-compose down -v       # stop + remove volumes (clean slate)
+#   docker-compose logs -f sql   # follow Azure SQL logs
+#
+# Connection strings for local dev (appsettings.Development.json):
+#   AzureConnection:  Server=localhost,1433;...
+#   KzLocalConnection: Server=localhost,1434;...
+#   Redis:             localhost:6379
+
+version: "3.9"
+
+services:
+
+  # ── Azure SQL (business data — mirrors Azure SQL Database) ───────────────
+  sql-azure:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: darkstore-sql-azure
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "DarkStore_Dev_2026!"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-azure-data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "DarkStore_Dev_2026!" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ── KZ Local DB (personal data — mirrors on-prem Beeline KZ VPS server) ──
+  sql-kzlocal:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: darkstore-sql-kzlocal
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "DarkStore_Dev_2026!"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1434:1433"   # exposed on 1434 to avoid clash with sql-azure
+    volumes:
+      - sql-kzlocal-data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "DarkStore_Dev_2026!" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ── Redis (Azure Cache for Redis — Standard C1 equivalent) ───────────────
+  redis:
+    image: redis:7-alpine
+    container_name: darkstore-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  sql-azure-data:
+  sql-kzlocal-data:
+  redis-data:
+

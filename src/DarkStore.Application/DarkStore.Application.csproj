@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\DarkStore.Domain\DarkStore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ── CQRS ── -->
+    <PackageReference Include="JetBrains.Annotations" Version="2025.2.4" />
+    <PackageReference Include="MediatR" Version="14.1.0" />
+
+    <!-- ── Validation ── -->
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+
+    <!-- ── Mapping (source generators, zero-reflection) ── -->
+    <PackageReference Include="Mapster" Version="10.0.7" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="10.0.7" />
+
+    <!-- ── EF Core abstractions (DbSet / IQueryable for IAppDbContext interface) ── -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
+
+    <!--
+      1.C (Q3+): Consider replacing MediatR with Mediator (source-gen) for zero-runtime-overhead dispatch.
+      NuGet: Mediator / Mediator.Abstractions — evaluate when team grows or perf profiling shows MediatR overhead.
+      Migration is mechanical: IRequest<T> → IRequest<T>, IRequestHandler → IRequestHandler (different namespace),
+      pipeline behaviours become IPipelineBehavior<,> — API stays identical, no handler rewrites needed.
+    -->
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+
+
