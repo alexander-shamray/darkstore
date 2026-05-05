@@ -1,0 +1,128 @@
+﻿/* =====================================================
+   Dark Store — кастомная палитра
+   Светлая тема: тёплый slate-blue + мягкий teal-акцент
+   Тёмная тема:  глубокий charcoal + тот же teal-акцент
+   ===================================================== */
+
+/* ---------- Светлая тема ---------- */
+[data-md-color-scheme="default"] {
+  /* Основной цвет (навигация, заголовки, кнопки) */
+  --md-primary-fg-color:           #37474f;   /* blue-grey 800 */
+  --md-primary-fg-color--light:    #546e7a;   /* blue-grey 600 */
+  --md-primary-fg-color--dark:     #263238;   /* blue-grey 900 */
+  --md-primary-bg-color:           #ffffff;
+  --md-primary-bg-color--light:    #ffffffb3;
+
+  /* Акцентный цвет (ссылки, hover, чекбоксы) */
+  --md-accent-fg-color:            #00897b;   /* teal 600 */
+  --md-accent-fg-color--transparent: #00897b1a;
+  --md-accent-bg-color:            #ffffff;
+  --md-accent-bg-color--light:     #ffffffb3;
+
+  /* Фон */
+  --md-default-bg-color:           #fafafa;
+
+  /* Типографика текста */
+  --md-typeset-color:              #37474f;
+  --md-typeset-a-color:            #00695c;   /* teal 800 — ненавязчивый */
+  --md-typeset-mark-color:         #b2dfdb55; /* teal highlight */
+
+  /* Sidebar */
+  --md-nav-item--active-color:     #00897b;
+}
+
+/* ---------- Тёмная тема ---------- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:           #37474f;
+  --md-primary-fg-color--light:    #546e7a;
+  --md-primary-fg-color--dark:     #263238;
+  --md-primary-bg-color:           #ffffff;
+  --md-primary-bg-color--light:    #ffffffb3;
+
+  --md-accent-fg-color:            #4db6ac;   /* teal 300 — чуть ярче на тёмном */
+  --md-accent-fg-color--transparent: #4db6ac1a;
+  --md-accent-bg-color:            #ffffff;
+
+  /* Фон */
+  --md-default-bg-color:           #1e272e;
+  --md-default-bg-color--light:    #252f38;
+  --md-default-bg-color--lighter:  #2c3843;
+  --md-default-bg-color--lightest: #34424f;
+
+  /* Текст в тёмной теме */
+  --md-typeset-a-color:            #4db6ac;
+  --md-typeset-mark-color:         #4db6ac33;
+  --md-nav-item--active-color:     #4db6ac;
+}
+
+/* =====================================================
+   Дополнительные правки UI
+   ===================================================== */
+
+/* Заголовок: чуть мягче */
+.md-header {
+  background-color: #37474f !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,.18);
+}
+
+/* Вкладки навигации */
+.md-tabs {
+  background-color: #2e3f48 !important;
+}
+.md-tabs__item--active .md-tabs__link,
+.md-tabs__link:hover {
+  color: #b2dfdb !important;
+}
+
+/* Карточки на главной (grid cards) */
+.md-typeset .grid.cards > :is(ul, ol) > li,
+.md-typeset .grid > .card {
+  border: 1px solid #b0bec522 !important;
+  border-radius: 10px !important;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.md-typeset .grid.cards > :is(ul, ol) > li:hover,
+.md-typeset .grid > .card:hover {
+  box-shadow: 0 4px 16px rgba(0,137,123,.15) !important;
+  border-color: #4db6ac55 !important;
+}
+
+/* Admonitions — убавляем яркость */
+.md-typeset .admonition,
+.md-typeset details {
+  border-left-width: 3px !important;
+}
+
+/* Кнопки поиска и search highlight */
+.md-search__input {
+  border-radius: 6px !important;
+}
+
+/* Таблицы */
+.md-typeset table:not([class]) th {
+  background-color: #37474f !important;
+  color: #fff !important;
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: #263238 !important;
+}
+
+/* Код — чуть менее резкий фон */
+.md-typeset code {
+  background-color: #eceff133 !important;
+  color: #37474f !important;
+  border-radius: 4px;
+}
+[data-md-color-scheme="slate"] .md-typeset code {
+  background-color: #37474f77 !important;
+  color: #b2dfdb !important;
+}
+
+/* Footer */
+.md-footer {
+  background-color: #263238 !important;
+}
+.md-footer-meta {
+  background-color: #1c272d !important;
+}
+
