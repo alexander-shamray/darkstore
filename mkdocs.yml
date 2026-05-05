@@ -65,6 +65,9 @@ markdown_extensions:
   - toc:
       permalink: true
       title: Содержание
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - attr_list
   - md_in_html
 
