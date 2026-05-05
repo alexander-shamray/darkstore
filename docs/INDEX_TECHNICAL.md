@@ -33,7 +33,7 @@
 | 2.5 | [TESTING_STRATEGY.md](./TESTING_STRATEGY.md) | Пирамида тестирования, **TDD (Red→Green→Refactor)** с примерами на C# и TypeScript, Unit/Integration/Architecture/E2E тесты, Quality Gates, Chaos Testing |
 
 > **TDD-правило:** PR на изменение доменной логики без тестов не принимается — блокируется Quality Gate в `deploy-azure1.yml`.  
-> Краткий путь: `TESTING_STRATEGY.md` → раздел **[TDD — разработка через тестирование](#tdd)**
+> Краткий путь: [TESTING_STRATEGY.md](./TESTING_STRATEGY.md) → раздел **TDD — разработка через тестирование**
 
 ---
 
@@ -57,11 +57,11 @@
 
 ## 🚢 Шаг 5 — CI/CD и деплой (10 мин)
 
-| # | Документ | Что даёт |
+| # | Файл | Что даёт |
 |---|---------|---------|
-| 5.1 | [deploy-azure1.yml](./deploy-azure1.yml) | PR Check workflow — сборка + тесты + CVE-сканирование на каждый Pull Request |
-| 5.2 | [deploy-azure2.yml](./deploy-azure2.yml) | Деплой: build → staging (авто) → production (ручное подтверждение); OIDC, health check, Telegram; retention 30 дней |
-| 5.3 | [.github/workflows/rollback.yml](./.github/workflows/rollback.yml) | Откат production/staging на любой предыдущий SHA с Telegram-уведомлением (`workflow_dispatch`) |
+| 5.1 | `deploy-azure1.yml` | PR Check workflow — сборка + тесты + CVE-сканирование на каждый Pull Request |
+| 5.2 | `deploy-azure2.yml` | Деплой: build → staging (авто) → production (ручное подтверждение); OIDC, health check, Telegram; retention 30 дней |
+| 5.3 | `.github/workflows/rollback.yml` | Откат production/staging на любой предыдущий SHA с Telegram-уведомлением (`workflow_dispatch`) |
 
 ---
 

@@ -202,12 +202,3 @@ BackgroundJob.Schedule<SupportService>(
 5. **Эскалируйте сложные случаи** вовремя.
 
 ---
-
-**Файл готов.**
-
-Хочешь, я сделаю следующий документ? Например:
-- `BRAND_GUIDELINES.md`
-- `LEGAL_REQUIREMENTS.md`
-- `ONBOARDING_CHECKLIST.md`
-
-Или нужно что-то добавить/изменить в этом файле?
