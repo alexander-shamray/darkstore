@@ -10,15 +10,15 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep orange
-      accent: orange
+      primary: blue-grey
+      accent: teal
       toggle:
         icon: material/brightness-7
         name: Тёмная тема
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep orange
-      accent: orange
+      primary: blue-grey
+      accent: teal
       toggle:
         icon: material/brightness-4
         name: Светлая тема
@@ -39,8 +39,8 @@ theme:
     - content.tabs.link
     - content.code.copy
     - toc.follow
-  logo: https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff
-  favicon: https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff
+  logo: https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=37474f&textColor=ffffff
+  favicon: https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=37474f&textColor=ffffff
 
 plugins:
   - search:
@@ -63,6 +63,9 @@ markdown_extensions:
       title: Содержание
   - attr_list
   - md_in_html
+
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   social:
