@@ -1,0 +1,4273 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Сервис быстрой доставки продуктов в Костанае. Полная документация для заказчика и команды.">
+      
+      
+        <meta name="author" content="Dark Store Team">
+      
+      
+      
+        <link rel="prev" href="../INDEX_TECHNICAL/">
+      
+      
+        <link rel="next" href="../DATABASE_SCHEMA/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Технологический стек - Dark Store — Документация проекта</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tech-stack" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href=".." title="Dark Store — Документация проекта" class="md-header__button md-logo" aria-label="Dark Store — Документация проекта" data-md-component="logo">
+      
+  <img src="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dark Store — Документация проекта
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Технологический стек
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Тёмная тема"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Тёмная тема" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Светлая тема"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Светлая тема" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Поделиться" aria-label="Поделиться" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../DARK_STORE_PROJECT_SUMMARY/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🎯 О проекте
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../FINANCIAL_MODEL/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  💰 Бизнес
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ROADMAP_12_MONTHS/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  📅 Дорожная карта
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../INDEX_OPERATIONS/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ⚙️ Операции
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../RISKS_AND_MITIGATION/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ⚖️ Риски и право
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../BRAND_GUIDELINES/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🎨 Бренд
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../INDEX_TECHNICAL/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🔧 Технический раздел
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ANALYSIS_AND_CHANGES/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  📋 Планы и задачи
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Dark Store — Документация проекта" class="md-nav__button md-logo" aria-label="Dark Store — Документация проекта" data-md-component="logo">
+      
+  <img src="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff" alt="logo">
+
+    </a>
+    Dark Store — Документация проекта
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Главная
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎯 О проекте
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎯 О проекте
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DARK_STORE_PROJECT_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Обзор проекта
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COMPETITOR_ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Анализ конкурентов
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SOLUTION_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сравнение решений
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💰 Бизнес
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💰 Бизнес
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FINANCIAL_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финансовая модель
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEAM_STRUCTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Структура команды
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUSTOMER_JOURNEY_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Путь клиента
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MARKETING_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маркетинговая стратегия
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GROWTH_HACKS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Growth Hacking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 Дорожная карта
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📅 Дорожная карта
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROADMAP_12_MONTHS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Роадмап на 12 месяцев
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚙️ Операции
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚙️ Операции
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDEX_OPERATIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Операционный индекс
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS_MANUAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция по операциям
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUSTOMER_SUPPORT_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Руководство поддержки
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚖️ Риски и право
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚖️ Риски и право
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RISKS_AND_MITIGATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Риски и митигация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LEGAL_REQUIREMENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Правовые требования
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎨 Бренд
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎨 Бренд
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BRAND_GUIDELINES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Гайдлайны бренда
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔧 Технический раздел
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔧 Технический раздел
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDEX_TECHNICAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технический индекс
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технологический стек
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технологический стек
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Общая архитектура
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-no94-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1а. Гибридная архитектура хранения данных (Закон РК №94-V)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Backend (Серверная часть)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2а. Разбор альтернатив — почему именно так
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2а. Разбор альтернатив — почему именно так">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ef-core-dapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EF Core → оставить, но добавить Dapper для чтений
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swashbuckle-scalar-microsoftaspnetcoreopenapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swashbuckle → заменить на Scalar + Microsoft.AspNetCore.OpenApi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mediatr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MediatR → оставить, но с ограничениями
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluentvalidation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FluentValidation → оставить
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapster-7x-12x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapster → оставить (версия исправлена: 7.x, не 12.x)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Нужна ли очередь сообщений?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signalr-real-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SignalR — добавить для real-time статуса
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2б. Resilience — устойчивость внешних вызовов (обязательно)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-request-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2в. Глобальная обработка ошибок и Request Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2г. Стратегия кэширования Redis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2а. Стратегия версионирования API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2а. Стратегия версионирования API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правила введения новой версии
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sunset-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Жизненный цикл версий (Sunset Policy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка в Program.cs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пример контроллера
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalar-openapi-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scalar (OpenAPI UI) с версионированием
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Frontend (Клиентская часть)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Frontend (Клиентская часть)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ngrxsignals-ngrx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Почему @ngrx/signals а не классический NgRx?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. База данных
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. База данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kz-local-no94-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🇰🇿 KZ Local — Персональные данные (обязательно в РК по Закону №94-V)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☁️ Azure — Бизнес-данные
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Хостинг и Инфраструктура
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Хостинг и Инфраструктура">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kz-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🇰🇿 KZ Local (персональные данные)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☁️ Azure (бизнес-логика и инфраструктура)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cicd-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. CI/CD и DevOps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. CI/CD и DevOps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iac-bicep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IaC — Bicep (обязательный артефакт до запуска)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. ИИ и Интеллектуальные сервисы
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Интеграции
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Инструменты разработки
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9а. Тестовый стек
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9а. Тестовый стек">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-angular-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (Angular 20)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI Quality Gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Почему выбран именно этот стек?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. План эволюции стека
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATABASE_SCHEMA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Схема базы данных
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AUTH_AND_IDENTITY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Аутентификация и авторизация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Интеграции
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигурация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LOGGING_AND_AUDIT_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Логирование и аудит
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Стратегия тестирования
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PROJECT_CREATION_STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Создание проекта
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Планы и задачи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📋 Планы и задачи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ANALYSIS_AND_CHANGES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Анализ и изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IMPROVEMENT_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    План улучшений
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MANUAL_ACTIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ручные действия (чеклист)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Общая архитектура
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-no94-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1а. Гибридная архитектура хранения данных (Закон РК №94-V)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Backend (Серверная часть)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2а. Разбор альтернатив — почему именно так
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2а. Разбор альтернатив — почему именно так">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ef-core-dapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EF Core → оставить, но добавить Dapper для чтений
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swashbuckle-scalar-microsoftaspnetcoreopenapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swashbuckle → заменить на Scalar + Microsoft.AspNetCore.OpenApi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mediatr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MediatR → оставить, но с ограничениями
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluentvalidation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FluentValidation → оставить
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapster-7x-12x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapster → оставить (версия исправлена: 7.x, не 12.x)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Нужна ли очередь сообщений?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signalr-real-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SignalR — добавить для real-time статуса
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2б. Resilience — устойчивость внешних вызовов (обязательно)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-request-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2в. Глобальная обработка ошибок и Request Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2г. Стратегия кэширования Redis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2а. Стратегия версионирования API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2а. Стратегия версионирования API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Правила введения новой версии
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sunset-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Жизненный цикл версий (Sunset Policy)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка в Program.cs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пример контроллера
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalar-openapi-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scalar (OpenAPI UI) с версионированием
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Frontend (Клиентская часть)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Frontend (Клиентская часть)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ngrxsignals-ngrx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Почему @ngrx/signals а не классический NgRx?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. База данных
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. База данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kz-local-no94-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🇰🇿 KZ Local — Персональные данные (обязательно в РК по Закону №94-V)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☁️ Azure — Бизнес-данные
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Хостинг и Инфраструктура
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Хостинг и Инфраструктура">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kz-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🇰🇿 KZ Local (персональные данные)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ☁️ Azure (бизнес-логика и инфраструктура)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cicd-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. CI/CD и DevOps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. CI/CD и DevOps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iac-bicep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IaC — Bicep (обязательный артефакт до запуска)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. ИИ и Интеллектуальные сервисы
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Интеграции
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Инструменты разработки
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9а. Тестовый стек
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9а. Тестовый стек">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-angular-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (Angular 20)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI Quality Gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Почему выбран именно этот стек?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. План эволюции стека
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tech-stack">Технологический стек (Tech Stack)<a class="headerlink" href="#tech-stack" title="Permanent link">&para;</a></h1>
+<p><strong>Проект:</strong> Dark Store — быстрая доставка продуктов<br />
+<strong>Локация:</strong> Костанай, Казахстан<br />
+<strong>Дата:</strong> Май 2026</p>
+<hr />
+<h2 id="1">1. Общая архитектура<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><strong>Тип архитектуры:</strong> Clean Architecture + Модульный монолит<br />
+<strong>Стиль:</strong> Domain-Driven Design (лёгкая версия)<br />
+<strong>Паттерны:</strong> CQRS (через MediatR), Repository + Unit of Work, Domain Events</p>
+<p><strong>Преимущества выбранной архитектуры:</strong>
+- Хорошая разделяемость кода
+- Легко тестировать
+- Удобно масштабировать в будущем
+- Подходит для соло-разработки</p>
+<hr />
+<h2 id="1-no94-v">1а. Гибридная архитектура хранения данных (Закон РК №94-V)<a class="headerlink" href="#1-no94-v" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>⚖️ <strong>Правовое основание:</strong> Закон РК «О персональных данных и их защите» №94-V обязывает хранить персональные данные граждан Казахстана <strong>на серверах, физически расположенных в РК</strong>. Azure не имеет региона в Казахстане.</p>
+</blockquote>
+<p><strong>Решение: Гибридный подход</strong> — два изолированных хранилища данных.</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
+│                    ASP.NET Core API (Azure)                      │
+│                  (бизнес-логика, оркестрация)                    │
+└──────────────┬───────────────────────────┬──────────────────────┘
+               │                           │
+               ▼                           ▼
+┌──────────────────────────┐   ┌───────────────────────────────┐
+│  🇰🇿 KZ Local DB           │   │  ☁️  Azure SQL Database        │
+│  SQL Server / PostgreSQL  │   │  (Sweden Central / UAE North) │
+│  Провайдер: Beeline KZ    │   │                               │
+│  или KAZTELECOM           │   │  Бизнес-данные:               │
+│                           │   │  - Products, Categories       │
+│  Персональные данные:     │   │  - Orders, OrderItems         │
+│  - Users (ФИО, телефон)   │   │  - Inventory, Stores          │
+│  - Addresses              │   │  - Deliveries, Couriers       │
+│  - LoyaltyTransactions    │   │  - Payments                   │
+│  - Notifications          │   │  - PromoCodes                 │
+│                           │   │  - AuditLogs                  │
+└──────────────────────────┘   └───────────────────────────────┘
+</code></pre></div>
+<p><strong>Принцип разделения данных:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Категория</th>
+<th>Где хранится</th>
+<th>Примеры полей</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔴 <strong>ПДн — хранить в КЗ</strong></td>
+<td>KZ Local DB</td>
+<td>ФИО, телефон, email, адрес доставки</td>
+</tr>
+<tr>
+<td>🟢 <strong>Бизнес-данные — Azure</strong></td>
+<td>Azure SQL</td>
+<td>Товары, заказы (только UserId), склад, курьеры</td>
+</tr>
+<tr>
+<td>🟡 <strong>Кэш и сессии</strong></td>
+<td>Azure Redis</td>
+<td>JWT-токены, краткосрочные данные</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Связь между базами:</strong><br />
+API держит два <code>DbContext</code>-а с разными connection strings. <code>UserId</code> (GUID) — единственный идентификатор, связывающий записи. Никакие ПДн не попадают в Azure SQL.</p>
+<p><strong>Провайдеры KZ Local хостинга:</strong>
+- <a href="https://beeline.kz/ru/business/it-solutions">Beeline KZ</a> — VPS/Dedicated в Алматы/Астане
+- <a href="https://telecom.kz/">KAZTELECOM</a> — дата-центры Kazakhtelecom в РК
+- Собственный сервер в Костанае (при наличии надёжного ЦОД)</p>
+<hr />
+<h2 id="2-backend">2. Backend (Серверная часть)<a class="headerlink" href="#2-backend" title="Permanent link">&para;</a></h2>
+<p>х| Компонент              | Технология                  | Версия     | Решение | Назначение |
+|------------------------|-----------------------------|------------|---------|----------|
+| <strong>Язык</strong>               | C#                          | .NET 10    | ✅ Оставить | Основной язык |
+| <strong>Фреймворк</strong>          | ASP.NET Core Web API        | 10.0       | ✅ Оставить | Backend API |
+| <strong>Архитектура</strong>        | Clean Architecture + MediatR| -          | ✅ Оставить | Структура проекта |
+| <strong>ORM (команды)</strong>      | Entity Framework Core       | 10.0       | ✅ Оставить | Writes, миграции, DDD |
+| <strong>ORM (запросы)</strong>      | <strong>Dapper</strong>                  | 2.x        | 🆕 Добавить | Reads — сложные SQL-запросы каталога |
+| <strong>CQRS</strong>               | MediatR                     | 12.x       | ✅ Оставить | Команды и запросы |
+| <strong>Валидация</strong>          | FluentValidation            | 11.x       | ✅ Оставить | Валидация входных данных |
+| <strong>Маппинг</strong>            | Mapster + source generators | 7.x        | ✅ Оставить | Маппинг DTO ↔ Entity (zero reflection) |
+| <strong>Логирование</strong>        | Serilog (async sinks)       | 4.x        | ✅ + 🔧 Исправить | Структурированное логирование, <code>WriteTo.Async()</code> |
+| <strong>ПДн-защита в логах</strong> | <strong>Destructurama.Attributed</strong>| 4.x        | 🆕 Добавить | <code>[NotLogged]</code>/<code>[LogMasked]</code> на командах |
+| <strong>OpenAPI</strong>            | <strong>Microsoft.AspNetCore.OpenApi + Scalar</strong> | 10.x  | 🔄 Заменить Swashbuckle | Современный OpenAPI UI |
+| <strong>Аутентификация</strong>     | JWT Bearer + OTP + OAuth 2.0 / OIDC | 10.x       | 🆕 Добавить | JWT авторизация, Social Login (Google, Apple, Microsoft, Meta), 2FA, семейные подписки — см. <strong><a href="../AUTH_AND_IDENTITY/">AUTH_AND_IDENTITY.md</a></strong> |
+| <strong>Ограничение запросов</strong> | <strong>ASP.NET Core Rate Limiting</strong> | встроен | 🆕 Добавить | OTP 3/час, API 100 req/мин |
+| <strong>CORS + HSTS</strong>        | ASP.NET Core built-in       | встроен    | 🆕 Добавить | Безопасность браузера |
+| <strong>Сжатие</strong>             | <strong>Response Compression</strong>    | встроен    | 🆕 Добавить | Brotli + Gzip (−60–80% трафика) |
+| <strong>Кэш (L1)</strong>           | <strong>Output Cache</strong>            | встроен    | 🆕 Добавить | In-memory кэш перед Redis |
+| <strong>Версионирование API</strong> | Asp.Versioning.Http        | 8.x        | ✅ Оставить | URL <code>/api/v1/</code> |
+| <strong>Фоновые задачи</strong>     | <strong>Hangfire</strong>                | 1.8.x      | 🆕 Добавить | 1С sync, нотификации, таймауты заказов |
+| <strong>Real-time</strong>          | <strong>SignalR</strong>                 | встроен    | 🆕 Добавить | Статус заказа в реал-тайм |
+| <strong>Observability</strong>      | <strong>Application Insights + OpenTelemetry</strong> | 2.x / 1.9.x | 🆕 Добавить | APM + будущий OTLP Grafana |
+| <strong>Секреты</strong>            | <strong>Azure Key Vault</strong>         | SDK 1.x    | 🆕 Добавить | Connection strings, API keys вне appsettings |
+| <strong>Безопасность Hangfire</strong> | <code>HangfireAdminAuthorizationFilter</code> | - | 🆕 Добавить | Dashboard доступен только Admin-роли |</p>
+<hr />
+<h2 id="2">2а. Разбор альтернатив — почему именно так<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="ef-core-dapper">EF Core → оставить, но добавить Dapper для чтений<a class="headerlink" href="#ef-core-dapper" title="Permanent link">&para;</a></h3>
+<p><strong>Проблема EF Core только:</strong> сложные SELECT с JOIN по каталогу, истории заказов и аналитике генерируют неоптимальный SQL. На 1000+ заказов/день это заметно.</p>
+<p><strong>Решение — гибридный подход (CQRS естественно даёт это):</strong>
+<div class="highlight"><pre><span></span><code>Commands (запись)  →  EF Core   — entity tracking, migrations, DDD events
+Queries  (чтение)  →  Dapper    — сырой SQL, 5–10× быстрее для сложных SELECT
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Query Handler — Dapper (быстро, прозрачно)</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GetProductsQueryHandler</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IRequestHandler</span><span class="o">&lt;</span><span class="n">GetProductsQuery</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ProductDto</span><span class="o">&gt;&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IDbConnection</span><span class="w"> </span><span class="n">_db</span><span class="p">;</span><span class="w"> </span><span class="c1">// Dapper</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ProductDto</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Handle</span><span class="p">(</span><span class="n">GetProductsQuery</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="n">_db</span><span class="p">.</span><span class="n">QueryAsync</span><span class="o">&lt;</span><span class="n">ProductDto</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;SELECT p.Id, p.Name, p.Price, i.Quantity FROM Products p JOIN Inventory i ON p.Id = i.ProductId WHERE p.IsActive = 1 AND p.CategoryId = @CategoryId&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">CategoryId</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">)).</span><span class="n">ToList</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Command Handler — EF Core (entity tracking, domain events)</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">PlaceOrderCommandHandler</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IRequestHandler</span><span class="o">&lt;</span><span class="n">PlaceOrderCommand</span><span class="p">,</span><span class="w"> </span><span class="n">Guid</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">AppDbContext</span><span class="w"> </span><span class="n">_db</span><span class="p">;</span><span class="w"> </span><span class="c1">// EF Core</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="swashbuckle-scalar-microsoftaspnetcoreopenapi">Swashbuckle → заменить на Scalar + Microsoft.AspNetCore.OpenApi<a class="headerlink" href="#swashbuckle-scalar-microsoftaspnetcoreopenapi" title="Permanent link">&para;</a></h3>
+<p><strong>Причина:</strong> С .NET 9 Microsoft убрал Swashbuckle из шаблонов проекта. <code>Microsoft.AspNetCore.OpenApi</code> — встроенный, быстрый, без зависимостей. <strong>Scalar</strong> — современный UI вместо стандартного Swagger UI.</p>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.AspNetCore.OpenApi
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Scalar.AspNetCore
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddOpenApi</span><span class="p">();</span><span class="w">               </span><span class="c1">// встроенный OpenAPI .NET 10</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">MapOpenApi</span><span class="p">();</span><span class="w">                            </span><span class="c1">// /openapi/v1.json</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MapScalarApiReference</span><span class="p">();</span><span class="w">                 </span><span class="c1">// /scalar/v1 — красивый UI</span>
+</code></pre></div>
+<p><strong>Что теряем:</strong> ничего практически. Scalar умеет всё то же, выглядит лучше, обновляется быстрее.</p>
+<hr />
+<h3 id="mediatr">MediatR → оставить, но с ограничениями<a class="headerlink" href="#mediatr" title="Permanent link">&para;</a></h3>
+<p>MediatR хорош для этого проекта. Главная ловушка — <strong>overuse</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Использование</th>
+<th>✅ Правильно</th>
+<th>❌ Неправильно</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application-слой</td>
+<td>Команды (<code>PlaceOrderCommand</code>)</td>
+<td>Domain Events внутри Entity</td>
+</tr>
+<tr>
+<td></td>
+<td>Запросы (<code>GetProductsQuery</code>)</td>
+<td>Простые CRUD без логики</td>
+</tr>
+<tr>
+<td></td>
+<td>Пайплайн behaviors (логирование, валидация)</td>
+<td>Каждый маленький хелпер</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Альтернатива на будущее:</strong> <code>Mediator</code> (source generators, быстрее) — можно рассмотреть при переходе на Q3+.</p>
+<hr />
+<h3 id="fluentvalidation">FluentValidation → оставить<a class="headerlink" href="#fluentvalidation" title="Permanent link">&para;</a></h3>
+<p>Лучший вариант в .NET-экосистеме. Альтернатив равного качества нет.</p>
+<hr />
+<h3 id="mapster-7x-12x">Mapster → оставить (версия исправлена: 7.x, не 12.x)<a class="headerlink" href="#mapster-7x-12x" title="Permanent link">&para;</a></h3>
+<p>Лучше AutoMapper (который фактически устарел для новых проектов). Включить source generators для нулевого оверхеда в рантайме:</p>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Mapster
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Mapster.DependencyInjection
+</code></pre></div>
+<hr />
+<h3 id="_1">Нужна ли очередь сообщений?<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p><strong>Ответ: да, но не Azure Service Bus на MVP. Правильный выбор — Hangfire.</strong></p>
+<p><strong>Зачем очередь в q-commerce:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Задача</th>
+<th>Без очереди</th>
+<th>С Hangfire</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1С sync (остатки)</td>
+<td>Polling в хуке запроса — блокирует API</td>
+<td>Recurring job каждые 5 мин</td>
+</tr>
+<tr>
+<td>Таймаут заказа (неоплачен 15 мин → отмена)</td>
+<td>Нет механизма</td>
+<td><code>BackgroundJob.Schedule(cancelOrder, TimeSpan.FromMinutes(15))</code></td>
+</tr>
+<tr>
+<td>Kaspi Pay webhook</td>
+<td>Долгая обработка внутри HTTP → таймаут у Kaspi</td>
+<td>Ack 200 сразу, обработка в фоне</td>
+</tr>
+<tr>
+<td>Отправка push-уведомлений</td>
+<td>Блокирующий вызов Firebase</td>
+<td>Fire-and-forget job</td>
+</tr>
+<tr>
+<td>Ежедневное начисление бонусов</td>
+<td>Нет механизма</td>
+<td>Cronjob <code>"0 2 * * *"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Почему Hangfire (не Azure Service Bus) на MVP:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Hangfire</th>
+<th>Azure Service Bus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Сложность настройки</td>
+<td>5 минут</td>
+<td>Часы (топики, подписки, DLQ)</td>
+</tr>
+<tr>
+<td>Стоимость</td>
+<td>Бесплатно (хранится в SQL)</td>
+<td>От $10/мес</td>
+</tr>
+<tr>
+<td>Персистентность</td>
+<td>✅ SQL Server</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>✅ <code>/hangfire</code> — визуальный UI</td>
+<td>❌ только Portal</td>
+</tr>
+<tr>
+<td>Подходит для</td>
+<td>&lt; 10 000 jobs/день</td>
+<td>Миллионы сообщений</td>
+</tr>
+<tr>
+<td>Когда переходить</td>
+<td>—</td>
+<td><strong>Conditional</strong>: &gt; 500 заказов/сут стабильно 2 нед., или Hangfire DB &gt; 10GB. Финансовая модель Year 1 (~87 заказов/день) не достигает этого порога — не планировать в Q4.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Hangfire.AspNetCore
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Hangfire.SqlServer
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddHangfire</span><span class="p">(</span><span class="n">config</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">UseSqlServerStorage</span><span class="p">(</span><span class="n">connectionString</span><span class="p">));</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddHangfireServer</span><span class="p">();</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MapHangfireDashboard</span><span class="p">(</span><span class="s">&quot;/hangfire&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DashboardOptions</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Authorization</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HangfireAdminAuthorizationFilter</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Примеры использования:</span>
+<span class="c1">// Recurring (1С sync каждые 5 минут)</span>
+<span class="n">RecurringJob</span><span class="p">.</span><span class="n">AddOrUpdate</span><span class="o">&lt;</span><span class="n">OneCSyncService</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;1c-sync&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">SyncInventoryAsync</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;*/5 * * * *&quot;</span><span class="p">);</span>
+
+<span class="c1">// Delayed (автоотмена заказа через 15 минут)</span>
+<span class="n">BackgroundJob</span><span class="p">.</span><span class="n">Schedule</span><span class="o">&lt;</span><span class="n">OrderService</span><span class="o">&gt;</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">CancelIfUnpaidAsync</span><span class="p">(</span><span class="n">orderId</span><span class="p">),</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMinutes</span><span class="p">(</span><span class="mi">15</span><span class="p">));</span>
+
+<span class="c1">// Fire-and-forget (push после смены статуса)</span>
+<span class="n">BackgroundJob</span><span class="p">.</span><span class="n">Enqueue</span><span class="o">&lt;</span><span class="n">NotificationService</span><span class="o">&gt;</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">SendOrderStatusUpdateAsync</span><span class="p">(</span><span class="n">orderId</span><span class="p">,</span><span class="w"> </span><span class="n">newStatus</span><span class="p">));</span>
+</code></pre></div>
+<hr />
+<h3 id="signalr-real-time">SignalR — добавить для real-time статуса<a class="headerlink" href="#signalr-real-time" title="Permanent link">&para;</a></h3>
+<p>Q-commerce без real-time — это плохой UX. Клиент обновляет страницу вручную или видит статус с задержкой.</p>
+<p><strong>Что нужно в реал-тайм:</strong>
+- Клиент: статус заказа (собирают → едет → доставлен) + местоположение курьера
+- Курьер: входящий заказ, изменение маршрута
+- Админ: дашборд активных заказов</p>
+<p><strong>Альтернативы:</strong>
+- <strong>Polling</strong> (каждые 3 сек) — простейший, но 20× больше запросов к API
+- <strong>SSE (Server-Sent Events)</strong> — только сервер → клиент, нет двусторонней связи
+- <strong>SignalR</strong> — WebSocket с автофоллбэком, встроен в ASP.NET Core, бесплатно ✅</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Hub</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OrderHub</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Hub</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">JoinOrderGroup</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">orderId</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Groups</span><span class="p">.</span><span class="n">AddToGroupAsync</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">ConnectionId</span><span class="p">,</span><span class="w"> </span><span class="s">$&quot;order-{orderId}&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Вызов из OrderService при смене статуса</span>
+<span class="k">await</span><span class="w"> </span><span class="n">_hubContext</span><span class="p">.</span><span class="n">Clients</span><span class="p">.</span><span class="n">Group</span><span class="p">(</span><span class="s">$&quot;order-{orderId}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">SendAsync</span><span class="p">(</span><span class="s">&quot;StatusChanged&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">orderId</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">courierLat</span><span class="p">,</span><span class="w"> </span><span class="n">courierLng</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<p><strong>На Angular:</strong> <code>@microsoft/signalr</code> (npm package), подключается за 10 строк кода.</p>
+<hr />
+<h2 id="2-resilience">2б. Resilience — устойчивость внешних вызовов (обязательно)<a class="headerlink" href="#2-resilience" title="Permanent link">&para;</a></h2>
+<p>Все <code>HttpClient</code>-обёртки для внешних сервисов (1С, Kaspi Pay, AZS, Google Maps) <strong>обязаны</strong> иметь retry, circuit breaker и timeout. 1С нестабильна — её зависание без circuit breaker заблокирует Hangfire workers.</p>
+<p><strong>Пакет (встроен в .NET 8+):</strong>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.Extensions.Http.Resilience
+</code></pre></div></p>
+<p><strong>Конфигурация в <code>Program.cs</code> / <code>DependencyInjection.cs</code>:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddHttpClient</span><span class="o">&lt;</span><span class="n">IOneCClient</span><span class="p">,</span><span class="w"> </span><span class="n">OneCClient</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddStandardResilienceHandler</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">Retry</span><span class="p">.</span><span class="n">MaxRetryAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">Retry</span><span class="p">.</span><span class="n">Delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">Retry</span><span class="p">.</span><span class="n">BackoffType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DelayBackoffType</span><span class="p">.</span><span class="n">Exponential</span><span class="p">;</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">CircuitBreaker</span><span class="p">.</span><span class="n">FailureRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">CircuitBreaker</span><span class="p">.</span><span class="n">SamplingDuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">CircuitBreaker</span><span class="p">.</span><span class="n">BreakDuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMinutes</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">AttemptTimeout</span><span class="p">.</span><span class="n">Timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="c1">// Аналогично для Kaspi Pay, AZS, Google Maps</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddHttpClient</span><span class="o">&lt;</span><span class="n">IKaspiPayClient</span><span class="p">,</span><span class="w"> </span><span class="n">KaspiPayClient</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddStandardResilienceHandler</span><span class="p">();</span>
+</code></pre></div></p>
+<p><strong>Fallback при открытом circuit breaker (1С):</strong>
+- Продолжать использовать последний известный инвентарь (<code>Inventory.IsStaleInventory = true</code>)
+- Флаг <code>IsStaleInventory</code> видим только в Admin Panel, не клиентам
+- При закрытии circuit breaker — немедленный full sync (не ждать следующего cron)
+- Установить <code>MaxRetries</code> для 1С Hangfire recurring job: не более 5 retries с backoff</p>
+<p><strong>Полная матрица resilience по сервисам:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Сервис</th>
+<th>Retry</th>
+<th>Timeout</th>
+<th>Circuit Breaker</th>
+<th>Fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1С (инвентарь)</td>
+<td>3× exp backoff</td>
+<td>10s</td>
+<td>50% / 30s / 1min break</td>
+<td><code>IsStaleInventory = true</code>, последний кэш</td>
+</tr>
+<tr>
+<td>Kaspi Pay (payment init)</td>
+<td>3× exp backoff</td>
+<td>15s</td>
+<td>50% / 30s / 2min break</td>
+<td>"Оплата временно недоступна"</td>
+</tr>
+<tr>
+<td>Kaspi Pay (webhook)</td>
+<td>— (webhook ack сразу)</td>
+<td>—</td>
+<td>—</td>
+<td>Outbox: обработать при восстановлении</td>
+</tr>
+<tr>
+<td>SMS провайдер</td>
+<td>2× / 3s</td>
+<td>5s</td>
+<td>40% / 60s → switch to secondary</td>
+<td>Secondary провайдер → email OTP</td>
+</tr>
+<tr>
+<td>AZS лояльность</td>
+<td>3× exp backoff</td>
+<td>8s</td>
+<td>50% / 30s / 2min break</td>
+<td>Без баллов, sync after recovery</td>
+</tr>
+<tr>
+<td>Google Maps</td>
+<td>2×</td>
+<td>5s</td>
+<td>30% / 60s / 5min break</td>
+<td>Кэш Redis → зональный тариф</td>
+</tr>
+<tr>
+<td>Azure OpenAI</td>
+<td>2× jitter</td>
+<td>20s</td>
+<td>40% / 60s / 5min break</td>
+<td>Популярные категории как замена</td>
+</tr>
+<tr>
+<td>Firebase FCM</td>
+<td>2× / 5s</td>
+<td>10s</td>
+<td>graceful skip</td>
+<td>Тихо проигнорировать, лог</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-request-logging">2в. Глобальная обработка ошибок и Request Logging<a class="headerlink" href="#2-request-logging" title="Permanent link">&para;</a></h2>
+<p><strong>Обязательные middleware (в порядке регистрации в <code>Program.cs</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. Correlation ID — должен быть первым</span>
+<span class="n">app</span><span class="p">.</span><span class="n">Use</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">correlationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">&quot;X-Correlation-Id&quot;</span><span class="p">].</span><span class="n">FirstOrDefault</span><span class="p">()</span>
+<span class="w">                        </span><span class="o">??</span><span class="w"> </span><span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">&quot;X-Correlation-Id&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">correlationId</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">LogContext</span><span class="p">.</span><span class="n">PushProperty</span><span class="p">(</span><span class="s">&quot;CorrelationId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">))</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">next</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="c1">// 2. Serilog request logging</span>
+<span class="n">app</span><span class="p">.</span><span class="n">UseSerilogRequestLogging</span><span class="p">(</span><span class="n">opts</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">opts</span><span class="p">.</span><span class="n">MessageTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;HTTP {RequestMethod} {RequestPath} → {StatusCode} in {Elapsed:0.000}ms [{CorrelationId}]&quot;</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// 3. Global exception handler — RFC 7807 ProblemDetails</span>
+<span class="n">app</span><span class="p">.</span><span class="n">UseExceptionHandler</span><span class="p">(</span><span class="n">errApp</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">errApp</span><span class="p">.</span><span class="n">Run</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="n">IExceptionHandlerFeature</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?.</span><span class="n">Error</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="k">switch</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NotFoundException</span><span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Resource not found&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">ValidationException</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Validation failed&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">UnauthorizedAccessException</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">401</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unauthorized&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">_</span><span class="w">                        </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Internal server error&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">WriteAsJsonAsync</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ProblemDetails</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;correlationId&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">&quot;X-Correlation-Id&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}));</span>
+</code></pre></div>
+<p><strong>Правило:</strong> никакие необработанные исключения не должны возвращать стектрейсы клиентам в Production (<code>ASPNETCORE_ENVIRONMENT != Development</code>).</p>
+<hr />
+<h2 id="2-redis">2г. Стратегия кэширования Redis<a class="headerlink" href="#2-redis" title="Permanent link">&para;</a></h2>
+<p>Используем паттерн <strong>cache-aside</strong> через <code>IDistributedCache</code> (позволяет fallback на in-memory в Dev).</p>
+<table>
+<thead>
+<tr>
+<th>Что кэшируем</th>
+<th>TTL</th>
+<th>Ключ Redis</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Каталог продуктов (список)</td>
+<td>5 мин</td>
+<td><code>catalog:page:{n}:size:{s}:cat:{id}</code></td>
+<td>Инвалидировать при изменении товара</td>
+</tr>
+<tr>
+<td>Дерево категорий</td>
+<td>30 мин</td>
+<td><code>categories:tree</code></td>
+<td>Редко меняется</td>
+</tr>
+<tr>
+<td>Баланс лояльности</td>
+<td>1 мин</td>
+<td><code>loyalty:balance:{userId}</code></td>
+<td>Вычисляется из LoyaltyTransactions</td>
+</tr>
+<tr>
+<td>Результат геокодинга</td>
+<td>24 ч</td>
+<td><code>geocode:{lat}:{lng}</code></td>
+<td><code>Addresses.Latitude/Longitude</code> уже хранят координаты</td>
+</tr>
+<tr>
+<td>Distance Matrix</td>
+<td>30 мин</td>
+<td><code>distance:{storeLat}:{storeLng}:{customerLat}:{customerLng}</code></td>
+<td>Для расчёта DeliveryFee</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Правило:</strong> JWT-валидация — <strong>не кэшировать</strong> в Redis (проверяется подписью локально без сетевых вызовов).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// DependencyInjection.cs</span>
+<span class="n">services</span><span class="p">.</span><span class="n">AddStackExchangeRedisCache</span><span class="p">(</span><span class="n">opts</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="n">opts</span><span class="p">.</span><span class="n">Configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">[</span><span class="s">&quot;ConnectionStrings:Redis&quot;</span><span class="p">]);</span>
+
+<span class="c1">// В Dev — fallback на in-memory если Redis недоступен</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">env</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">())</span>
+<span class="w">    </span><span class="n">services</span><span class="p">.</span><span class="n">AddDistributedMemoryCache</span><span class="p">();</span>
+</code></pre></div>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance Redis:</strong>
+- Redis downtime ≠ падение системы. Всегда используй <code>try-catch</code> вокруг cache operations и продолжай без кэша (пробрось на БД).
+- Настрой <code>abortConnect=False</code> в connection string — приложение запустится даже если Redis недоступен при старте.
+- Добавь <code>connectRetry=3</code> — попытки переподключения при transient network issues.
+- В Production используй Redis Standard C1 (не Basic C0) — Basic не имеет SLA и не поддерживает failover.
+- Настрой <strong>Cache Stampede protection</strong> для дорогостоящих операций (каталог): Lazy loading с lock <code>IDistributedLock</code> при первом промахе кэша.</p>
+</blockquote>
+<hr />
+<h2 id="2-api">2а. Стратегия версионирования API<a class="headerlink" href="#2-api" title="Permanent link">&para;</a></h2>
+<p><strong>Метод:</strong> URL-сегмент (<code>/api/v{version}/resource</code>) — наиболее наглядно для клиентов и прокси.</p>
+<div class="highlight"><pre><span></span><code>/api/v1/products       ← текущая стабильная версия
+/api/v2/products       ← новая версия (при breaking changes)
+</code></pre></div>
+<h3 id="_2">Правила введения новой версии<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Тип изменения</th>
+<th>Нужна новая версия?</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Добавление нового поля в ответ</td>
+<td>❌ Нет</td>
+<td><code>{ ..., "rating": 4.5 }</code></td>
+</tr>
+<tr>
+<td>Добавление нового необязательного параметра</td>
+<td>❌ Нет</td>
+<td><code>?includeOutOfStock=true</code></td>
+</tr>
+<tr>
+<td>Удаление поля из ответа</td>
+<td>✅ Да</td>
+<td>убрать поле <code>description</code></td>
+</tr>
+<tr>
+<td>Изменение типа поля</td>
+<td>✅ Да</td>
+<td><code>price: int</code> → <code>price: decimal</code></td>
+</tr>
+<tr>
+<td>Изменение структуры ответа</td>
+<td>✅ Да</td>
+<td>плоский объект → вложенный</td>
+</tr>
+<tr>
+<td>Изменение поведения эндпоинта</td>
+<td>✅ Да</td>
+<td>изменение логики сортировки</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sunset-policy">Жизненный цикл версий (Sunset Policy)<a class="headerlink" href="#sunset-policy" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>v1 (текущая) → v2 выходит → v1 получает статус &quot;Deprecated&quot;
+                           → v1 работает ещё 6 месяцев
+                           → v1 отключается
+</code></pre></div>
+<ul>
+<li><strong>Deprecated-заголовок:</strong> устаревшая версия возвращает <code>Deprecation: true</code> и <code>Sunset: &lt;date&gt;</code> в headers</li>
+<li><strong>Минимальный срок поддержки deprecated:</strong> <strong>6 месяцев</strong> (достаточно для Mobile/PWA клиентов)</li>
+<li>На MVP допустимо только <code>v1</code> — новые версии вводятся при реальной необходимости</li>
+</ul>
+<h3 id="programcs">Настройка в <code>Program.cs</code><a class="headerlink" href="#programcs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddApiVersioning</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">DefaultApiVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ApiVersion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">AssumeDefaultVersionWhenUnspecified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">ReportApiVersions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// возвращает заголовки api-supported-versions</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="n">AddApiExplorer</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">GroupNameFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&#39;v&#39;VVV&quot;</span><span class="p">;</span><span class="w">        </span><span class="c1">// v1, v2, ...</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">SubstituteApiVersionInUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w">  </span><span class="c1">// /api/v{version}/ → /api/v1/</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="_3">Пример контроллера<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="na">[ApiController]</span>
+<span class="na">[ApiVersion(&quot;1.0&quot;)]</span>
+<span class="na">[Route(&quot;api/v{version:apiVersion}/[controller]</span><span class="s">&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ProductsController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[HttpGet]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IActionResult</span><span class="w"> </span><span class="nf">GetAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// При появлении breaking change — новый контроллер:</span>
+<span class="na">[ApiController]</span>
+<span class="na">[ApiVersion(&quot;2.0&quot;)]</span>
+<span class="na">[Route(&quot;api/v{version:apiVersion}/[controller]</span><span class="s">&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ProductsV2Controller</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[HttpGet]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IActionResult</span><span class="w"> </span><span class="nf">GetAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// новая структура ответа</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="scalar-openapi-ui">Scalar (OpenAPI UI) с версионированием<a class="headerlink" href="#scalar-openapi-ui" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs — вместо AddSwaggerGen:</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddOpenApi</span><span class="p">(</span><span class="s">&quot;v1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">options</span><span class="p">.</span><span class="n">AddDocumentTransformer</span><span class="p">(...);</span><span class="w"> </span><span class="p">});</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddOpenApi</span><span class="p">(</span><span class="s">&quot;v2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">});</span>
+
+<span class="n">app</span><span class="p">.</span><span class="n">MapOpenApi</span><span class="p">();</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MapScalarApiReference</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dark Store API&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">Servers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="k">new</span><span class="w"> </span><span class="n">ScalarServer</span><span class="p">(</span><span class="s">&quot;https://api.darkstore.kz&quot;</span><span class="p">)];</span>
+<span class="p">});</span>
+<span class="c1">// Доступно: /scalar/v1, /scalar/v2</span>
+</code></pre></div>
+<hr />
+<h2 id="3-frontend">3. Frontend (Клиентская часть)<a class="headerlink" href="#3-frontend" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Технология</th>
+<th>Версия</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Фреймворк</strong></td>
+<td>Angular</td>
+<td>20+</td>
+<td>Основной frontend</td>
+</tr>
+<tr>
+<td><strong>Язык</strong></td>
+<td>TypeScript</td>
+<td>5.x</td>
+<td>Типизация</td>
+</tr>
+<tr>
+<td><strong>Стилизация</strong></td>
+<td>Tailwind CSS</td>
+<td>4.x</td>
+<td>Быстрая стилизация</td>
+</tr>
+<tr>
+<td><strong>UI-компоненты</strong></td>
+<td>PrimeNG / Angular Material</td>
+<td>-</td>
+<td>Готовые компоненты</td>
+</tr>
+<tr>
+<td><strong>Состояние</strong></td>
+<td><strong><code>@ngrx/signals</code></strong> (NgRx Signal Store)</td>
+<td>-</td>
+<td>Реактивное состояние без бойлерплейта NgRx Classic</td>
+</tr>
+<tr>
+<td><strong>HTTP-клиент</strong></td>
+<td>Angular HttpClient</td>
+<td>-</td>
+<td>Запросы к API</td>
+</tr>
+<tr>
+<td><strong>Формы</strong></td>
+<td>Reactive Forms</td>
+<td>-</td>
+<td>Работа с формами</td>
+</tr>
+<tr>
+<td><strong>PWA</strong></td>
+<td>@angular/pwa + Service Worker</td>
+<td>-</td>
+<td>Установка на главный экран, офлайн-режим, Web Push</td>
+</tr>
+<tr>
+<td><strong>Real-time</strong></td>
+<td><code>@microsoft/signalr</code></td>
+<td>-</td>
+<td>OrderHub WebSocket</td>
+</tr>
+<tr>
+<td><strong>Карты</strong></td>
+<td><code>@angular/google-maps</code></td>
+<td>-</td>
+<td>Трекинг курьера (Q2)</td>
+</tr>
+<tr>
+<td><strong>Push-уведомления</strong></td>
+<td><code>firebase</code> + <code>@angular/fire</code></td>
+<td>-</td>
+<td>FCM Web Push токены (Q3)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ngrxsignals-ngrx">Почему <code>@ngrx/signals</code> а не классический NgRx?<a class="headerlink" href="#ngrxsignals-ngrx" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>@ngrx/signals</code> (Signal Store)</th>
+<th>NgRx Store (Classic)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бойлерплейт</td>
+<td>🟢 ~30% меньше кода</td>
+<td>🔴 Actions + Reducers + Selectors + Effects</td>
+</tr>
+<tr>
+<td>Реактивность</td>
+<td>Angular Signals — нативно</td>
+<td>RxJS Observables</td>
+</tr>
+<tr>
+<td>Подходит для</td>
+<td>Соло/малая команда</td>
+<td>Команда 3+ человек</td>
+</tr>
+<tr>
+<td>Производительность</td>
+<td>Лучше (Zone-less ready)</td>
+<td>Хорошая</td>
+</tr>
+<tr>
+<td>Когда переходить на NgRx Classic</td>
+<td>Команда &gt; 3 чел + сложная state topology</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Frontend:</strong></p>
+<p><strong>HTTP Resilience (Angular <code>HttpClient</code>):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Глобальный interceptor с retry для идемпотентных запросов</span>
+<span class="c1">// src/app/core/interceptors/retry.interceptor.ts</span>
+<span class="nx">intercept</span><span class="p">(</span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">HttpRequest</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="o">:</span><span class="w"> </span><span class="kt">HttpHandler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">isIdempotent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HEAD&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OPTIONS&#39;</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">isIdempotent</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">retry</span><span class="p">({</span><span class="w"> </span><span class="nx">count</span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">,</span><span class="w"> </span><span class="nx">delay</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="w"> </span><span class="nx">attempt</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">      </span><span class="nx">error</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">500</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">timer</span><span class="p">(</span><span class="nx">attempt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1000</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">throwError</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Offline Support (PWA Service Worker):</strong>
+- Кэшировать страницы каталога и корзины в Service Worker (стратегия <code>StaleWhileRevalidate</code>).
+- При потере сети — показывать закешированный каталог с баннером "Нет подключения — показываем последние данные".
+- Оформление заказа при отсутствии сети — мягко блокировать с сообщением "Для оформления нужен интернет".</p>
+<p><strong>SignalR Reconnect:</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">HubConnectionBuilder</span><span class="p">()</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">withUrl</span><span class="p">(</span><span class="s1">&#39;/hubs/order&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">withAutomaticReconnect</span><span class="p">([</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">2000</span><span class="p">,</span><span class="w"> </span><span class="mf">10000</span><span class="p">,</span><span class="w"> </span><span class="mf">30000</span><span class="p">])</span><span class="w"> </span><span class="c1">// пауза перед каждой попыткой</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="nx">connection</span><span class="p">.</span><span class="nx">onreconnecting</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">showReconnectingBanner</span><span class="p">());</span>
+<span class="nx">connection</span><span class="p">.</span><span class="nx">onreconnected</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">hideReconnectingBanner</span><span class="p">());</span>
+<span class="nx">connection</span><span class="p">.</span><span class="nx">onclose</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">showOfflineBanner</span><span class="p">());</span>
+</code></pre></div></p>
+<p><strong>Global Error Handler:</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">@Injectable</span><span class="p">()</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">GlobalErrorHandler</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">ErrorHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">handleError</span><span class="p">(</span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Логировать в Application Insights / Sentry</span>
+<span class="w">    </span><span class="c1">// Показать Toast: &quot;Что-то пошло не так. Попробуйте обновить страницу.&quot;</span>
+<span class="w">    </span><span class="c1">// Не отображать stack trace пользователю</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>NgRx Error States:</strong> Каждый Effect должен обрабатывать ошибки (<code>catchError</code>) и диспатчить <code>*Failure</code> action вместо propagation error.</p>
+</blockquote>
+<hr />
+<h2 id="4">4. База данных<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="kz-local-no94-v">🇰🇿 KZ Local — Персональные данные (обязательно в РК по Закону №94-V)<a class="headerlink" href="#kz-local-no94-v" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Технология</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ПДн БД</strong></td>
+<td>SQL Server / PostgreSQL</td>
+<td>Хранение персональных данных граждан РК</td>
+</tr>
+<tr>
+<td><strong>Хостинг ПДн</strong></td>
+<td>Beeline KZ VPS / KAZTELECOM</td>
+<td>Физически в Казахстане</td>
+</tr>
+<tr>
+<td><strong>DbContext</strong></td>
+<td><code>PersonalDataDbContext</code> (EF Core)</td>
+<td>Изолированный контекст для ПДн</td>
+</tr>
+</tbody>
+</table>
+<h3 id="azure-">☁️ Azure — Бизнес-данные<a class="headerlink" href="#azure-" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Технология</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Основная БД</strong></td>
+<td>Azure SQL Database</td>
+<td>Товары, заказы, склад, доставка</td>
+</tr>
+<tr>
+<td><strong>Регион</strong></td>
+<td>Sweden Central / UAE North</td>
+<td>Ближайшие к КЗ регионы Azure</td>
+</tr>
+<tr>
+<td><strong>DbContext</strong></td>
+<td><code>AppDbContext</code> (EF Core)</td>
+<td>Бизнес-данные без ПДн</td>
+</tr>
+<tr>
+<td><strong>Кэш</strong></td>
+<td>Azure Cache for Redis</td>
+<td>Кэширование сессий (без ПДн)</td>
+</tr>
+<tr>
+<td><strong>Поиск</strong></td>
+<td>Azure AI Search</td>
+<td>Поиск товаров (только каталог)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">5. Хостинг и Инфраструктура<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="kz-local">🇰🇿 KZ Local (персональные данные)<a class="headerlink" href="#kz-local" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Технология</th>
+<th>Этап использования</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ПДн сервер</strong></td>
+<td>Beeline KZ VPS (2 CPU, 4GB RAM)</td>
+<td>С первого дня (MVP)</td>
+</tr>
+<tr>
+<td><strong>ПДн БД</strong></td>
+<td>SQL Server Express / PostgreSQL</td>
+<td>MVP</td>
+</tr>
+<tr>
+<td><strong>Бэкап ПДн</strong></td>
+<td>Локальный SQL Agent → Azure Blob</td>
+<td>Ежедневно</td>
+</tr>
+</tbody>
+</table>
+<h3 id="azure-_1">☁️ Azure (бизнес-логика и инфраструктура)<a class="headerlink" href="#azure-_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Технология</th>
+<th>Этап использования</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Хостинг Backend</strong></td>
+<td>Azure App Service</td>
+<td>MVP (первые 6–9 мес)</td>
+</tr>
+<tr>
+<td><strong>Хостинг Frontend</strong></td>
+<td>Azure Static Web Apps</td>
+<td>MVP</td>
+</tr>
+<tr>
+<td><strong>Промежуточный этап</strong></td>
+<td>Azure Container Apps</td>
+<td>При росте нагрузки</td>
+</tr>
+<tr>
+<td><strong>Полный масштаб</strong></td>
+<td>Azure Kubernetes Service (AKS)</td>
+<td>При необходимости</td>
+</tr>
+<tr>
+<td><strong>Хранилище</strong></td>
+<td>Azure Blob Storage</td>
+<td>Изображения, файлы</td>
+</tr>
+<tr>
+<td><strong>CDN</strong></td>
+<td>Azure CDN</td>
+<td>Статический контент</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-cicd-devops">6. CI/CD и DevOps<a class="headerlink" href="#6-cicd-devops" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Технология</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Репозиторий</strong></td>
+<td>GitHub</td>
+<td>Хранение кода</td>
+</tr>
+<tr>
+<td><strong>CI/CD</strong></td>
+<td>GitHub Actions</td>
+<td>Автоматическая сборка и деплой</td>
+</tr>
+<tr>
+<td><strong>SAST</strong></td>
+<td><strong>GitHub CodeQL</strong></td>
+<td>Статический анализ C# + TypeScript на уязвимости</td>
+</tr>
+<tr>
+<td><strong>IaC</strong></td>
+<td>Azure Bicep</td>
+<td>Инфраструктура как код — <strong>обязательно до публичного запуска</strong></td>
+</tr>
+<tr>
+<td><strong>Мониторинг</strong></td>
+<td>Azure Application Insights</td>
+<td>Мониторинг и алерты</td>
+</tr>
+<tr>
+<td><strong>Логи</strong></td>
+<td>Azure Log Analytics</td>
+<td>Сбор и анализ логов</td>
+</tr>
+<tr>
+<td><strong>Secrets</strong></td>
+<td>Azure Key Vault</td>
+<td>Secrets management — connection strings, API keys вне кода</td>
+</tr>
+<tr>
+<td><strong>Форматирование</strong></td>
+<td><code>dotnet format</code></td>
+<td>Enforced CI-gate — <code>--verify-no-changes</code> блокирует PR</td>
+</tr>
+<tr>
+<td><strong>Vuln Scan</strong></td>
+<td><code>dotnet list package --vulnerable</code> + <code>npm audit</code></td>
+<td>CVE-сканирование .NET и npm</td>
+</tr>
+</tbody>
+</table>
+<h3 id="iac-bicep">IaC — Bicep (обязательный артефакт до запуска)<a class="headerlink" href="#iac-bicep" title="Permanent link">&para;</a></h3>
+<p>Создать Bicep-шаблон в <code>infra/main.bicep</code> до публичного запуска. Воссоздание среды после катастрофы должно занимать &lt; 30 минут, а не требовать ручных click-ops действий.</p>
+<p><strong>Ресурсы, которые должен покрывать шаблон:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Azure-ресурс</th>
+<th>Параметры</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App Service Plan (B1 → P1V3)</td>
+<td>staging + prod slots</td>
+</tr>
+<tr>
+<td>Azure App Service</td>
+<td><code>.NET 10</code>, Linux</td>
+</tr>
+<tr>
+<td>Azure SQL Database</td>
+<td>S1, geo-redundant backup</td>
+</tr>
+<tr>
+<td>Azure Cache for Redis</td>
+<td>Basic C0 (dev) / Standard C1 (prod)</td>
+</tr>
+<tr>
+<td>Azure Blob Storage</td>
+<td>LRS, контейнер <code>product-images</code></td>
+</tr>
+<tr>
+<td>Azure Application Insights</td>
+<td>connected to Log Analytics workspace</td>
+</tr>
+<tr>
+<td>Azure Static Web Apps</td>
+<td>для Angular PWA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pipeline:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/deploy-infra.yml — workflow_dispatch (ручной запуск)</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">choice</span>
+<span class="w">        </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">staging</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">production</span><span class="p p-Indicator">]</span>
+</code></pre></div></p>
+<blockquote>
+<p>📌 Пример команды деплоя: <code>az deployment group create --resource-group darkstore-rg --template-file infra/main.bicep --parameters environment=production</code></p>
+</blockquote>
+<hr />
+<h2 id="7">7. ИИ и Интеллектуальные сервисы<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Сервис</th>
+<th>Технология</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ИИ-агент</strong></td>
+<td>Azure OpenAI Service</td>
+<td>Чат-бот, рекомендации товаров</td>
+</tr>
+<tr>
+<td><strong>Модели</strong></td>
+<td>GPT-4o / GPT-4o-mini</td>
+<td>Основные модели</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td>Azure AI Search + OpenAI</td>
+<td>Поиск по каталогу товаров</td>
+</tr>
+<tr>
+<td><strong>Анализ тональности</strong></td>
+<td>Azure Text Analytics</td>
+<td>Анализ отзывов (позже)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8">8. Интеграции<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Сервис</th>
+<th>Технология / Протокол</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1С</strong></td>
+<td>OData / Web-сервисы</td>
+<td>MVP</td>
+</tr>
+<tr>
+<td><strong>Kaspi Pay</strong></td>
+<td>REST API + Webhooks</td>
+<td>MVP</td>
+</tr>
+<tr>
+<td><strong>Сеть АЗС</strong></td>
+<td>REST API</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td><strong>Google Maps</strong></td>
+<td>Google Maps Platform API</td>
+<td>Q2</td>
+</tr>
+<tr>
+<td><strong>Firebase FCM</strong></td>
+<td>Web Push (Firebase Web SDK) через Angular PWA</td>
+<td>Q3</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📱 <strong>Стратегия мобильных уведомлений:</strong> Используем <strong>Angular PWA + Firebase Web Push</strong> (без отдельного нативного приложения).<br />
+Android Chrome и iOS Safari 16.4+ поддерживают Web Push. Это даёт 95%+ охват целевой аудитории без отдельной кодовой базы.<br />
+Нативное мобильное приложение (<strong>Flutter</strong>) рассматривается как опция в Year 2 при наличии спроса от пользователей.</p>
+</blockquote>
+<hr />
+<h2 id="9">9. Инструменты разработки<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JetBrains Rider</strong></td>
+<td>Основная IDE (Backend)</td>
+</tr>
+<tr>
+<td><strong>Visual Studio Code</strong></td>
+<td>Frontend + конфигурация</td>
+</tr>
+<tr>
+<td><strong>Azure Portal</strong></td>
+<td>Управление облаком</td>
+</tr>
+<tr>
+<td><strong>Postman / Bruno</strong></td>
+<td>Тестирование API</td>
+</tr>
+<tr>
+<td><strong>Scalar</strong></td>
+<td>Документация API (заменяет Swagger UI)</td>
+</tr>
+<tr>
+<td><strong>Hangfire Dashboard</strong></td>
+<td>Мониторинг фоновых задач (<code>/hangfire</code>)</td>
+</tr>
+<tr>
+<td><strong>Git</strong></td>
+<td>Система контроля версий</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Контейнеризация (Testcontainers в CI, позже prod)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9_1">9а. Тестовый стек<a class="headerlink" href="#9_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Полная документация: <code>TESTING_STRATEGY.md</code></p>
+</blockquote>
+<h3 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Пакет</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>xUnit</strong></td>
+<td>Test runner</td>
+</tr>
+<tr>
+<td><strong>FluentAssertions</strong></td>
+<td>Читаемые assertions</td>
+</tr>
+<tr>
+<td><strong>NSubstitute</strong></td>
+<td>Мокирование зависимостей</td>
+</tr>
+<tr>
+<td><strong>Bogus</strong></td>
+<td>Генерация тестовых данных</td>
+</tr>
+<tr>
+<td><strong>Microsoft.AspNetCore.Mvc.Testing</strong></td>
+<td>WebApplicationFactory — реальные HTTP тесты</td>
+</tr>
+<tr>
+<td><strong>Testcontainers.MsSql + Redis</strong></td>
+<td>SQL Server + Redis в Docker для Integration тестов</td>
+</tr>
+<tr>
+<td><strong>Respawn</strong></td>
+<td>Быстрый сброс БД между тестами</td>
+</tr>
+<tr>
+<td><strong>WireMock.Net</strong></td>
+<td>Mock внешних API (1С, Kaspi, SMS-шлюз)</td>
+</tr>
+<tr>
+<td><strong>NetArchTest.Rules</strong></td>
+<td>Clean Architecture enforcement</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-angular-20">Frontend (Angular 20)<a class="headerlink" href="#frontend-angular-20" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Пакет</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Jest + jest-preset-angular</strong></td>
+<td>Unit тест runner (вместо Karma)</td>
+</tr>
+<tr>
+<td><strong>@testing-library/angular</strong></td>
+<td>DOM-ориентированное тестирование компонентов</td>
+</tr>
+<tr>
+<td><strong>msw (Mock Service Worker)</strong></td>
+<td>Mock HTTP в тестах</td>
+</tr>
+<tr>
+<td><strong>@playwright/test</strong></td>
+<td>E2E тесты (Chromium, Android Chrome, iPhone Safari)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ci-quality-gates">CI Quality Gates<a class="headerlink" href="#ci-quality-gates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Порог</th>
+<th>Действие при провале</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend line coverage</td>
+<td>≥ 70%</td>
+<td>Блокирует PR мерж</td>
+</tr>
+<tr>
+<td>Vulnerable packages</td>
+<td>0 high/critical</td>
+<td>Блокирует PR мерж</td>
+</tr>
+<tr>
+<td>Architecture tests</td>
+<td>100% pass</td>
+<td>Блокирует PR мерж</td>
+</tr>
+<tr>
+<td>E2E Staging</td>
+<td>100% critical pass</td>
+<td>Блокирует деплой в Production</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10">10. Почему выбран именно этот стек?<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Преимущество</th>
+<th>Обоснование</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>.NET 10 + Rider</strong></td>
+<td>Высокая продуктивность, отличная поддержка C# (LTS версия), глубокая интеграция с Azure</td>
+</tr>
+<tr>
+<td><strong>Clean Architecture + MediatR</strong></td>
+<td>Хорошая структура кода, легко масштабировать и тестировать</td>
+</tr>
+<tr>
+<td><strong>Angular</strong></td>
+<td>Современный, мощный, отличная типизация, большая экосистема</td>
+</tr>
+<tr>
+<td><strong>Azure</strong></td>
+<td>Лучшая интеграция с .NET, удобные managed-сервисы, гибкая масштабируемость</td>
+</tr>
+<tr>
+<td><strong>Azure OpenAI</strong></td>
+<td>Простая интеграция ИИ, хорошая производительность и безопасность</td>
+</tr>
+<tr>
+<td><strong>GitHub Actions</strong></td>
+<td>Бесплатно, удобно, отличная интеграция с Azure</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11">11. План эволюции стека<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Период</th>
+<th>Что меняется</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MVP</strong></td>
+<td>.NET 10 + Angular PWA + Azure App Service + Hangfire + SignalR + JWT + OTP Auth + Rate Limiting + HSTS + Security Headers</td>
+</tr>
+<tr>
+<td><strong>Q1</strong></td>
+<td>Dapper reads + Output Cache + Response Compression + Mapster source gen + <code>@ngrx/signals</code> + <strong>Social Login (OAuth 2.0: Google, Apple, Microsoft, Meta)</strong> + <strong>2FA (TOTP)</strong></td>
+</tr>
+<tr>
+<td><strong>Q2</strong></td>
+<td><code>@angular/google-maps</code> (курьерская карта) + PWA offline + IaC Bicep finalized + <strong>Семейные подписки + Регистрация по приглашению</strong></td>
+</tr>
+<tr>
+<td><strong>Q3</strong></td>
+<td>Firebase Web Push + <code>@angular/fire</code> + Dapper для сложных reads (аналитика)</td>
+</tr>
+<tr>
+<td><strong>6–12 мес</strong></td>
+<td>Переход на Azure Container Apps</td>
+</tr>
+<tr>
+<td><strong>Q4+</strong></td>
+<td>Azure Service Bus — <strong>conditional</strong> (только если &gt; 500 заказов/сут стабильно, финмодель Year 1 этого не предполагает)</td>
+</tr>
+<tr>
+<td><strong>12+ мес</strong></td>
+<td>Возможный переход на AKS + микросервисы</td>
+</tr>
+<tr>
+<td><strong>Year 2+</strong></td>
+<td>Нативное приложение на Flutter (при спросе от пользователей)</td>
+</tr>
+<tr>
+<td><strong>Будущее</strong></td>
+<td>OpenTelemetry + Grafana (OTLP endpoint уже реализован — просто включить), Event-Driven (Azure Service Bus)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<p><em>Документ актуален: Май 2026. Ревизия — раз в квартал.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Нижний колонтитул" >
+        
+          
+          <a href="../INDEX_TECHNICAL/" class="md-footer__link md-footer__link--prev" aria-label="Назад: Технический индекс">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Назад
+              </span>
+              <div class="md-ellipsis">
+                Технический индекс
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../DATABASE_SCHEMA/" class="md-footer__link md-footer__link--next" aria-label="Вперед: Схема базы данных">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Вперед
+              </span>
+              <div class="md-ellipsis">
+                Схема базы данных
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Dark Store. Все права защищены.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com" target="_blank" rel="noopener" title="GitHub репозиторий" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.suggest", "search.share", "content.tabs.link", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

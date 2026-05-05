@@ -1,0 +1,2983 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Сервис быстрой доставки продуктов в Костанае. Полная документация для заказчика и команды.">
+      
+      
+        <meta name="author" content="Dark Store Team">
+      
+      
+      
+        <link rel="prev" href="../TESTING_STRATEGY/">
+      
+      
+        <link rel="next" href="../ANALYSIS_AND_CHANGES/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Создание проекта - Dark Store — Документация проекта</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dark-store" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href=".." title="Dark Store — Документация проекта" class="md-header__button md-logo" aria-label="Dark Store — Документация проекта" data-md-component="logo">
+      
+  <img src="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dark Store — Документация проекта
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Создание проекта
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Тёмная тема"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Тёмная тема" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="orange"  aria-label="Светлая тема"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Светлая тема" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Поделиться" aria-label="Поделиться" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../DARK_STORE_PROJECT_SUMMARY/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🎯 О проекте
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../FINANCIAL_MODEL/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  💰 Бизнес
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ROADMAP_12_MONTHS/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  📅 Дорожная карта
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../INDEX_OPERATIONS/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ⚙️ Операции
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../RISKS_AND_MITIGATION/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ⚖️ Риски и право
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../BRAND_GUIDELINES/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🎨 Бренд
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../INDEX_TECHNICAL/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🔧 Технический раздел
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ANALYSIS_AND_CHANGES/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  📋 Планы и задачи
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Dark Store — Документация проекта" class="md-nav__button md-logo" aria-label="Dark Store — Документация проекта" data-md-component="logo">
+      
+  <img src="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=e65100&textColor=ffffff" alt="logo">
+
+    </a>
+    Dark Store — Документация проекта
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Главная
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎯 О проекте
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎯 О проекте
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DARK_STORE_PROJECT_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Обзор проекта
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COMPETITOR_ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Анализ конкурентов
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SOLUTION_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сравнение решений
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💰 Бизнес
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💰 Бизнес
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FINANCIAL_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финансовая модель
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEAM_STRUCTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Структура команды
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUSTOMER_JOURNEY_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Путь клиента
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MARKETING_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маркетинговая стратегия
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GROWTH_HACKS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Growth Hacking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 Дорожная карта
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📅 Дорожная карта
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROADMAP_12_MONTHS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Роадмап на 12 месяцев
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚙️ Операции
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚙️ Операции
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDEX_OPERATIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Операционный индекс
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS_MANUAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция по операциям
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUSTOMER_SUPPORT_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Руководство поддержки
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚖️ Риски и право
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚖️ Риски и право
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RISKS_AND_MITIGATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Риски и митигация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LEGAL_REQUIREMENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Правовые требования
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎨 Бренд
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎨 Бренд
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BRAND_GUIDELINES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Гайдлайны бренда
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔧 Технический раздел
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔧 Технический раздел
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDEX_TECHNICAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технический индекс
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TECH_STACK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технологический стек
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATABASE_SCHEMA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Схема базы данных
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AUTH_AND_IDENTITY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Аутентификация и авторизация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Интеграции
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигурация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LOGGING_AND_AUDIT_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Логирование и аудит
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Стратегия тестирования
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Создание проекта
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Создание проекта
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 1: Подготовка аккаунтов
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 2: Создание репозитория на GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-rider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 3: Создание решения в Rider
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-clean-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 4: Базовая структура проекта (Clean Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-push-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 5: Первый коммит и push в GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-github-actions-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 6: Настройка GitHub Actions (CI/CD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-azure-app-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 7: Создание Azure App Service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Шаг 7: Создание Azure App Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-app-registration-azure-ad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. Создание App Registration в Azure AD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-federated-identity-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. Добавление Federated Identity Credential
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-service-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. Создание Service Principal и назначение роли
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-github-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. Добавление GitHub Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-github-environments-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. Настройка GitHub Environments (ручное подтверждение Production)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-branch-protection-rules-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6. Branch Protection Rules для ветки main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#87-rollback-app-service-deployment-slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7. Rollback процедура (App Service Deployment Slots)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 9: Проверка работы CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 10: Следующие шаги после базовой настройки
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-api-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 11: Настройка API-версионирования
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Планы и задачи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📋 Планы и задачи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ANALYSIS_AND_CHANGES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Анализ и изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IMPROVEMENT_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    План улучшений
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MANUAL_ACTIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ручные действия (чеклист)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 1: Подготовка аккаунтов
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 2: Создание репозитория на GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-rider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 3: Создание решения в Rider
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-clean-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 4: Базовая структура проекта (Clean Architecture)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-push-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 5: Первый коммит и push в GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-github-actions-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 6: Настройка GitHub Actions (CI/CD)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-azure-app-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 7: Создание Azure App Service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Шаг 7: Создание Azure App Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-app-registration-azure-ad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. Создание App Registration в Azure AD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-federated-identity-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. Добавление Federated Identity Credential
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-service-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. Создание Service Principal и назначение роли
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-github-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. Добавление GitHub Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-github-environments-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. Настройка GitHub Environments (ручное подтверждение Production)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-branch-protection-rules-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6. Branch Protection Rules для ветки main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#87-rollback-app-service-deployment-slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7. Rollback процедура (App Service Deployment Slots)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 9: Проверка работы CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 10: Следующие шаги после базовой настройки
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-api-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Шаг 11: Настройка API-версионирования
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dark-store">Пошаговое создание проекта Dark Store<a class="headerlink" href="#dark-store" title="Permanent link">&para;</a></h1>
+<p><strong>Цель:</strong> Создать с нуля современный проект на .NET 10 + Angular с использованием Clean Architecture, GitHub Actions и деплоя в Azure App Service.</p>
+<hr />
+<h2 id="1">Шаг 1: Подготовка аккаунтов<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Создай аккаунт на <strong>GitHub</strong> (если ещё нет)</li>
+<li>Создай бесплатную подписку в <strong>Azure Portal</strong></li>
+<li>Убедись, что у тебя установлен <strong>JetBrains Rider 2026</strong></li>
+<li>Создай <strong>Fine-grained Personal Access Token</strong> в GitHub со следующими правами:</li>
+<li><code>Contents</code>: Read and write</li>
+<li><code>Actions</code>: Read and write</li>
+<li><code>Pull requests</code>: Read and write</li>
+<li><code>Workflows</code>: Read and write</li>
+<li><code>Metadata</code>: Read-only</li>
+</ol>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 1:</strong>
+- Включи <strong>2FA (двухфакторную аутентификацию)</strong> на GitHub и Azure — единственная точка отказа при взломе аккаунта.
+- Сохрани <strong>Recovery Codes</strong> от 2FA в защищённом офлайн-хранилище (не в браузере).
+- Создай <strong>два PAT-токена</strong> с разными сроками действия — один рабочий, второй резервный. При компрометации одного немедленно отзови и замени.
+- В Azure Portal настрой <strong>резервную контактную почту</strong> и <strong>телефон</strong> для восстановления аккаунта.
+- Для Azure: включи <strong>Azure Cost Alert</strong> ($20/мес порог) — защита от непредвиденных расходов при утечке ключей.
+- Задокументируй все аккаунты / сервисы в менеджере паролей (1Password / Bitwarden), доступном без подключения к сети.</p>
+</blockquote>
+<hr />
+<h2 id="2-github">Шаг 2: Создание репозитория на GitHub<a class="headerlink" href="#2-github" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Зайди на GitHub и нажми <strong>New repository</strong></li>
+<li>Заполни данные:</li>
+<li>Repository name: <code>darkstore-backend</code></li>
+<li>Visibility: <strong>Private</strong></li>
+<li>Не добавляй README и <code>.gitignore</code> (сделаем позже)</li>
+<li>Нажми <strong>Create repository</strong></li>
+<li>Скопируй HTTPS-ссылку репозитория</li>
+</ol>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 2:</strong>
+- Настрой <strong>второй remote</strong> (<code>git remote add backup &lt;другой_git_хостинг&gt;</code>) — например, GitLab или собственный Gitea. Push в оба репозитория после каждого спринта.
+- Включи функцию <strong>"Keep my email private"</strong> в GitHub (Settings → Emails), чтобы исключить спам/фишинг.
+- Создай защищённую <strong><code>main</code> ветку</strong> немедленно (даже если единственный разработчик) — случайный <code>git push --force</code> в main без защиты уничтожит историю.
+- Заранее добавь в <code>.gitignore</code> шаблон .NET (через <code>gitignore.io</code>), чтобы исключить случайный коммит секретов.
+- Сделай <strong>локальный бэкап репозитория</strong> раз в неделю: <code>git bundle create darkstore-backup-$(date +%Y%m%d).bundle --all</code> и сохрани на внешний диск.</p>
+</blockquote>
+<hr />
+<h2 id="3-rider">Шаг 3: Создание решения в Rider<a class="headerlink" href="#3-rider" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Открой <strong>Rider</strong></li>
+<li>Нажми <strong>New Solution</strong></li>
+<li>Выбери шаблон: <strong>ASP.NET Core Web API</strong></li>
+<li>Укажи:</li>
+<li>.NET version: <strong>.NET 10.0</strong></li>
+<li>Solution name: <code>DarkStore</code></li>
+<li>Project name: <code>DarkStore.API</code></li>
+<li>Создай решение</li>
+</ol>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 3:</strong>
+- Сразу после создания решения добавь файл <code>.editorconfig</code> для единообразия кода.
+- Включи в <code>DarkStore.API.csproj</code> свойство <code>&lt;TreatWarningsAsErrors&gt;true&lt;/TreatWarningsAsErrors&gt;</code> — предупреждения компилятора в CI превращаются в ошибки сборки.
+- Добавь <code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code> — защита от <code>NullReferenceException</code> на уровне компилятора.
+- Включи <code>&lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;</code> с явными using для критичных пространств имён, чтобы исключить случайные конфликты имён.
+- Сразу создай <code>global.json</code> с фиксацией версии SDK: <code>{ "sdk": { "version": "10.0.xxx", "rollForward": "patch" } }</code> — защита от непредвиденных изменений при обновлении SDK.</p>
+</blockquote>
+<hr />
+<h2 id="4-clean-architecture">Шаг 4: Базовая структура проекта (Clean Architecture)<a class="headerlink" href="#4-clean-architecture" title="Permanent link">&para;</a></h2>
+<p>Создай следующую структуру папок внутри решения:</p>
+<p>DarkStore/
+├── src/
+│   ├── DarkStore.Domain
+│   ├── DarkStore.Application
+│   ├── DarkStore.Infrastructure
+│   └── DarkStore.API
+├── tests/
+│   └── DarkStore.Tests          ← Unit/Integration тесты
+└── .github/
+    └── workflows/</p>
+<p><strong>Установи базовые NuGet-пакеты:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># CQRS + Validation + Mapping</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>MediatR
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>FluentValidation
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Mapster
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Mapster.DependencyInjection
+
+<span class="c1"># ORM: EF Core (writes) + Dapper (reads)</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.EntityFrameworkCore.SqlServer
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.EntityFrameworkCore.Tools
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Dapper
+
+<span class="c1"># OpenAPI — Scalar вместо Swashbuckle</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.AspNetCore.OpenApi
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Scalar.AspNetCore
+
+<span class="c1"># Auth + Logging + Versioning</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Serilog.AspNetCore
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Asp.Versioning.Http
+
+<span class="c1"># Фоновые задачи</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Hangfire.AspNetCore
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Hangfire.SqlServer
+
+<span class="c1"># Real-time (SignalR встроен в ASP.NET Core — пакет не нужен)</span>
+</code></pre></div>
+<p><strong>Создай тестовый проект:</strong></p>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>new<span class="w"> </span>xunit<span class="w"> </span>-n<span class="w"> </span>DarkStore.Tests<span class="w"> </span>-o<span class="w"> </span>tests/DarkStore.Tests
+dotnet<span class="w"> </span>add<span class="w"> </span>tests/DarkStore.Tests/DarkStore.Tests.csproj<span class="w"> </span>reference<span class="w"> </span>src/DarkStore.Application/DarkStore.Application.csproj
+dotnet<span class="w"> </span>add<span class="w"> </span>tests/DarkStore.Tests<span class="w"> </span>package<span class="w"> </span>Moq
+dotnet<span class="w"> </span>add<span class="w"> </span>tests/DarkStore.Tests<span class="w"> </span>package<span class="w"> </span>FluentAssertions
+</code></pre></div>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 4:</strong></p>
+<p><strong>Пакеты устойчивости (обязательно добавить сразу):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Resilience: retry, circuit breaker, timeout для всех HttpClient</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.Extensions.Http.Resilience
+
+<span class="c1"># Health checks: база данных, Redis, внешние сервисы</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.Extensions.Diagnostics.HealthChecks
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>AspNetCore.HealthChecks.SqlServer
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>AspNetCore.HealthChecks.Redis
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>AspNetCore.HealthChecks.Uris
+
+<span class="c1"># Мониторинг</span>
+dotnet<span class="w"> </span>add<span class="w"> </span>package<span class="w"> </span>Microsoft.ApplicationInsights.AspNetCore
+</code></pre></div></p>
+<p><strong>Архитектурные решения устойчивости:</strong>
+- <strong>Outbox Pattern</strong> — сразу добавь таблицу <code>OutboxMessages</code> и Hangfire-джоб обработки; защищает от потери событий при сбое внешних сервисов.
+- <strong>Idempotency Keys</strong> — для всех write-операций API добавь поддержку <code>Idempotency-Key</code> header (uuid4); повторный запрос с тем же ключом возвращает закешированный ответ, не создавая дубли.
+- <strong>Domain Events</strong> через Outbox — смена статуса заказа НЕ вызывает внешние сервисы синхронно; события публикуются в <code>OutboxMessages</code> и обрабатываются Hangfire.
+- <strong>Optimistic Concurrency</strong> — добавь <code>rowversion</code> / <code>ConcurrencyToken</code> в EF Core конфигурации критичных сущностей (<code>Orders</code>, <code>Inventory</code>); защита от race condition при параллельных запросах.
+- <strong>Circuit Breaker State Machine</strong> — при старте приложения инициализируй счётчики сбоев для каждого внешнего сервиса (1С, Kaspi Pay, SMS, AZS) независимо.
+- <strong>Graceful Degradation</strong> — если KZ Local DB недоступна, API должен возвращать <code>503 Service Unavailable</code> с <code>Retry-After</code> заголовком, а не <code>500 Internal Server Error</code>.</p>
+</blockquote>
+<h2 id="5-push-github">Шаг 5: Первый коммит и push в GitHub<a class="headerlink" href="#5-push-github" title="Permanent link">&para;</a></h2>
+<p>Выполни в терминале Rider:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial commit: Project structure&quot;</span>
+git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;вставь_ссылку_на_репозиторий&gt;
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div></p>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 5:</strong>
+- Перед первым push добавь <code>.gitignore</code> (шаблон .NET от GitHub/gitignore.io) — один коммит секретов в историю требует полного удаления через <code>git filter-repo</code>, что разрушительно.
+- Добавь <strong>pre-commit hook</strong> через <code>dotnet-format</code> или Husky (если Frontend): автоформатирование кода перед коммитом.
+- Настрой <strong>GitHub Secret Scanning</strong> (Settings → Security → Secret scanning): GitHub автоматически выявляет случайно добавленные ключи и уведомляет.
+- Добавь <strong>Dependabot</strong> (<code>/.github/dependabot.yml</code>) сразу — ежеслучайное уведомление об уязвимых пакетах критично для безопасности с первого дня.
+- После push немедленно задай <strong>Branch Protection</strong> (см. Шаг 8.6) — нельзя откладывать.</p>
+</blockquote>
+<h2 id="6-github-actions-cicd">Шаг 6: Настройка GitHub Actions (CI/CD)<a class="headerlink" href="#6-github-actions-cicd" title="Permanent link">&para;</a></h2>
+<p>В репозитории уже подготовлены два pipeline-файла — <strong>не создавай новый вручную</strong>, просто скопируй из репозитория:</p>
+<table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.github/workflows/deploy-azure1.yml</code></td>
+<td>PR Check — сборка + тесты + покрытие кода (без деплоя)</td>
+</tr>
+<tr>
+<td><code>.github/workflows/deploy-azure2.yml</code></td>
+<td>Main pipeline — staging (авто) → production (ручное подтверждение)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>Важно:</strong> оба файла используют <code>.NET 10.0.x</code> и OIDC-аутентификацию (без Publish Profile). Настройка OIDC описана в <strong>Шаге 8</strong>.</p>
+</blockquote>
+<p>Как настроить уведомления в Telegram</p>
+<p>Создай бота
+Открой Telegram и найди бота @BotFather
+Отправь команду /newbot
+Придумай имя бота (например: DarkStoreDeployBot)
+Скопируй API Token (он выглядит как 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11)</p>
+<p>Получи Chat ID
+Добавь своего бота в личные сообщения или в группу
+Отправь боту любое сообщение
+Зайди по ссылке: https://api.telegram.org/bot&lt;ТОКЕН_БОТА&gt;/getUpdates
+Найди поле "chat":{"id": ...} — это и есть твой TELEGRAM_CHAT_ID</p>
+<p>Добавь секреты в GitHub
+Перейди в репозиторий → Settings → Secrets and variables → Actions
+Добавь два новых секрета:</p>
+<p>Secret Name,Значение
+TELEGRAM_BOT_TOKEN,Токен бота от @BotFather
+TELEGRAM_CHAT_ID,"Chat ID (число, например -1001234567890)"</p>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 6:</strong></p>
+<p><strong>Устойчивость самого CI/CD pipeline:</strong>
+- Добавь <code>timeout-minutes: 20</code> ко всем job — предотвращает бесконечное зависание при сбое тестов или сетевых проблемах.
+- Используй <code>continue-on-error: false</code> для критичных steps (тесты, build) и <code>continue-on-error: true</code> для некритичных (coverage badge update).
+- Настрой <strong>retry для flaky-тестов</strong>: в CI используй <code>retry: 2</code> для integration-тестов (Testcontainers иногда падает при первом Docker pull).
+- Добавь <strong>artifact retention</strong> (<code>retention-days: 30</code>) — возможность откатить деплой на любую сборку последнего месяца.
+- Добавь <strong>dependency caching</strong> для NuGet и npm:
+  <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v4</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.nuget/packages</span>
+<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nuget-${{ hashFiles(&#39;**/*.csproj&#39;) }}</span>
+<span class="w">    </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nuget-</span>
+</code></pre></div>
+  Без кэша каждый запуск скачивает пакеты заново — если NuGet.org недоступен, CI сломается.
+- Настрой <strong>GitHub Actions Concurrency</strong> для предотвращения параллельных деплоев одного окружения:
+  <div class="highlight"><pre><span></span><code><span class="nt">concurrency</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy-${{ github.ref }}</span>
+<span class="w">  </span><span class="nt">cancel-in-progress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># не отменять — ждать завершения</span>
+</code></pre></div>
+- Зафиксируй версии actions через SHA-хэш (не <code>@v4</code>, а <code>@a1b2c3...</code>) — защита от supply-chain атак.
+- Telegram-уведомления должны срабатывать как при <strong>успехе</strong>, так и при <strong>провале</strong> — иначе silent failure остаётся незамеченным.</p>
+</blockquote>
+<h2 id="7-azure-app-service">Шаг 7: Создание Azure App Service<a class="headerlink" href="#7-azure-app-service" title="Permanent link">&para;</a></h2>
+<p>Зайди в Azure Portal
+Создай ресурс App Service
+Выбери:
+Runtime stack: .NET 10 (custom / preview bin; или .NET 9 LTS если .NET 10 ещё не в GA для App Service)
+Operating System: Linux (рекомендуется)
+Pricing tier: Basic B1 (на старте)</p>
+<p>После создания перейди в Deployment Center → Get publish profile
+Скачай файл .PublishSettings</p>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 7:</strong>
+- <strong>Deployment Slots</strong> — обязательно создай <code>staging</code> слот. Деплой всегда идёт в staging → smoke tests → <code>swap</code>. При сбое swap доступен мгновенный rollback без нового деплоя (<code>az webapp deployment slot swap --slot staging --target-slot production</code>).
+- <strong>Health Check Endpoint</strong> — сразу настрой <code>GET /health</code> эндпоинт (реагирует за &lt; 200ms). В Azure Portal → App Service → Health check укажи <code>/health</code> и минимальный порог <code>2 — из 10 успешных</code>. Azure автоматически перезапустит instance при провале.
+- <strong>Always On</strong> — включи (Settings → Configuration → General → Always On: On) для предотвращения cold start. Без этого первый запрос после простоя занимает 10–30 секунд.
+- <strong>Auto-heal</strong> — настрой правила автоматического перезапуска (Settings → Diagnose and solve → Auto Heal):
+  - Memory usage &gt; 90% → restart
+  - HTTP 5xx errors &gt; 20/min → restart
+  - Request duration &gt; 30 sec → restart
+- <strong>Connection Resilience</strong> в <code>appsettings.json</code>:
+  <div class="highlight"><pre><span></span><code><span class="nt">&quot;ConnectionResiliency&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;MaxRetryCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;MaxRetryDelay&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:00:30&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+  В EF Core: <code>.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null)</code> — защита от transient SQL failures.
+- <strong>Scaling</strong> — даже на B1 настрой вертикальное масштабирование до P2V3 в случае инцидента: правило <code>CPU &gt; 80% за 10 мин → scale up</code>. Откат по расписанию (ночью).
+- <strong>App Service Plan Redundancy</strong> — на B1 нет SLA. Для prod рекомендуется S1+ (99.95% SLA). Зафиксируй план перехода (при &gt; 50 заказов/день выполни upgrade до S1).</p>
+</blockquote>
+<p>OIDC (Federated Identity Credential) — современный и безопасный способ. Не требует статических секретов (Publish Profile), токен запрашивается автоматически при каждом запуске.</p>
+<h3 id="81-app-registration-azure-ad">8.1. Создание App Registration в Azure AD<a class="headerlink" href="#81-app-registration-azure-ad" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Через Azure CLI (или вручную в Azure Portal)</span>
+
+<span class="c1"># Войти в Azure</span>
+az<span class="w"> </span>login
+
+<span class="c1"># Создать App Registration</span>
+az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>create<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;darkstore-github-actions&quot;</span>
+
+<span class="c1"># Запомни вывод: &quot;appId&quot; — это AZURE_CLIENT_ID</span>
+</code></pre></div>
+<p>Или через портал:
+1. <strong>Azure Portal → Microsoft Entra ID → App registrations → New registration</strong>
+2. Имя: <code>darkstore-github-actions</code>, тип: Single tenant
+3. Скопируй <strong>Application (client) ID</strong> → это <code>AZURE_CLIENT_ID</code>
+4. Скопируй <strong>Directory (tenant) ID</strong> → это <code>AZURE_TENANT_ID</code></p>
+<hr />
+<h3 id="82-federated-identity-credential">8.2. Добавление Federated Identity Credential<a class="headerlink" href="#82-federated-identity-credential" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Получи ID созданного приложения</span>
+<span class="nv">APP_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>list<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;darkstore-github-actions&quot;</span><span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;[0].appId&quot;</span><span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+
+<span class="c1"># Добавить Federated Credential для GitHub Actions (ветка main)</span>
+az<span class="w"> </span>ad<span class="w"> </span>app<span class="w"> </span>federated-credential<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--id<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--parameters<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;name&quot;: &quot;darkstore-main&quot;,</span>
+<span class="s1">    &quot;issuer&quot;: &quot;https://token.actions.githubusercontent.com&quot;,</span>
+<span class="s1">    &quot;subject&quot;: &quot;repo:&lt;ТВОЙ_GITHUB_USERNAME&gt;/darkstore-backend:ref:refs/heads/main&quot;,</span>
+<span class="s1">    &quot;audiences&quot;: [&quot;api://AzureADTokenExchange&quot;]</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<p>Или через портал:
+1. <strong>App Registration → Certificates &amp; secrets → Federated credentials → Add credential</strong>
+2. Scenario: <strong>GitHub Actions deploying Azure resources</strong>
+3. Заполни:
+   - Organization: <code>&lt;твой GitHub username&gt;</code>
+   - Repository: <code>darkstore-backend</code>
+   - Entity type: <strong>Branch</strong>
+   - Branch: <code>main</code>
+   - Name: <code>darkstore-main</code></p>
+<hr />
+<h3 id="83-service-principal">8.3. Создание Service Principal и назначение роли<a class="headerlink" href="#83-service-principal" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Создать Service Principal для приложения</span>
+az<span class="w"> </span>ad<span class="w"> </span>sp<span class="w"> </span>create<span class="w"> </span>--id<span class="w"> </span><span class="nv">$APP_ID</span>
+
+<span class="c1"># Получи Subscription ID</span>
+<span class="nv">SUBSCRIPTION_ID</span><span class="o">=</span><span class="k">$(</span>az<span class="w"> </span>account<span class="w"> </span>show<span class="w"> </span>--query<span class="w"> </span>id<span class="w"> </span>-o<span class="w"> </span>tsv<span class="k">)</span>
+
+<span class="c1"># Назначить роль &quot;Contributor&quot; на уровне Resource Group</span>
+az<span class="w"> </span>role<span class="w"> </span>assignment<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--assignee<span class="w"> </span><span class="nv">$APP_ID</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--role<span class="w"> </span><span class="s2">&quot;Contributor&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--scope<span class="w"> </span><span class="s2">&quot;/subscriptions/</span><span class="nv">$SUBSCRIPTION_ID</span><span class="s2">/resourceGroups/darkstore-rg&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>💡 Используй <strong>Resource Group scope</strong>, а не Subscription scope — меньше прав, больше безопасность.</p>
+<p>🛡️ <strong>Fault Tolerance — 8.3:</strong>
+- Принцип <strong>Least Privilege</strong>: выдавай роль <code>Contributor</code> только на конкретный Resource Group, не на подписку.
+- Периодически ротируй App Registration — настрой Calendar-reminder каждые 12 месяцев на проверку и обновление Federated Credentials.
+- Если OIDC перестал работать (GitHub изменил формат subject), добавь <strong>второй Federated Credential</strong> на environment <code>staging</code> для независимого деплоя staging без prod-credential.</p>
+</blockquote>
+<hr />
+<h3 id="84-github-secrets">8.4. Добавление GitHub Secrets<a class="headerlink" href="#84-github-secrets" title="Permanent link">&para;</a></h3>
+<p>В репозитории: <strong>Settings → Secrets and variables → Actions → New repository secret</strong></p>
+<table>
+<thead>
+<tr>
+<th>Secret Name</th>
+<th>Значение</th>
+<th>Где взять</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AZURE_CLIENT_ID</code></td>
+<td>Application (client) ID</td>
+<td>App Registration → Overview</td>
+</tr>
+<tr>
+<td><code>AZURE_TENANT_ID</code></td>
+<td>Directory (tenant) ID</td>
+<td>App Registration → Overview</td>
+</tr>
+<tr>
+<td><code>AZURE_SUBSCRIPTION_ID</code></td>
+<td>Subscription ID</td>
+<td>Azure Portal → Subscriptions</td>
+</tr>
+<tr>
+<td><code>AZURE_WEBAPP_NAME</code></td>
+<td>Имя Production App Service</td>
+<td>Azure Portal → App Services</td>
+</tr>
+<tr>
+<td><code>AZURE_WEBAPP_NAME_STAGING</code></td>
+<td>Имя Staging App Service</td>
+<td>Azure Portal → App Services</td>
+</tr>
+<tr>
+<td><code>TELEGRAM_BOT_TOKEN</code></td>
+<td>Токен бота от @BotFather</td>
+<td>Telegram</td>
+</tr>
+<tr>
+<td><code>TELEGRAM_CHAT_ID</code></td>
+<td>Chat ID для уведомлений</td>
+<td>getUpdates API</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>❌ <code>AZURE_WEBAPP_PUBLISH_PROFILE</code> и <code>AZURE_WEBAPP_PUBLISH_PROFILE_STAGING</code> больше <strong>не нужны</strong>.</p>
+<p>🛡️ <strong>Fault Tolerance — 8.4:</strong>
+- Документируй смысл каждого секрета в Notion/README-protected — при ротации секрета нельзя угадать, куда его вставить.
+- Настрой <strong>GitHub Secret expiry reminder</strong>: добавь в calendar напоминание каждые 6 месяцев для ревью и ротации секретов.
+- Если <code>AZURE_CLIENT_ID</code> скомпрометирован — немедленный план: удалить App Registration, создать новый, обновить все GitHub Secrets и перезапустить деплой.</p>
+</blockquote>
+<hr />
+<h3 id="85-github-environments-production">8.5. Настройка GitHub Environments (ручное подтверждение Production)<a class="headerlink" href="#85-github-environments-production" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Репозиторий → <strong>Settings → Environments → New environment</strong></li>
+<li>Создай <code>staging</code> — без ограничений (деплой автоматический)</li>
+<li>Создай <code>production</code>:</li>
+<li>Включить <strong>Required reviewers</strong> → добавить себя</li>
+<li>Деплой в Production потребует нажатия <strong>"Approve"</strong> в GitHub Actions</li>
+</ol>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — 8.5:</strong>
+- Добавь <strong>Wait timer: 5 минут</strong> для <code>production</code> environment — окно для автоматических smoke-тестов на staging до одобрения.
+- Настрой <strong>Deployment protection rule</strong>: "Required reviewers" блокирует случайный авто-деплой в production при ошибке конфигурации pipeline.
+- Добавь <strong>Environment secrets</strong> (отдельно от Repository secrets) для prod-специфичных значений — изоляция конфигурации staging/prod.</p>
+</blockquote>
+<hr />
+<h3 id="86-branch-protection-rules-main">8.6. Branch Protection Rules для ветки <code>main</code><a class="headerlink" href="#86-branch-protection-rules-main" title="Permanent link">&para;</a></h3>
+<p><strong>Обязательно настроить до первого PR:</strong></p>
+<ol>
+<li>Репозиторий → <strong>Settings → Branches → Add branch protection rule</strong></li>
+<li>Branch name pattern: <code>main</code></li>
+<li>Включить следующие опции:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Настройка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Require a pull request before merging</strong></td>
+<td>✅ Включить</td>
+</tr>
+<tr>
+<td>— Required approvals</td>
+<td>1 (себя включить как reviewer)</td>
+</tr>
+<tr>
+<td>— Dismiss stale reviews when new commits are pushed</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Require status checks to pass before merging</strong></td>
+<td>✅ Включить</td>
+</tr>
+<tr>
+<td>— Required checks</td>
+<td><code>build-and-test</code> (из <code>deploy-azure1.yml</code>)</td>
+</tr>
+<tr>
+<td><strong>Require branches to be up to date before merging</strong></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Do not allow bypassing the above settings</strong></td>
+<td>✅ (даже для admin)</td>
+</tr>
+<tr>
+<td><strong>Restrict force pushes</strong></td>
+<td>✅ Запретить</td>
+</tr>
+<tr>
+<td><strong>Restrict deletions</strong></td>
+<td>✅ Запретить</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚡ <strong>Критично:</strong> без <code>Require status checks</code> разработчик может случайно влить PR с падающими тестами или уязвимыми пакетами прямо в production pipeline.</p>
+<p>🛡️ <strong>Fault Tolerance — 8.6:</strong>
+- Добавь в Required checks: <code>build-and-test</code> <strong>И</strong> vulnerability scan (<code>dotnet list package --vulnerable</code>). Один небезопасный пакет в production = потенциальная компрометация данных клиентов.
+- Включи <strong>"Restrict force pushes"</strong> — случайный <code>git push --force</code> от нового collaborator может уничтожить историю коммитов.
+- Настрой <strong>Protected tags</strong> (<code>v*</code>) — предотвращает удаление или перемещение релизных тегов.</p>
+</blockquote>
+<hr />
+<h3 id="87-rollback-app-service-deployment-slots">8.7. Rollback процедура (App Service Deployment Slots)<a class="headerlink" href="#87-rollback-app-service-deployment-slots" title="Permanent link">&para;</a></h3>
+<p>При использовании staging slot деплой выглядит так: код деплоится в staging → тесты → <code>swap</code> staging ↔ production.</p>
+<p><strong>Быстрый rollback через swap:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Откатить production к предыдущей версии (staging содержит старый код)</span>
+az<span class="w"> </span>webapp<span class="w"> </span>deployment<span class="w"> </span>slot<span class="w"> </span>swap<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--resource-group<span class="w"> </span>darkstore-rg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>darkstore-api<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--slot<span class="w"> </span>staging<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--target-slot<span class="w"> </span>production
+</code></pre></div></p>
+<p><strong>Rollback через GitHub Actions (<code>workflow_dispatch</code>):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/rollback.yml</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">commit_sha</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Commit</span><span class="nv"> </span><span class="s">SHA</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">rollback</span><span class="nv"> </span><span class="s">to&#39;</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rollback</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event.inputs.commit_sha }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy specific commit to production</span>
+<span class="w">        </span><span class="c1"># ... деплой шаги</span>
+</code></pre></div></p>
+<blockquote>
+<p>📌 <strong>Retention артефактов:</strong> установить 30 дней в <code>deploy-azure2.yml</code> (<code>retention-days: 30</code>) чтобы иметь возможность откатиться на любую версию последнего месяца.</p>
+<p>🛡️ <strong>Fault Tolerance — 8.7 (Расширенные сценарии Rollback):</strong></p>
+<p><strong>Сценарий A: Критический баг обнаружен после деплоя (&lt; 5 мин)</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Немедленный rollback через slot swap (&lt; 60 секунд)</span>
+az<span class="w"> </span>webapp<span class="w"> </span>deployment<span class="w"> </span>slot<span class="w"> </span>swap<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--resource-group<span class="w"> </span>darkstore-rg<span class="w"> </span>--name<span class="w"> </span>darkstore-api<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--slot<span class="w"> </span>staging<span class="w"> </span>--target-slot<span class="w"> </span>production
+<span class="c1"># Сообщить команде в Telegram о rollback</span>
+</code></pre></div></p>
+<p><strong>Сценарий B: Массовый сбой API после успешного деплоя (обнаружен через App Insights)</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Посмотреть текущую версию</span>
+az<span class="w"> </span>webapp<span class="w"> </span>show<span class="w"> </span>--resource-group<span class="w"> </span>darkstore-rg<span class="w"> </span>--name<span class="w"> </span>darkstore-api<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;siteConfig.linuxFxVersion&quot;</span>
+<span class="c1"># Перезапустить (если проблема transient)</span>
+az<span class="w"> </span>webapp<span class="w"> </span>restart<span class="w"> </span>--resource-group<span class="w"> </span>darkstore-rg<span class="w"> </span>--name<span class="w"> </span>darkstore-api
+<span class="c1"># Если не помогло — rollback через slot</span>
+</code></pre></div></p>
+<p><strong>Сценарий C: Database Migration поломала данные</strong>
+- Немедленно откатить App Service (slot swap)
+- Запустить <code>dotnet ef database update &lt;PreviousMigrationName&gt;</code> на staging
+- Применить Point-in-Time restore БД (см. <code>OPERATIONS_MANUAL.md</code> §10.4)</p>
+<p><strong>Сценарий D: Полная недоступность Azure Region</strong>
+- Переключить DNS на статическую страницу "Технические работы" (Azure CDN Static Page)
+- Уведомить клиентов через Telegram-канал
+- Ждать восстановления региона (обычно &lt; 4 часов)</p>
+<p><strong>Runbook (хранить офлайн):</strong> Распечатай эту процедуру и храни физически — при инциденте GitHub может быть недоступен.</p>
+</blockquote>
+<h2 id="9-cicd">Шаг 9: Проверка работы CI/CD<a class="headerlink" href="#9-cicd" title="Permanent link">&para;</a></h2>
+<p>Сделай любое небольшое изменение в коде и закоммить
+Зайди во вкладку Actions и убедись, что workflow запустился
+Проверь, что приложение успешно задеплоилось в Azure</p>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 9:</strong>
+- После первого успешного деплоя сразу выполни <strong>Smoke Tests</strong> вручную:
+  - <code>GET /health</code> → 200 OK
+  - <code>GET /openapi/v1.json</code> → 200 OK
+  - <code>GET /api/v1/products</code> → 200 OK (не 500)
+- Запиши <strong>базовый Response Time</strong> первого деплоя (Postman / Rider HTTP client) — это baseline для будущих сравнений производительности.
+- Проверь App Insights: убедись, что телеметрия поступает (Dashboard → Live Metrics).
+- Сымитируй failure: временно поломай connection string → убедись, что Health Check возвращает <code>503</code>, а не <code>200</code>.
+- Убедись, что Telegram-бот уведомил об успешном деплое — если нет, Pipeline работает неправильно.</p>
+</blockquote>
+<h2 id="10">Шаг 10: Следующие шаги после базовой настройки<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<p>После успешного деплоя рекомендуется сделать следующее:</p>
+<ol>
+<li>Добавить Swagger в проект</li>
+<li>Создать первую миграцию Entity Framework</li>
+<li>Добавить Health Check endpoint (<code>/health</code>)</li>
+<li>Создать базовую структуру с MediatR (первый Use Case)</li>
+<li>Настроить API-версионирование (см. ниже)</li>
+<li>Начать разработку Angular фронтенда (в папке <code>client/</code>)</li>
+</ol>
+<blockquote>
+<p>🛡️ <strong>Fault Tolerance — Шаг 10:</strong></p>
+<p><strong>Расширенный Health Check (обязательно перед публичным запуском):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddHealthChecks</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddSqlServer</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;ConnectionStrings:AzureConnection&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;azure-sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;db&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;azure&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddSqlServer</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;ConnectionStrings:KzLocalConnection&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;kz-local-sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;db&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;kz&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddRedis</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;ConnectionStrings:Redis&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;redis&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;cache&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="p">.</span><span class="n">AddUrlGroup</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;OneCIntegration:BaseUrl&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/ping&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1c-integration&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;external&quot;</span><span class="p">]);</span>
+
+<span class="c1">// Отдельные endpoints: /health (все), /health/live (только жизнь), /health/ready (готовность)</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MapHealthChecks</span><span class="p">(</span><span class="s">&quot;/health&quot;</span><span class="p">);</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MapHealthChecks</span><span class="p">(</span><span class="s">&quot;/health/ready&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">check</span><span class="p">.</span><span class="n">Tags</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">&quot;db&quot;</span><span class="p">)</span>
+<span class="p">});</span>
+<span class="n">app</span><span class="p">.</span><span class="n">MapHealthChecks</span><span class="p">(</span><span class="s">&quot;/health/live&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="w">  </span><span class="c1">// всегда OK если процесс жив</span>
+<span class="p">});</span>
+</code></pre></div></p>
+<p><strong>Первая миграция — защита от потери данных:</strong>
+- Всегда проверяй миграцию на Staging перед Production.
+- Добавь в migration <code>Down()</code> метод — без него rollback невозможен.
+- Перед каждой prod-миграцией создай manual backup (см. <code>OPERATIONS_MANUAL.md</code> §10.5).</p>
+<p><strong>MediatR Behaviors (Pipeline) — первыми реализуй:</strong>
+1. <code>ValidationBehavior</code> — FluentValidation перехватывает невалидные команды до Handler
+2. <code>LoggingBehavior</code> — Serilog логирует каждый Command/Query с CorrelationId
+3. <code>RetryBehavior</code> — для идемпотентных операций (Queries): повтор при transient DB errors
+4. <code>TransactionBehavior</code> — EF Core transaction scope для всех Commands</p>
+</blockquote>
+<hr />
+<h2 id="11-api-">Шаг 11: Настройка API-версионирования<a class="headerlink" href="#11-api-" title="Permanent link">&para;</a></h2>
+<p>Пакет <code>Asp.Versioning.Http</code> уже установлен на Шаге 4. Добавь конфигурацию:</p>
+<p><strong><code>Program.cs</code>:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddApiVersioning</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">DefaultApiVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ApiVersion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">AssumeDefaultVersionWhenUnspecified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">ReportApiVersions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="n">AddApiExplorer</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">GroupNameFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&#39;v&#39;VVV&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">SubstituteApiVersionInUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></p>
+<p><strong>Пример контроллера:</strong>
+<div class="highlight"><pre><span></span><code><span class="na">[ApiController]</span>
+<span class="na">[ApiVersion(&quot;1.0&quot;)]</span>
+<span class="na">[Route(&quot;api/v{version:apiVersion}/[controller]</span><span class="s">&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ProductsController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[HttpGet]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IActionResult</span><span class="w"> </span><span class="nf">GetAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Swagger с версиями:</strong>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddSwaggerGen</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">SwaggerDoc</span><span class="p">(</span><span class="s">&quot;v1&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenApiInfo</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dark Store API&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;v1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dark Store — API быстрой доставки продуктов&quot;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></p>
+<blockquote>
+<p>📌 Подробнее: стратегия версионирования и Sunset Policy описаны в <code>TECH_STACK.md</code>, раздел 2а.</p>
+<p>🛡️ <strong>Fault Tolerance — Шаг 11:</strong>
+- <strong>Backward-Compatible Changes Only</strong> в v1 — добавление полей допустимо, удаление и переименование требует v2. Нарушение ломает mobile-клиенты без уведомления.
+- <strong>Deprecation Headers</strong> — при переходе на v2 добавь к v1 ответам:
+  <div class="highlight"><pre><span></span><code><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Deprecation&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Sunset&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Sat, 01 Nov 2026 00:00:00 GMT&quot;</span><span class="p">);</span>
+<span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Link&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&lt;/api/v2/products&gt;; rel=\&quot;successor-version\&quot;&quot;</span><span class="p">);</span>
+</code></pre></div>
+- <strong>Version Fallthrough</strong> — конфигурация <code>AssumeDefaultVersionWhenUnspecified = true</code> защищает от ошибок клиентов, не передающих версию; не убирай этот флаг.
+- <strong>Contract Tests</strong> — при добавлении v2 обязательно пиши Regression тесты для v1, чтобы убедиться, что v1 не сломан одновременно.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Нижний колонтитул" >
+        
+          
+          <a href="../TESTING_STRATEGY/" class="md-footer__link md-footer__link--prev" aria-label="Назад: Стратегия тестирования">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Назад
+              </span>
+              <div class="md-ellipsis">
+                Стратегия тестирования
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ANALYSIS_AND_CHANGES/" class="md-footer__link md-footer__link--next" aria-label="Вперед: Анализ и изменения">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Вперед
+              </span>
+              <div class="md-ellipsis">
+                Анализ и изменения
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Dark Store. Все права защищены.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com" target="_blank" rel="noopener" title="GitHub репозиторий" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.suggest", "search.share", "content.tabs.link", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
