@@ -53,7 +53,7 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css?v=20260505b">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -2129,34 +2129,34 @@
 <strong>Дата:</strong> Май 2026</p>
 <hr />
 <h2 id="_1">Обзор интеграций<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>graph TD
-    DS[&quot;🛒 Dark Store API&quot;]
+<pre class="mermaid"><code>graph TD
+    DS["🛒 Dark Store API"]
 
-    subgraph MVP[&quot;📋 MVP — Q1 (Месяцы 1–3)&quot;]
-        C1C[&quot;🏪 1С УТ\n(остатки · цены · заказы)&quot;]
-        KASPI[&quot;💳 Kaspi Pay\n(оплата · рассрочка · возвраты)&quot;]
-        SMS[&quot;📱 SMS Provider\n(OTP верификация — БЛОКЕР)&quot;]
+    subgraph MVP["📋 MVP — Q1 (Месяцы 1–3)"]
+        C1C["🏪 1С УТ\n(остатки · цены · заказы)"]
+        KASPI["💳 Kaspi Pay\n(оплата · рассрочка · возвраты)"]
+        SMS["📱 SMS Provider\n(OTP верификация — БЛОКЕР)"]
     end
 
-    subgraph Q2[&quot;🚀 Q2 (Месяцы 4–6)&quot;]
-        AZS[&quot;⛽ Сеть АЗС\n(бонусная программа)&quot;]
-        GMAPS[&quot;🗺️ Google Maps\n(геокодинг · маршруты · ETA)&quot;]
-        AI[&quot;🤖 Azure OpenAI\n(ИИ-агент · рекомендации)&quot;]
-        COURIER[&quot;🏍 Courier System\n(GPS · SignalR · трекинг)&quot;]
+    subgraph Q2["🚀 Q2 (Месяцы 4–6)"]
+        AZS["⛽ Сеть АЗС\n(бонусная программа)"]
+        GMAPS["🗺️ Google Maps\n(геокодинг · маршруты · ETA)"]
+        AI["🤖 Azure OpenAI\n(ИИ-агент · рекомендации)"]
+        COURIER["🏍 Courier System\n(GPS · SignalR · трекинг)"]
     end
 
-    subgraph Q3[&quot;📈 Q3+ (Месяцы 7–12)&quot;]
-        FCM[&quot;🔔 Firebase FCM\n(Web Push уведомления)&quot;]
+    subgraph Q3["📈 Q3+ (Месяцы 7–12)"]
+        FCM["🔔 Firebase FCM\n(Web Push уведомления)"]
     end
 
-    DS &lt;--&gt;|&quot;двусторонний\n(WebHook + REST)&quot;| C1C
-    DS &lt;--&gt;|&quot;Merchant API\nHMAC-SHA256&quot;| KASPI
-    DS --&gt;|&quot;REST OTP\nRate-limited&quot;| SMS
-    DS &lt;--&gt;|&quot;REST · OAuth 2.0\nOutbox at-least-once&quot;| AZS
-    DS --&gt;|&quot;Directions API\nGeocoding · Places&quot;| GMAPS
-    DS &lt;--&gt;|&quot;Azure.AI.OpenAI\nSemantic Kernel&quot;| AI
-    DS &lt;--&gt;|&quot;SignalR · Firebase&quot;| COURIER
-    DS --&gt;|&quot;FirebaseAdmin SDK\nfire-and-forget&quot;| FCM
+    DS &lt;--&gt;|"двусторонний\n(WebHook + REST)"| C1C
+    DS &lt;--&gt;|"Merchant API\nHMAC-SHA256"| KASPI
+    DS --&gt;|"REST OTP\nRate-limited"| SMS
+    DS &lt;--&gt;|"REST · OAuth 2.0\nOutbox at-least-once"| AZS
+    DS --&gt;|"Directions API\nGeocoding · Places"| GMAPS
+    DS &lt;--&gt;|"Azure.AI.OpenAI\nSemantic Kernel"| AI
+    DS &lt;--&gt;|"SignalR · Firebase"| COURIER
+    DS --&gt;|"FirebaseAdmin SDK\nfire-and-forget"| FCM
 
     classDef core fill:#1B5E20,color:#fff,stroke:#33691E,stroke-width:2px
     classDef mvpStyle fill:#1565C0,color:#fff,stroke:#0D47A1,stroke-width:2px
@@ -2166,8 +2166,7 @@
     class DS core
     class C1C,KASPI,SMS mvpStyle
     class AZS,GMAPS,AI,COURIER q2Style
-    class FCM q3Style
-</code></pre></div>
+    class FCM q3Style</code></pre>
 <p>В проекте планируется несколько ключевых внешних интеграций. Ниже приведён полный список с приоритетами, описанием и техническими деталями.</p>
 <table>
 <thead>
@@ -2653,6 +2652,8 @@ npm<span class="w"> </span>install<span class="w"> </span>firebase<span class="w
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

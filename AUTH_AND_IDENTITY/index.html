@@ -53,7 +53,7 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css?v=20260505b">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -3491,12 +3491,12 @@
 - Семейные связи → ПДн (связка людей)</p>
 <hr />
 <h2 id="2">2. Обзор этапов<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart TD
-    E1[&quot;🟢 Этап 1 — MVP (неделя 1)\nPhone OTP → JWT + Refresh Token\nТаблицы: Users · RefreshTokens · OtpCodes&quot;]
-    E2[&quot;🔵 Этап 2 — Q1 (+1 неделя)\nSocial Login: Google · Apple · Microsoft · Meta\n+ ExternalLogins&quot;]
-    E3[&quot;🟣 Этап 3 — Q1–Q2 (+3–5 дней)\n2FA: TOTP + SMS fallback + Backup-коды\n+ TwoFactorSettings · TwoFactorBackupCodes&quot;]
-    E4[&quot;🟠 Этап 4 — Q2 (+1 неделя)\nСемейные подписки + совместные бонусы\n+ FamilyGroups · FamilyMembers&quot;]
-    E5[&quot;🔴 Этап 5 — Q2–Q3 (+3–5 дней)\nРегистрация по приглашению\n+ InviteTokens&quot;]
+<pre class="mermaid"><code>flowchart TD
+    E1["🟢 Этап 1 — MVP (неделя 1)\nPhone OTP → JWT + Refresh Token\nТаблицы: Users · RefreshTokens · OtpCodes"]
+    E2["🔵 Этап 2 — Q1 (+1 неделя)\nSocial Login: Google · Apple · Microsoft · Meta\n+ ExternalLogins"]
+    E3["🟣 Этап 3 — Q1–Q2 (+3–5 дней)\n2FA: TOTP + SMS fallback + Backup-коды\n+ TwoFactorSettings · TwoFactorBackupCodes"]
+    E4["🟠 Этап 4 — Q2 (+1 неделя)\nСемейные подписки + совместные бонусы\n+ FamilyGroups · FamilyMembers"]
+    E5["🔴 Этап 5 — Q2–Q3 (+3–5 дней)\nРегистрация по приглашению\n+ InviteTokens"]
 
     E1 --&gt; E2 --&gt; E3 --&gt; E4 --&gt; E5
 
@@ -3506,8 +3506,7 @@
 
     class E1 mvp
     class E2,E3 q1
-    class E4,E5 q2
-</code></pre></div>
+    class E4,E5 q2</code></pre>
 <p><strong>Ни один из этапов не изменяет структуру таблиц предыдущего этапа.</strong></p>
 <hr />
 <h2 id="3-1-mvp-phone-otp-jwt">3. Этап 1 (MVP) — Phone OTP + JWT<a class="headerlink" href="#3-1-mvp-phone-otp-jwt" title="Permanent link">&para;</a></h2>
@@ -3515,7 +3514,7 @@
 <p>✅ Реализация частично присутствует: <code>OtpCodes</code>, <code>RefreshTokens</code>, <code>Users</code> в схеме БД.</p>
 </blockquote>
 <h3 id="_6">Поток аутентификации<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant C as 📱 Клиент
     participant A as ⚡ API
     participant DB as 🇰🇿 KZ Local DB
@@ -3535,8 +3534,7 @@
     end
 
     A-&gt;&gt;DB: INSERT RefreshTokens
-    A--&gt;&gt;C: 200 { accessToken, refreshToken, isNewUser }
-</code></pre></div>
+    A--&gt;&gt;C: 200 { accessToken, refreshToken, isNewUser }</code></pre>
 <h3 id="jwt-claims">JWT Claims<a class="headerlink" href="#jwt-claims" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// Минимальный набор claims для JWT (не хранить ПДн в payload — только ID)</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">claims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span>
@@ -3718,7 +3716,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="social-login-web">Поток Social Login (Web)<a class="headerlink" href="#social-login-web" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant Ang as 🌐 Angular
     participant A as ⚡ API
     participant DB as 🇰🇿 KZ Local DB
@@ -3740,8 +3738,7 @@
         A-&gt;&gt;DB: UPDATE ExternalLogin.TokenExpiresAt
     end
 
-    A--&gt;&gt;Ang: { accessToken, refreshToken, isNewUser }
-</code></pre></div>
+    A--&gt;&gt;Ang: { accessToken, refreshToken, isNewUser }</code></pre>
 <h3 id="social-login-mobile-pwa-pkce">Поток Social Login (Mobile PWA — PKCE)<a class="headerlink" href="#social-login-mobile-pwa-pkce" title="Permanent link">&para;</a></h3>
 <p>На мобильных устройствах вместо обычного Authorization Code Flow используется <strong>PKCE</strong> (Proof Key for Code Exchange), так как мобильные приложения не могут надёжно хранить client secret.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Angular PWA — PKCE Flow</span>
@@ -3924,7 +3921,7 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
 <span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">IX_TwoFactorBackupCodes_UserId</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">TwoFactorBackupCodes</span><span class="p">(</span><span class="n">UserId</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="totp-web">Поток включения TOTP (Web)<a class="headerlink" href="#totp-web" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant C as 📱 Клиент
     participant A as ⚡ API
     participant DB as 🇰🇿 KZ Local DB
@@ -3936,12 +3933,11 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
 
     Note over C: Пользователь сканирует QR&lt;br/&gt;в Google Authenticator
 
-    C-&gt;&gt;A: POST /auth/2fa/totp/confirm { code: &quot;123456&quot; }
+    C-&gt;&gt;A: POST /auth/2fa/totp/confirm { code: "123456" }
     A-&gt;&gt;DB: Проверить TOTP код
     A-&gt;&gt;DB: IsEnabled = true
     A-&gt;&gt;DB: INSERT TwoFactorBackupCodes × 8 (хэши)
-    A--&gt;&gt;C: 200 { backupCodes: [...] } ← показать один раз!
-</code></pre></div>
+    A--&gt;&gt;C: 200 { backupCodes: [...] } ← показать один раз!</code></pre>
 <h3 id="2fa_1">Поток входа с 2FA<a class="headerlink" href="#2fa_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>// При входе через OTP или Social Login — если 2FA включена:
 1. Проверить основной метод (OTP/Social) → успех
@@ -4257,7 +4253,7 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
 <span class="c1">-- InviteTokenId != NULL → пользователь зарегистрировался по приглашению</span>
 </code></pre></div>
 <h3 id="_12">Поток регистрации по приглашению<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant A as 👤 Пользователь A
     participant API as ⚡ API
     participant DB as 🇰🇿 KZ Local DB
@@ -4279,8 +4275,7 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
     API-&gt;&gt;DB: INSERT FamilyMembers
     API-&gt;&gt;DB: UPDATE InviteTokens (UsedAt, CurrentUsages++)
     API-&gt;&gt;DB: EarnBonus(inviter) + EarnBonus(invitee)
-    API--&gt;&gt;B: { accessToken, refreshToken, bonusEarned: 200 }
-</code></pre></div>
+    API--&gt;&gt;B: { accessToken, refreshToken, bonusEarned: 200 }</code></pre>
 <h3 id="endpoints-5">Endpoints этапа 5<a class="headerlink" href="#endpoints-5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4316,29 +4311,29 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
 <hr />
 <h2 id="8">8. Схема базы данных — эволюция<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
 <h3 id="kz-local-db_1">Итоговая карта всех таблиц (🇰🇿 KZ Local DB)<a class="headerlink" href="#kz-local-db_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>graph TD
-    subgraph E1[&quot;🟢 Этап 1 — MVP&quot;]
-        Users[&quot;Users\n(PhoneNumber, FullName, Email,\nReferralSource, Corporate)&quot;]
-        RT[&quot;RefreshTokens\n(TokenHash, DeviceId, FamilyId)&quot;]
-        OTP[&quot;OtpCodes\n(CodeHash, Phone, ExpiresAt)&quot;]
+<pre class="mermaid"><code>graph TD
+    subgraph E1["🟢 Этап 1 — MVP"]
+        Users["Users\n(PhoneNumber, FullName, Email,\nReferralSource, Corporate)"]
+        RT["RefreshTokens\n(TokenHash, DeviceId, FamilyId)"]
+        OTP["OtpCodes\n(CodeHash, Phone, ExpiresAt)"]
     end
 
-    subgraph E2[&quot;🔵 Этап 2 — Social Login&quot;]
-        EL[&quot;ExternalLogins\n(Provider, ProviderUserId,\nEncryptedTokens)&quot;]
+    subgraph E2["🔵 Этап 2 — Social Login"]
+        EL["ExternalLogins\n(Provider, ProviderUserId,\nEncryptedTokens)"]
     end
 
-    subgraph E3[&quot;🟣 Этап 3 — 2FA&quot;]
-        TFS[&quot;TwoFactorSettings\n(TotpSecretEncrypted, IsEnabled)&quot;]
-        TFBC[&quot;TwoFactorBackupCodes\n(CodeHash, IsUsed)&quot;]
+    subgraph E3["🟣 Этап 3 — 2FA"]
+        TFS["TwoFactorSettings\n(TotpSecretEncrypted, IsEnabled)"]
+        TFBC["TwoFactorBackupCodes\n(CodeHash, IsUsed)"]
     end
 
-    subgraph E4[&quot;🟠 Этап 4 — Family&quot;]
-        FG[&quot;FamilyGroups\n(OwnerId, Name, MaxMembers)&quot;]
-        FM[&quot;FamilyMembers\n(Role: Owner/Member)&quot;]
+    subgraph E4["🟠 Этап 4 — Family"]
+        FG["FamilyGroups\n(OwnerId, Name, MaxMembers)"]
+        FM["FamilyMembers\n(Role: Owner/Member)"]
     end
 
-    subgraph E5[&quot;🔴 Этап 5 — Invite&quot;]
-        IT[&quot;InviteTokens\n(Type, BonusForInviter,\nBonusForInvitee, ExpiresAt)&quot;]
+    subgraph E5["🔴 Этап 5 — Invite"]
+        IT["InviteTokens\n(Type, BonusForInviter,\nBonusForInvitee, ExpiresAt)"]
     end
 
     Users --&gt; RT
@@ -4353,7 +4348,7 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
     IT --&gt;|CreatedByUserId| Users
     Users -.-&gt;|InviteTokenId — nullable, Этап 5| IT
 
-    note1[&quot;➕ LoyaltyTransactions.FamilyGroupId\n(nullable, добавляется в Этап 4)&quot;]
+    note1["➕ LoyaltyTransactions.FamilyGroupId\n(nullable, добавляется в Этап 4)"]
 
     classDef e1 fill:#2E7D32,color:#fff,stroke:#1B5E20
     classDef e2 fill:#1565C0,color:#fff,stroke:#0D47A1
@@ -4367,8 +4362,7 @@ GET /api/v1/auth/linked-providers   — список привязанных пр
     class TFS,TFBC e3
     class FG,FM e4
     class IT e5
-    class note1 note
-</code></pre></div>
+    class note1 note</code></pre>
 <h3 id="_13">Матрица аддитивных изменений<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -4971,6 +4965,8 @@ npm<span class="w"> </span>install<span class="w"> </span>qrcode<span class="w">
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

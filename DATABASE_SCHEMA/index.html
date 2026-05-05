@@ -53,7 +53,7 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css?v=20260505b">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -2663,25 +2663,25 @@
 <hr />
 <h2 id="no94-v">Гибридная архитектура БД (Закон РК №94-V)<a class="headerlink" href="#no94-v" title="Permanent link">&para;</a></h2>
 <p>Данные разделены на <strong>два изолированных хранилища</strong>:</p>
-<div class="highlight"><pre><span></span><code>graph LR
-    API[&quot;🔄 API\n(оркестрация в памяти)&quot;]
+<pre class="mermaid"><code>graph LR
+    API["🔄 API\n(оркестрация в памяти)"]
 
-    subgraph KZ[&quot;🇰🇿 KZ Local DB — Казахстан&quot;]
-        K1[&quot;👤 Users · Addresses&quot;]
-        K2[&quot;🔑 RefreshTokens · OtpCodes&quot;]
-        K3[&quot;💎 LoyaltyTransactions&quot;]
-        K4[&quot;🔔 Notifications&quot;]
-        K5[&quot;🏍 CourierProfiles&quot;]
-        K6[&quot;🔐 Auth: ExternalLogins\nTwoFactorSettings\nFamilyGroups · FamilyMembers\nInviteTokens&quot;]
+    subgraph KZ["🇰🇿 KZ Local DB — Казахстан"]
+        K1["👤 Users · Addresses"]
+        K2["🔑 RefreshTokens · OtpCodes"]
+        K3["💎 LoyaltyTransactions"]
+        K4["🔔 Notifications"]
+        K5["🏍 CourierProfiles"]
+        K6["🔐 Auth: ExternalLogins\nTwoFactorSettings\nFamilyGroups · FamilyMembers\nInviteTokens"]
     end
 
-    subgraph AZ[&quot;☁️ Azure SQL — Sweden Central&quot;]
-        A1[&quot;🛍 Products · Categories&quot;]
-        A2[&quot;📋 Orders · OrderItems&quot;]
-        A3[&quot;🚚 Deliveries · Couriers&quot;]
-        A4[&quot;💳 Payments&quot;]
-        A5[&quot;🏪 Inventory · Stores&quot;]
-        A6[&quot;📜 AuditLogs · OutboxMessages&quot;]
+    subgraph AZ["☁️ Azure SQL — Sweden Central"]
+        A1["🛍 Products · Categories"]
+        A2["📋 Orders · OrderItems"]
+        A3["🚚 Deliveries · Couriers"]
+        A4["💳 Payments"]
+        A5["🏪 Inventory · Stores"]
+        A6["📜 AuditLogs · OutboxMessages"]
     end
 
     API --&gt;|PersonalDataDbContext| KZ
@@ -2693,8 +2693,7 @@
 
     class API apiStyle
     class K1,K2,K3,K4,K5,K6 kzStyle
-    class A1,A2,A3,A4,A5,A6 azStyle
-</code></pre></div>
+    class A1,A2,A3,A4,A5,A6 azStyle</code></pre>
 <table>
 <thead>
 <tr>
@@ -4175,7 +4174,7 @@ API оркестрирует запросы к обеим БД и «склеив
 <hr />
 <h2 id="relationships">Связи между таблицами (Relationships)<a class="headerlink" href="#relationships" title="Permanent link">&para;</a></h2>
 <h3 id="kz-local-db">🇰🇿 KZ Local DB<a class="headerlink" href="#kz-local-db" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>erDiagram
+<pre class="mermaid"><code>erDiagram
     USERS {
         Guid Id PK
         string PhoneNumber UK
@@ -4228,16 +4227,15 @@ API оркестрирует запросы к обеим БД и «склеив
         string IIN
     }
 
-    USERS ||--o{ ADDRESSES : &quot;has&quot;
-    USERS ||--o{ REFRESHTOKENS : &quot;has&quot;
-    USERS ||--o{ LOYALTYTRANSACTIONS : &quot;earns&quot;
-    USERS ||--o{ FAMILYMEMBERS : &quot;member of&quot;
-    FAMILYGROUPS ||--o{ FAMILYMEMBERS : &quot;contains&quot;
-    FAMILYGROUPS ||--o{ LOYALTYTRANSACTIONS : &quot;pools&quot;
-    USERS ||--o| FAMILYGROUPS : &quot;owns&quot;
-</code></pre></div>
+    USERS ||--o{ ADDRESSES : "has"
+    USERS ||--o{ REFRESHTOKENS : "has"
+    USERS ||--o{ LOYALTYTRANSACTIONS : "earns"
+    USERS ||--o{ FAMILYMEMBERS : "member of"
+    FAMILYGROUPS ||--o{ FAMILYMEMBERS : "contains"
+    FAMILYGROUPS ||--o{ LOYALTYTRANSACTIONS : "pools"
+    USERS ||--o| FAMILYGROUPS : "owns"</code></pre>
 <h3 id="azure-sql">☁️ Azure SQL<a class="headerlink" href="#azure-sql" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>erDiagram
+<pre class="mermaid"><code>erDiagram
     CATEGORIES {
         Guid Id PK
         string Name
@@ -4301,16 +4299,15 @@ API оркестрирует запросы к обеим БД и «склеив
         decimal Longitude
     }
 
-    CATEGORIES }o--o| CATEGORIES : &quot;parent&quot;
-    CATEGORIES ||--o{ PRODUCTS : &quot;contains&quot;
-    PRODUCTS ||--o{ ORDERITEMS : &quot;ordered in&quot;
-    ORDERS ||--o{ ORDERITEMS : &quot;contains&quot;
-    ORDERS ||--o| DELIVERIES : &quot;has&quot;
-    ORDERS ||--o{ PAYMENTS : &quot;paid via&quot;
-    COURIERS ||--o{ DELIVERIES : &quot;handles&quot;
-    PRODUCTS ||--o{ INVENTORY : &quot;stocked at&quot;
-    STORES ||--o{ INVENTORY : &quot;holds&quot;
-</code></pre></div>
+    CATEGORIES }o--o| CATEGORIES : "parent"
+    CATEGORIES ||--o{ PRODUCTS : "contains"
+    PRODUCTS ||--o{ ORDERITEMS : "ordered in"
+    ORDERS ||--o{ ORDERITEMS : "contains"
+    ORDERS ||--o| DELIVERIES : "has"
+    ORDERS ||--o{ PAYMENTS : "paid via"
+    COURIERS ||--o{ DELIVERIES : "handles"
+    PRODUCTS ||--o{ INVENTORY : "stocked at"
+    STORES ||--o{ INVENTORY : "holds"</code></pre>
 <hr />
 <h2 id="c">Пример сущности (C#)<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BaseEntity</span>
@@ -4496,6 +4493,8 @@ API оркестрирует запросы к обеим БД и «склеив
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

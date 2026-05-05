@@ -53,7 +53,7 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css?v=20260505b">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -3557,10 +3557,10 @@
 </ol>
 <hr />
 <h2 id="_2">Принципы и пирамида тестирования <a name="принципы"></a><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>graph BT
-    U[&quot;🔬 Unit тесты\n~60% всех тестов\nHandlers · Validators · Domain logic\n&amp;lt; 1 мс на тест&quot;]
-    I[&quot;🔗 Integration тесты\n~35% всех тестов\nAPI endpoints · DB · Внешние интеграции\n&amp;lt; 1 сек на тест&quot;]
-    E[&quot;🌐 E2E тесты\n~5% — критические пути\nПолный user flow в браузере\n&amp;lt; 3 мин&quot;]
+<pre class="mermaid"><code>graph BT
+    U["🔬 Unit тесты\n~60% всех тестов\nHandlers · Validators · Domain logic\n&amp;lt; 1 мс на тест"]
+    I["🔗 Integration тесты\n~35% всех тестов\nAPI endpoints · DB · Внешние интеграции\n&amp;lt; 1 сек на тест"]
+    E["🌐 E2E тесты\n~5% — критические пути\nПолный user flow в браузере\n&amp;lt; 3 мин"]
 
     U --&gt; I --&gt; E
 
@@ -3570,8 +3570,7 @@
 
     class U unitStyle
     class I intStyle
-    class E e2eStyle
-</code></pre></div>
+    class E e2eStyle</code></pre>
 <table>
 <thead>
 <tr>
@@ -3617,10 +3616,10 @@
 Цель — не покрытие ради метрик, а <strong>проектирование через поведение</strong>: интерфейс и контракт модуля формируются требованиями теста.</p>
 </blockquote>
 <h3 id="red-green-refactor">Цикл Red → Green → Refactor<a class="headerlink" href="#red-green-refactor" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>flowchart LR
-    RED[&quot;🔴 RED\nНаписать падающий тест\n(код ещё не существует)&quot;]
-    GREEN[&quot;🟢 GREEN\nМинимальный код\nдля прохождения теста&quot;]
-    REFACTOR[&quot;🔵 REFACTOR\nУлучшить код\nбез изменения поведения&quot;]
+<pre class="mermaid"><code>flowchart LR
+    RED["🔴 RED\nНаписать падающий тест\n(код ещё не существует)"]
+    GREEN["🟢 GREEN\nМинимальный код\nдля прохождения теста"]
+    REFACTOR["🔵 REFACTOR\nУлучшить код\nбез изменения поведения"]
 
     RED --&gt; GREEN --&gt; REFACTOR --&gt; RED
 
@@ -3630,8 +3629,7 @@
 
     class RED redStyle
     class GREEN greenStyle
-    class REFACTOR blueStyle
-</code></pre></div>
+    class REFACTOR blueStyle</code></pre>
 <table>
 <thead>
 <tr>
@@ -5738,6 +5736,8 @@ PlaceOrder()                                               ❌ (не понят�
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>

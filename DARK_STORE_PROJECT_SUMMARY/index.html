@@ -53,7 +53,7 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css?v=20260505b">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -2064,14 +2064,14 @@
 - <strong>MediatR</strong> (лёгкий CQRS)
 - <strong>Модульный монолит</strong> на старте
 - <strong>Bounded Contexts:</strong> Catalog, Ordering, Inventory, Delivery, Loyalty, Payments</p>
-<div class="highlight"><pre><span></span><code>graph LR
-    subgraph BC[&quot;Bounded Contexts&quot;]
-        CAT[&quot;🛍 Catalog\nТовары · Поиск · ИИ&quot;]
-        ORD[&quot;📋 Ordering\nКорзина · Заказ · Статусы&quot;]
-        INV[&quot;🏪 Inventory\nСклад · Резервирование · 1С&quot;]
-        DEL[&quot;🚚 Delivery\nКурьеры · Трекинг&quot;]
-        LOY[&quot;💎 Loyalty\nБонусы · АЗС · Промокоды&quot;]
-        PAY[&quot;💳 Payments\nKaspi Pay · Возвраты&quot;]
+<pre class="mermaid"><code>graph LR
+    subgraph BC["Bounded Contexts"]
+        CAT["🛍 Catalog\nТовары · Поиск · ИИ"]
+        ORD["📋 Ordering\nКорзина · Заказ · Статусы"]
+        INV["🏪 Inventory\nСклад · Резервирование · 1С"]
+        DEL["🚚 Delivery\nКурьеры · Трекинг"]
+        LOY["💎 Loyalty\nБонусы · АЗС · Промокоды"]
+        PAY["💳 Payments\nKaspi Pay · Возвраты"]
     end
 
     ORD --&gt; CAT
@@ -2084,8 +2084,7 @@
     classDef ordNode fill:#2E7D32,color:#fff,stroke:#1B5E20,stroke-width:2px
 
     class CAT,INV,DEL,LOY,PAY bcNode
-    class ORD ordNode
-</code></pre></div>
+    class ORD ordNode</code></pre>
 <p><strong>Tech Stack:</strong>
 - <strong>Backend:</strong> .NET 10, ASP.NET Core Web API
 - <strong>Frontend:</strong> Angular 20+
@@ -2095,13 +2094,13 @@
 - <strong>IDE:</strong> JetBrains Rider
 - <strong>ИИ:</strong> Azure OpenAI</p>
 <h2 id="4">4. Этапы реализации<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>flowchart LR
-    MVP[&quot;🚀 MVP\n(4–6 месяцев)\nКаталог · Корзина\nKaspi Pay · Доставка\nЛояльность (базовая)&quot;]
-    GROW[&quot;📈 Рост\n(6–12 месяцев)\nИИ-агент\n1С full sync\nАналитика&quot;]
-    SCALE[&quot;🏗 Масштаб\n(12+ месяцев)\nНесколько дарксторов\nМобильное приложение\nПродвинутый ИИ&quot;]
+<pre class="mermaid"><code>flowchart LR
+    MVP["🚀 MVP\n(4–6 месяцев)\nКаталог · Корзина\nKaspi Pay · Доставка\nЛояльность (базовая)"]
+    GROW["📈 Рост\n(6–12 месяцев)\nИИ-агент\n1С full sync\nАналитика"]
+    SCALE["🏗 Масштаб\n(12+ месяцев)\nНесколько дарксторов\nМобильное приложение\nПродвинутый ИИ"]
 
-    MVP --&gt;|&quot;Первые заказы\nОбратная связь&quot;| GROW
-    GROW --&gt;|&quot;1000+ заказов/мес\nСтабильность&quot;| SCALE
+    MVP --&gt;|"Первые заказы\nОбратная связь"| GROW
+    GROW --&gt;|"1000+ заказов/мес\nСтабильность"| SCALE
 
     classDef mvpStyle fill:#1565C0,color:#fff,stroke:#0D47A1,stroke-width:2px
     classDef growStyle fill:#2E7D32,color:#fff,stroke:#1B5E20,stroke-width:2px
@@ -2109,8 +2108,7 @@
 
     class MVP mvpStyle
     class GROW growStyle
-    class SCALE scaleStyle
-</code></pre></div>
+    class SCALE scaleStyle</code></pre>
 <table>
 <thead>
 <tr>
@@ -2279,6 +2277,8 @@
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
     
   </body>
