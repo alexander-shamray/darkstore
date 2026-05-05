@@ -71,9 +71,6 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css?v=20260505b
 
-extra_javascript:
-  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
-
 extra:
   social:
     - icon: fontawesome/brands/github
