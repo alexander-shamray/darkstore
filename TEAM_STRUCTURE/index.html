@@ -2596,19 +2596,21 @@
 </table>
 <hr />
 <h2 id="5-12">5. Организационная схема (к 12 месяцу)<a class="headerlink" href="#5-12" title="Permanent link">&para;</a></h2>
-<p>Основатель / CEO
-│
-┌──────────────────┼──────────────────┐
-│                  │                  │
-Операционный     Маркетолог          Технический директор
-директор           │                     │
-│             │                     │
-┌────┴────┐   Соцсети + Реклама   ┌─────┴─────┐
-│         │                       │           │
-Склад    Курьеры                 Backend     Frontend
-(6 чел)  (10 чел)               (2 чел)     (2 чел)
-│
-Поддержка (2 чел)</p>
+<pre class="mermaid"><code>graph TD
+    CEO["👤 Основатель / CEO"]
+
+    CEO --&gt; OD["📦 Операционный директор"]
+    CEO --&gt; MKT["📣 Маркетолог"]
+    CEO --&gt; CTO["💻 Технический директор"]
+
+    OD --&gt; WH["🏪 Склад\n(6 чел)"]
+    OD --&gt; DRV["🚴 Курьеры\n(10 чел)"]
+    OD --&gt; SUP["🎧 Поддержка\n(2 чел)"]
+
+    MKT --&gt; SMM["📱 Соцсети + Реклама"]
+
+    CTO --&gt; BE["⚙️ Backend\n(2 чел)"]
+    CTO --&gt; FE["🖥️ Frontend\n(2 чел)"]</code></pre>
 <hr />
 <h2 id="6-12">6. Бюджет на персонал (первые 12 месяцев)<a class="headerlink" href="#6-12" title="Permanent link">&para;</a></h2>
 <table>
@@ -2662,11 +2664,6 @@
 <li>Проводить <strong>регулярные обучения</strong> (раз в 2 месяца).</li>
 </ul>
 <hr />
-<p><strong>Файл готов.</strong></p>
-<p>Хочешь, я сделаю следующий документ? Например:
-- <code>LEGAL_REQUIREMENTS.md</code> (юридические требования)
-- <code>GROWTH_HACKS.md</code> (ростовые хаки)
-- <code>CUSTOMER_SUPPORT_GUIDE.md</code></p>
 
 
 

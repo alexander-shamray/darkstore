@@ -2258,7 +2258,7 @@
 </table>
 <blockquote>
 <p><strong>TDD-правило:</strong> PR на изменение доменной логики без тестов не принимается — блокируется Quality Gate в <code>deploy-azure1.yml</code>.<br />
-Краткий путь: <code>TESTING_STRATEGY.md</code> → раздел <strong><a href="#tdd">TDD — разработка через тестирование</a></strong></p>
+Краткий путь: <a href="../TESTING_STRATEGY/">TESTING_STRATEGY.md</a> → раздел <strong>TDD — разработка через тестирование</strong></p>
 </blockquote>
 <hr />
 <h2 id="3-30">🛠️ Шаг 3 — Настроить проект с нуля (30 мин)<a class="headerlink" href="#3-30" title="Permanent link">&para;</a></h2>
@@ -2312,24 +2312,24 @@
 <thead>
 <tr>
 <th>#</th>
-<th>Документ</th>
+<th>Файл</th>
 <th>Что даёт</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>5.1</td>
-<td><a href="./deploy-azure1.yml">deploy-azure1.yml</a></td>
+<td><code>deploy-azure1.yml</code></td>
 <td>PR Check workflow — сборка + тесты + CVE-сканирование на каждый Pull Request</td>
 </tr>
 <tr>
 <td>5.2</td>
-<td><a href="./deploy-azure2.yml">deploy-azure2.yml</a></td>
+<td><code>deploy-azure2.yml</code></td>
 <td>Деплой: build → staging (авто) → production (ручное подтверждение); OIDC, health check, Telegram; retention 30 дней</td>
 </tr>
 <tr>
 <td>5.3</td>
-<td><a href="./.github/workflows/rollback.yml">.github/workflows/rollback.yml</a></td>
+<td><code>.github/workflows/rollback.yml</code></td>
 <td>Откат production/staging на любой предыдущий SHA с Telegram-уведомлением (<code>workflow_dispatch</code>)</td>
 </tr>
 </tbody>
