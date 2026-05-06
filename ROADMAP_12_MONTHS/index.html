@@ -2191,12 +2191,15 @@
 <h2 id="общая-стратегия">Общая стратегия<a class="headerlink" href="#общая-стратегия" title="Permanent link">&para;</a></h2>
 <p>Проект развивается по принципу <strong>"Сначала продукт, потом масштабирование"</strong>.</p>
 <ul>
-<li><strong>Первые 6 месяцев</strong> — фокус на быстром запуске MVP и получении первых реальных заказов.</li>
-<li><strong>Следующие 6 месяцев</strong> — улучшение продукта, автоматизация и подготовка к росту.</li>
+<li><strong>MVP — 6 мес Optimistic / 8 мес Realistic</strong> (см. <a href="../MVP_PLAN/"><code>MVP_PLAN.md</code></a>) — фокус на быстром запуске и первых реальных заказах.</li>
+<li><strong>После публичного запуска ещё 4–6 месяцев</strong> — улучшение продукта, автоматизация, подготовка к росту.</li>
 <li><strong>Ключевой принцип:</strong> Не усложнять архитектуру раньше времени.</li>
 </ul>
+<blockquote>
+<p><strong>Гант ниже отражает Optimistic-сценарий.</strong> Realistic = +2 месяца к публичному запуску (см. таблицу «Ключевые вехи» ниже).</p>
+</blockquote>
 <pre class="mermaid"><code>gantt
-    title Dark Store — Roadmap 12 месяцев (Май 2026 — Апрель 2027)
+    title Dark Store — Roadmap 12 месяцев (Optimistic, Май 2026 — Апрель 2027)
     dateFormat  YYYY-MM
     axisFormat  %m/%Y
 
@@ -2548,42 +2551,52 @@
 Зрелый продукт, готовый к масштабированию.</p>
 <hr />
 <h2 id="ключевые-вехи-milestones">Ключевые вехи (Milestones)<a class="headerlink" href="#ключевые-вехи-milestones" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Источник правды по срокам MVP — <a href="../MVP_PLAN/#канонический-график-вех-источник-правды"><code>MVP_PLAN.md</code> § Канонический график вех</a>.</strong> Таблица ниже синхронизирована с ним: каждая MVP-веха имеет два срока — Optimistic (happy path) и Realistic (с буфером на партнёрские API, UX-итерации, HA-настройку).</p>
+</blockquote>
 <table>
 <thead>
 <tr>
 <th>Веха</th>
-<th>Срок</th>
+<th>🟢 Optimistic</th>
+<th>🟡 Realistic</th>
 <th>Описание</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>MVP готов</strong></td>
-<td>Конец месяца 3</td>
-<td>Возможность оформить заказ и оплатить</td>
+<td><strong>Backend MVP готов (M3)</strong></td>
+<td>конец августа 2026 (мес. 4)</td>
+<td>середина октября 2026 (мес. 5.5)</td>
+<td>1С интеграция + Angular shell, E2E smoke зелёный</td>
 </tr>
 <tr>
-<td><strong>Закрытое тестирование</strong></td>
-<td>Конец месяца 5</td>
+<td><strong>Closed Beta (M4)</strong></td>
+<td>конец сентября 2026 (мес. 5)</td>
+<td>конец ноября 2026 (мес. 7)</td>
 <td>50+ активных пользователей</td>
 </tr>
 <tr>
-<td><strong>Публичный запуск</strong></td>
-<td>Конец месяца 6</td>
+<td><strong>Публичный запуск (M5)</strong></td>
+<td>конец октября 2026 (мес. 6)</td>
+<td>конец декабря 2026 (мес. 8)</td>
 <td>Первый реальный оборот</td>
 </tr>
 <tr>
 <td><strong>1000 заказов в месяц</strong></td>
-<td>Конец месяца 9</td>
+<td>конец января 2027 (мес. 9)</td>
+<td>конец марта 2027 (мес. 11)</td>
 <td>Стабильная работа</td>
 </tr>
 <tr>
 <td><strong>Готовность к масштабу</strong></td>
-<td>Конец месяца 12</td>
+<td>конец апреля 2027 (мес. 12)</td>
+<td>конец июня 2027 (мес. 14)</td>
 <td>Продукт может выдержать рост</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Итого MVP (M0 → публичный запуск):</strong> 6 месяцев Optimistic / 8 месяцев Realistic.</p>
 <hr />
 <h2 id="приоритеты-по-направлениям">Приоритеты по направлениям<a class="headerlink" href="#приоритеты-по-направлениям" title="Permanent link">&para;</a></h2>
 <table>
