@@ -70,7 +70,7 @@
 | # | Документ | Что даёт |
 |---|---------|---------|
 | 6.1 | [ROADMAP_12_MONTHS.md](./ROADMAP_12_MONTHS.md) | Квартальная дорожная карта Q1–Q4, ключевые вехи, приоритеты |
-| 6.2 | [MVP_PLAN.md](./MVP_PLAN.md) | Декомпозиция MVP на вехи M0–M5: скоуп, Definition of Done, KPI, риски, gate публичного запуска |
+| 6.2 | [MVP_PLAN.md](./MVP_PLAN.md) | **Источник правды по срокам MVP** — Optimistic (6 мес) vs Realistic (8 мес). Декомпозиция на вехи M0–M5: скоуп, Definition of Done, KPI, риски, gate публичного запуска |
 
 ---
 
