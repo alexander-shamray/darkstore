@@ -1,0 +1,3605 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Сервис быстрой доставки продуктов в Костанае. Полная документация для заказчика и команды.">
+      
+      
+        <meta name="author" content="Dark Store Team">
+      
+      
+      
+        <link rel="prev" href="../LEGAL_REQUIREMENTS/">
+      
+      
+        <link rel="next" href="../BRAND_GUIDELINES/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=37474f&textColor=ffffff">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Azure Lock-In Analysis - Dark Store — Документация проекта</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css?v=20260505b">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#анализ-зависимости-от-azure-provider-lock-in" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href=".." title="Dark Store — Документация проекта" class="md-header__button md-logo" aria-label="Dark Store — Документация проекта" data-md-component="logo">
+      
+  <img src="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=37474f&textColor=ffffff" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dark Store — Документация проекта
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Azure Lock-In Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Тёмная тема"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Тёмная тема" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="teal"  aria-label="Светлая тема"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Светлая тема" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Поделиться" aria-label="Поделиться" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠 Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../DARK_STORE_PROJECT_SUMMARY/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🎯 О проекте
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../FINANCIAL_MODEL/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  💰 Бизнес
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ROADMAP_12_MONTHS/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  📅 Дорожная карта
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../INDEX_OPERATIONS/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ⚙️ Операции
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../RISKS_AND_MITIGATION/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ⚖️ Риски и право
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../BRAND_GUIDELINES/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🎨 Бренд
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../INDEX_TECHNICAL/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🔧 Технический раздел
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../ANALYSIS_AND_CHANGES/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  📋 Планы и задачи
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Dark Store — Документация проекта" class="md-nav__button md-logo" aria-label="Dark Store — Документация проекта" data-md-component="logo">
+      
+  <img src="https://api.dicebear.com/7.x/initials/svg?seed=DS&backgroundColor=37474f&textColor=ffffff" alt="logo">
+
+    </a>
+    Dark Store — Документация проекта
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Главная
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎯 О проекте
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎯 О проекте
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DARK_STORE_PROJECT_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Обзор проекта
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COMPETITOR_ANALYSIS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Анализ конкурентов
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SOLUTION_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Сравнение решений
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💰 Бизнес
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💰 Бизнес
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FINANCIAL_MODEL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финансовая модель
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEAM_STRUCTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Структура команды
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUSTOMER_JOURNEY_MAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Путь клиента
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MARKETING_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Маркетинговая стратегия
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GROWTH_HACKS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Growth Hacking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📅 Дорожная карта
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📅 Дорожная карта
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROADMAP_12_MONTHS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Роадмап на 12 месяцев
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MVP_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    План MVP по вехам
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚙️ Операции
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚙️ Операции
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDEX_OPERATIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Операционный индекс
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OPERATIONS_MANUAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция по операциям
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CUSTOMER_SUPPORT_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Руководство поддержки
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ⚖️ Риски и право
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ⚖️ Риски и право
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RISKS_AND_MITIGATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Риски и митигация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LEGAL_REQUIREMENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Правовые требования
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Lock-In Analysis
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure Lock-In Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#краткие-выводы-tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Краткие выводы (TL;DR)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-полная-карта-зависимостей-от-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Полная карта зависимостей от Azure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Полная карта зависимостей от Azure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-nuget-пакеты-с-прямой-привязкой-к-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 NuGet-пакеты с прямой привязкой к Azure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-используемые-сервисы-azure-уровень-инфраструктуры" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Используемые сервисы Azure (уровень инфраструктуры)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-что-уже-не-на-azure-существующая-портабельность" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Что уже НЕ на Azure (существующая портабельность)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-степень-lock-in-по-компонентам" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Степень lock-in по компонентам
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Степень lock-in по компонентам">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-высокий-lock-in--требуется-замена-sdk--api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 Высокий lock-in — требуется замена SDK / API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔴 Высокий lock-in — требуется замена SDK / API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-azure-openai-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Azure OpenAI Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-azure-key-vault--managed-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Azure Key Vault + Managed Identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-средний-lock-in--замена-с-умеренными-усилиями" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 Средний lock-in — замена с умеренными усилиями
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟡 Средний lock-in — замена с умеренными усилиями">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#23-azure-application-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Azure Application Insights
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-azure-sql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Azure SQL Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-azure-blob-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Azure Blob Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-azure-static-web-apps-фронтенд" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Azure Static Web Apps (фронтенд)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-низкий--нулевой-lock-in--уже-портабельно" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 Низкий / нулевой lock-in — уже портабельно
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 Низкий / нулевой lock-in — уже портабельно">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#27-azure-cache-for-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Azure Cache for Redis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-azure-app-service-вычисления" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Azure App Service (вычисления)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-cicd-github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 CI/CD (GitHub Actions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-jwt-аутентификация" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 JWT-аутентификация
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-оценка-lock-in-по-архитектурным-слоям" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Оценка lock-in по архитектурным слоям
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-сценарии-миграции" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Сценарии миграции
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Сценарии миграции">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-а-переход-на-собственные-серверы-полный-on-premise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий А: Переход на собственные серверы (полный on-premise)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-б-переход-на-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий Б: Переход на AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-в-переход-на-google-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий В: Переход на Google Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-г-минимальное-изменение-только-выход-из-azure-openai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий Г: Минимальное изменение (только выход из Azure OpenAI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-реестр-рисков-lock-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Реестр рисков lock-in
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-рекомендации-по-снижению-lock-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Рекомендации по снижению lock-in
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Рекомендации по снижению lock-in">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-1--сделать-сейчас-без-затрат-архитектурные-улучшения" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 1 — Сделать сейчас (без затрат, архитектурные улучшения)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-2--до-q2-низкое-усилие-высокое-значение" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 2 — До Q2 (низкое усилие, высокое значение)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-3--до-q3-среднее-усилие" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 3 — До Q3 (среднее усилие)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-4--резервное-планирование" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 4 — Резервное планирование
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-итоговая-оценка" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Итоговая оценка
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎨 Бренд
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎨 Бренд
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BRAND_GUIDELINES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Гайдлайны бренда
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔧 Технический раздел
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔧 Технический раздел
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDEX_TECHNICAL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технический индекс
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TECH_STACK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Технологический стек
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DATABASE_SCHEMA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Схема базы данных
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AUTH_AND_IDENTITY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Аутентификация и авторизация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INTEGRATIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Интеграции
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIGURATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигурация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LOGGING_AND_AUDIT_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Логирование и аудит
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TESTING_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Стратегия тестирования
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PROJECT_CREATION_STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Создание проекта
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Планы и задачи
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📋 Планы и задачи
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ANALYSIS_AND_CHANGES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Анализ и изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IMPROVEMENT_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    План улучшений
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MANUAL_ACTIONS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ручные действия (чеклист)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DOCS_DEPLOY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📤 Как обновить сайт доков
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#краткие-выводы-tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Краткие выводы (TL;DR)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-полная-карта-зависимостей-от-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Полная карта зависимостей от Azure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Полная карта зависимостей от Azure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-nuget-пакеты-с-прямой-привязкой-к-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 NuGet-пакеты с прямой привязкой к Azure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-используемые-сервисы-azure-уровень-инфраструктуры" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Используемые сервисы Azure (уровень инфраструктуры)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-что-уже-не-на-azure-существующая-портабельность" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Что уже НЕ на Azure (существующая портабельность)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-степень-lock-in-по-компонентам" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Степень lock-in по компонентам
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Степень lock-in по компонентам">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-высокий-lock-in--требуется-замена-sdk--api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 Высокий lock-in — требуется замена SDK / API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔴 Высокий lock-in — требуется замена SDK / API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-azure-openai-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Azure OpenAI Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-azure-key-vault--managed-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Azure Key Vault + Managed Identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-средний-lock-in--замена-с-умеренными-усилиями" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 Средний lock-in — замена с умеренными усилиями
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟡 Средний lock-in — замена с умеренными усилиями">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#23-azure-application-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Azure Application Insights
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-azure-sql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Azure SQL Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-azure-blob-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Azure Blob Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-azure-static-web-apps-фронтенд" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Azure Static Web Apps (фронтенд)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-низкий--нулевой-lock-in--уже-портабельно" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 Низкий / нулевой lock-in — уже портабельно
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 Низкий / нулевой lock-in — уже портабельно">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#27-azure-cache-for-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Azure Cache for Redis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-azure-app-service-вычисления" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Azure App Service (вычисления)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-cicd-github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 CI/CD (GitHub Actions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-jwt-аутентификация" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 JWT-аутентификация
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-оценка-lock-in-по-архитектурным-слоям" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Оценка lock-in по архитектурным слоям
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-сценарии-миграции" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Сценарии миграции
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Сценарии миграции">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-а-переход-на-собственные-серверы-полный-on-premise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий А: Переход на собственные серверы (полный on-premise)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-б-переход-на-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий Б: Переход на AWS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-в-переход-на-google-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий В: Переход на Google Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#сценарий-г-минимальное-изменение-только-выход-из-azure-openai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Сценарий Г: Минимальное изменение (только выход из Azure OpenAI)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-реестр-рисков-lock-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Реестр рисков lock-in
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-рекомендации-по-снижению-lock-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Рекомендации по снижению lock-in
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Рекомендации по снижению lock-in">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-1--сделать-сейчас-без-затрат-архитектурные-улучшения" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 1 — Сделать сейчас (без затрат, архитектурные улучшения)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-2--до-q2-низкое-усилие-высокое-значение" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 2 — До Q2 (низкое усилие, высокое значение)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-3--до-q3-среднее-усилие" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 3 — До Q3 (среднее усилие)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#приоритет-4--резервное-планирование" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Приоритет 4 — Резервное планирование
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-итоговая-оценка" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Итоговая оценка
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="анализ-зависимости-от-azure-provider-lock-in">Анализ зависимости от Azure (Provider Lock-In)<a class="headerlink" href="#анализ-зависимости-от-azure-provider-lock-in" title="Permanent link">&para;</a></h1>
+<p><strong>Проект:</strong> Dark Store — быстрая доставка продуктов<br />
+<strong>Локация:</strong> Костанай, Казахстан<br />
+<strong>Дата:</strong> Май 2026<br />
+<strong>Цель:</strong> Оценка глубины зависимости от Azure и реалистичности миграции на альтернативный хостинг или собственные серверы</p>
+<hr />
+<h2 id="краткие-выводы-tldr">Краткие выводы (TL;DR)<a class="headerlink" href="#краткие-выводы-tldr" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Оценка</th>
+<th>Комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Общий уровень lock-in</strong></td>
+<td>🟡 <strong>Средний</strong></td>
+<td>Базовая архитектура портабельна; зависимость сосредоточена в AI-сервисах и мониторинге</td>
+</tr>
+<tr>
+<td><strong>Миграция инфраструктуры</strong></td>
+<td>🟢 <strong>Реально</strong></td>
+<td>2–3 недели работы</td>
+</tr>
+<tr>
+<td><strong>Полная миграция SDK</strong></td>
+<td>🟡 <strong>Умеренные усилия</strong></td>
+<td>4–8 недель для соло-разработчика</td>
+</tr>
+<tr>
+<td><strong>Доменная / бизнес-логика</strong></td>
+<td>🟢 <strong>Нет lock-in</strong></td>
+<td>Ноль Azure-импортов в слоях Domain и Application</td>
+</tr>
+<tr>
+<td><strong>Самый критичный блокер</strong></td>
+<td>🔴 <strong>Azure OpenAI + AI Search</strong></td>
+<td>Нет готовой замены с идентичным API</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-полная-карта-зависимостей-от-azure">1. Полная карта зависимостей от Azure<a class="headerlink" href="#1-полная-карта-зависимостей-от-azure" title="Permanent link">&para;</a></h2>
+<h3 id="11-nuget-пакеты-с-прямой-привязкой-к-azure">1.1 NuGet-пакеты с прямой привязкой к Azure<a class="headerlink" href="#11-nuget-пакеты-с-прямой-привязкой-к-azure" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Пакет</th>
+<th>Проект</th>
+<th>Уровень lock-in</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Azure.Extensions.AspNetCore.Configuration.Secrets</code></td>
+<td>API</td>
+<td>🔴 <strong>Высокий</strong></td>
+<td>Загрузка секретов из Azure Key Vault в <code>IConfiguration</code></td>
+</tr>
+<tr>
+<td><code>Azure.Identity</code></td>
+<td>API</td>
+<td>🔴 <strong>Высокий</strong></td>
+<td><code>DefaultAzureCredential</code> — Managed Identity + Azure AD аутентификация</td>
+</tr>
+<tr>
+<td><code>Microsoft.ApplicationInsights.AspNetCore</code></td>
+<td>API</td>
+<td>🟡 <strong>Средний</strong></td>
+<td>APM-телеметрия → Azure Application Insights</td>
+</tr>
+<tr>
+<td><code>Serilog.Sinks.ApplicationInsights</code></td>
+<td>API</td>
+<td>🟡 <strong>Средний</strong></td>
+<td>Структурированные логи → Azure Application Insights</td>
+</tr>
+<tr>
+<td><code>Azure.AI.OpenAI</code></td>
+<td>Infrastructure</td>
+<td>🔴 <strong>Высокий</strong></td>
+<td>SDK Azure OpenAI Service (вызовы GPT-4o)</td>
+</tr>
+<tr>
+<td><code>Azure.Search.Documents</code></td>
+<td>Infrastructure</td>
+<td>🔴 <strong>Высокий</strong></td>
+<td>Azure AI Search (RAG / поиск товаров)</td>
+</tr>
+<tr>
+<td><code>Azure.Storage.Blobs</code></td>
+<td>Infrastructure</td>
+<td>🟡 <strong>Средний</strong></td>
+<td>Azure Blob Storage (фото товаров, архивы аудита)</td>
+</tr>
+<tr>
+<td><code>Microsoft.EntityFrameworkCore.SqlServer</code></td>
+<td>Infrastructure</td>
+<td>🟡 <strong>Средний</strong></td>
+<td>EF Core провайдер для SQL Server (работает на любом SQL Server)</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.Caching.StackExchangeRedis</code></td>
+<td>Infrastructure</td>
+<td>🟢 <strong>Низкий</strong></td>
+<td>Redis — открытый протокол, Azure Cache for Redis — просто управляемый Redis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Не затронуты (нет Azure-импортов):</strong>
+- <code>DarkStore.Domain</code> — чистая доменная модель на C#
+- <code>DarkStore.Application</code> — MediatR-обработчики, FluentValidation, без инфраструктурных импортов
+- Все тестовые проекты</p>
+<h3 id="12-используемые-сервисы-azure-уровень-инфраструктуры">1.2 Используемые сервисы Azure (уровень инфраструктуры)<a class="headerlink" href="#12-используемые-сервисы-azure-уровень-инфраструктуры" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>mindmap
+  root((☁️ Azure))
+    Вычисления
+      App Service
+        бэкенд API
+      Static Web Apps
+        Angular PWA
+    Данные
+      Azure SQL Database
+        бизнес-данные
+      Azure Cache for Redis
+        кэш / сессии
+    Хранилище
+      Azure Blob Storage
+        изображения / файлы
+      Azure CDN
+        статический контент
+    ИИ и Поиск
+      Azure OpenAI Service
+        GPT-4o / GPT-4o-mini
+      Azure AI Search
+        RAG / поиск товаров
+    Безопасность
+      Azure Key Vault
+        секреты
+      Entra ID
+        Managed Identity / OIDC
+    Наблюдаемость
+      Application Insights
+        APM / алерты
+      Log Analytics
+        агрегация логов
+    CI/CD и IaC
+      GitHub Actions
+        Azure OIDC
+      Azure Bicep
+        запланировано
+    Масштабирование
+      Container Apps
+        при росте нагрузки
+      AKS
+        долгосрочный план</code></pre>
+<h3 id="13-что-уже-не-на-azure-существующая-портабельность">1.3 Что уже НЕ на Azure (существующая портабельность)<a class="headerlink" href="#13-что-уже-не-на-azure-существующая-портабельность" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Хостинг</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KZ Local DB (<code>PersonalDataDbContext</code>)</td>
+<td>Beeline KZ VPS / KAZTELECOM</td>
+<td>Обязательно по Закону РК №94-V, уже on-prem</td>
+</tr>
+<tr>
+<td>Интеграция с 1С</td>
+<td>Сервер клиента on-premise</td>
+<td>Внешняя система</td>
+</tr>
+<tr>
+<td>Kaspi Pay</td>
+<td>Инфраструктура Kaspi</td>
+<td>Внешний платёжный шлюз</td>
+</tr>
+<tr>
+<td>SMS OTP (SMSC.kz / KazInfoTech)</td>
+<td>KZ-провайдеры</td>
+<td>Внешние</td>
+</tr>
+<tr>
+<td>Google Maps</td>
+<td>Google Cloud</td>
+<td>Не Azure</td>
+</tr>
+<tr>
+<td>Firebase FCM</td>
+<td>Google Cloud</td>
+<td>Не Azure</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-степень-lock-in-по-компонентам">2. Степень lock-in по компонентам<a class="headerlink" href="#2-степень-lock-in-по-компонентам" title="Permanent link">&para;</a></h2>
+<h3 id="-высокий-lock-in--требуется-замена-sdk--api">🔴 Высокий lock-in — требуется замена SDK / API<a class="headerlink" href="#-высокий-lock-in--требуется-замена-sdk--api" title="Permanent link">&para;</a></h3>
+<h4 id="21-azure-openai-service">2.1 Azure OpenAI Service<a class="headerlink" href="#21-azure-openai-service" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// Infrastructure/DarkStore.Infrastructure.csproj</span>
+<span class="o">&lt;</span><span class="n">PackageReference</span><span class="w"> </span><span class="n">Include</span><span class="o">=</span><span class="s">&quot;Azure.AI.OpenAI&quot;</span><span class="w"> </span><span class="n">Version</span><span class="o">=</span><span class="s">&quot;2.1.0&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">PackageReference</span><span class="w"> </span><span class="n">Include</span><span class="o">=</span><span class="s">&quot;Azure.Search.Documents&quot;</span><span class="w"> </span><span class="n">Version</span><span class="o">=</span><span class="s">&quot;12.0.0&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+</code></pre></div>
+<p><strong>Причины привязки:</strong>
+- <code>Azure.AI.OpenAI</code> оборачивает Azure-специфичные API-эндпоинты и аутентификацию
+- Azure AI Search использует проприетарный DSL запросов и API индексации
+- RAG-пайплайн (OpenAI + AI Search) построен как связанная пара Azure-сервисов</p>
+<p><strong>Пути миграции:</strong>
+| Цель | Альтернатива | Усилие |
+|------|-------------|--------|
+| Собственный сервер / self-hosted | Ollama + llama.cpp (Llama 3.3, Mistral) + pgvector (PostgreSQL) | 🔴 3–5 недель, компромисс по качеству |
+| AWS | Amazon Bedrock (Claude/Titan) + OpenSearch | 🟡 2–3 недели |
+| Google Cloud | Vertex AI + Vertex AI Search | 🟡 2–3 недели |
+| OpenAI API напрямую | Пакет <code>OpenAI</code> для .NET (те же модели, без Azure) | 🟢 2–3 дня — только смена SDK и эндпоинта |</p>
+<blockquote>
+<p><strong>Быстрый выход из Azure OpenAI:</strong> переход на официальный OpenAI API. Пакет <code>Azure.AI.OpenAI</code> v2.x поддерживает оба эндпоинта через конфигурацию — изменения в коде минимальны.</p>
+</blockquote>
+<h4 id="22-azure-key-vault--managed-identity">2.2 Azure Key Vault + Managed Identity<a class="headerlink" href="#22-azure-key-vault--managed-identity" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Configuration</span><span class="p">.</span><span class="n">AddAzureKeyVault</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">keyVaultUri</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultAzureCredential</span><span class="p">());</span>
+</code></pre></div>
+<p><strong>Причины привязки:</strong>
+- <code>DefaultAzureCredential</code> специфичен для Azure
+- URI Key Vault привязан к Azure-ресурсу
+- Пайплайн секретов зависит от Managed Identity Azure App Service</p>
+<p><strong>Пути миграции:</strong>
+| Цель | Альтернатива | Усилие |
+|------|-------------|--------|
+| Собственные серверы | HashiCorp Vault (бесплатный, open-source) | 🟡 3–5 дней |
+| Любой облачный провайдер | Переменные окружения + GitHub Secrets | 🟢 1 день |
+| AWS | AWS Secrets Manager | 🟡 2–3 дня |
+| Любой | <code>.env</code>-файлы + docker secrets (dev / небольшой prod) | 🟢 Несколько часов |</p>
+<hr />
+<h3 id="-средний-lock-in--замена-с-умеренными-усилиями">🟡 Средний lock-in — замена с умеренными усилиями<a class="headerlink" href="#-средний-lock-in--замена-с-умеренными-усилиями" title="Permanent link">&para;</a></h3>
+<h4 id="23-azure-application-insights">2.3 Azure Application Insights<a class="headerlink" href="#23-azure-application-insights" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// Program.cs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddApplicationInsightsTelemetry</span><span class="p">(</span><span class="n">opts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">});</span>
+
+<span class="c1">// DarkStore.API.csproj</span>
+<span class="o">&lt;</span><span class="n">PackageReference</span><span class="w"> </span><span class="n">Include</span><span class="o">=</span><span class="s">&quot;Microsoft.ApplicationInsights.AspNetCore&quot;</span><span class="w"> </span><span class="n">Version</span><span class="o">=</span><span class="s">&quot;2.23.0&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">PackageReference</span><span class="w"> </span><span class="n">Include</span><span class="o">=</span><span class="s">&quot;Serilog.Sinks.ApplicationInsights&quot;</span><span class="w"> </span><span class="n">Version</span><span class="o">=</span><span class="s">&quot;5.0.1&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+</code></pre></div>
+<p><strong>Пути миграции:</strong>
+| Цель | Альтернатива | Усилие |
+|------|-------------|--------|
+| Собственные серверы | Prometheus + Grafana + Loki (open-source стек) | 🟡 1–2 недели (настройка инфраструктуры) |
+| Любой облачный провайдер | Datadog / New Relic | 🟢 2–4 дня (замена SDK) |
+| Self-hosted | OpenTelemetry (уже на роадмапе!) + Seq или Jaeger | 🟢 2–3 дня |</p>
+<blockquote>
+<p><strong>Важно:</strong> интеграция OpenTelemetry OTLP уже спроектирована в коде (закомментирована — ожидает CVE-фикса в v1.15.3+). Переход с App Insights на любой OTLP-совместимый бэкенд (Grafana, Jaeger, self-hosted Seq) уже предусмотрен архитектурой.</p>
+</blockquote>
+<h4 id="24-azure-sql-database">2.4 Azure SQL Database<a class="headerlink" href="#24-azure-sql-database" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// DependencyInjection.cs</span>
+<span class="n">options</span><span class="p">.</span><span class="n">UseSqlServer</span><span class="p">(</span><span class="n">configuration</span><span class="p">.</span><span class="n">GetConnectionString</span><span class="p">(</span><span class="s">&quot;AzureConnection&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>// appsettings.json
+&quot;AzureConnection&quot;: &quot;Server=tcp:darkstore-azure.database.windows.net,1433;...&quot;
+</code></pre></div>
+<p><strong>Причины частичной привязки:</strong>
+- <code>UseSqlServer()</code> — SQL Server-специфичный провайдер EF Core
+- Quartz.NET использует <code>store.UseSqlServer()</code> для хранилища задач
+- Тег health check <code>"azure"</code> — косметический, не функциональный
+- SQL Server доступен на Docker, on-premise, AWS RDS, Google Cloud SQL — тот же провайдер работает везде</p>
+<p><strong>Пути миграции:</strong>
+| Цель | Альтернатива | Усилие |
+|------|-------------|--------|
+| Собственный сервер | SQL Server на Linux (Docker) — изменений в коде ноль | 🟢 Несколько часов (только connection string) |
+| Собственный сервер | PostgreSQL — заменить <code>UseSqlServer</code> → <code>UseNpgsql</code>, перегенерировать миграции | 🟡 1–2 дня |
+| AWS | AWS RDS for SQL Server — изменений в коде ноль | 🟢 Несколько часов |
+| Любой | PostgreSQL (Npgsql) — полная поддержка EF Core, open-source | 🟡 1–2 дня |</p>
+<blockquote>
+<p><strong>Quartz.NET:</strong> имеет провайдер для PostgreSQL (<code>store.UsePostgres()</code>), миграция прямолинейна.</p>
+</blockquote>
+<h4 id="25-azure-blob-storage">2.5 Azure Blob Storage<a class="headerlink" href="#25-azure-blob-storage" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// DarkStore.Infrastructure.csproj</span>
+<span class="o">&lt;</span><span class="n">PackageReference</span><span class="w"> </span><span class="n">Include</span><span class="o">=</span><span class="s">&quot;Azure.Storage.Blobs&quot;</span><span class="w"> </span><span class="n">Version</span><span class="o">=</span><span class="s">&quot;12.27.0&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+</code></pre></div>
+<p><strong>Пути миграции:</strong>
+| Цель | Альтернатива | Усилие |
+|------|-------------|--------|
+| Собственный сервер | MinIO (S3-совместимый, open-source, Docker) | 🟢 2–3 дня |
+| AWS | AWS S3 (заменить <code>Azure.Storage.Blobs</code> → <code>AWSSDK.S3</code>) | 🟡 1–2 дня |
+| Любой | Любое S3-совместимое хранилище через <code>AWSSDK.S3</code> | 🟡 1–2 дня |</p>
+<blockquote>
+<p><strong>Рекомендация для будущей портабельности:</strong> абстрагировать все операции с блобами за интерфейсом <code>IBlobStorageService</code>. Сейчас такой абстракции нет — добавить до разрастания функциональности.</p>
+</blockquote>
+<h4 id="26-azure-static-web-apps-фронтенд">2.6 Azure Static Web Apps (фронтенд)<a class="headerlink" href="#26-azure-static-web-apps-фронтенд" title="Permanent link">&para;</a></h4>
+<p><strong>Почему только мягкая привязка:</strong>
+- Артефакт сборки Angular PWA — обычная папка со статическими файлами (<code>dist/</code>)
+- Деплоится куда угодно: Nginx, Apache, AWS S3 + CloudFront, GitHub Pages, Cloudflare Pages, собственный Nginx
+- Ни одна строка Angular-кода не зависит от Azure</p>
+<p><strong>Миграция:</strong> изменить шаг деплоя в CI/CD. Оценка: несколько часов.</p>
+<hr />
+<h3 id="-низкий--нулевой-lock-in--уже-портабельно">🟢 Низкий / нулевой lock-in — уже портабельно<a class="headerlink" href="#-низкий--нулевой-lock-in--уже-портабельно" title="Permanent link">&para;</a></h3>
+<h4 id="27-azure-cache-for-redis">2.7 Azure Cache for Redis<a class="headerlink" href="#27-azure-cache-for-redis" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>&quot;Redis&quot;: &quot;darkstore-redis.redis.cache.windows.net:6380,...&quot;
+</code></pre></div>
+<p><strong>Почему реального lock-in нет:</strong>
+- Протокол Redis полностью открытый (RESP protocol)
+- <code>StackExchange.Redis</code> (используется через <code>Microsoft.Extensions.Caching.StackExchangeRedis</code>) подключается к <strong>любому</strong> Redis-инстансу
+- Локальная разработка уже использует обычный Redis через Docker (<code>redis:7-alpine</code> в <code>docker-compose.yml</code>)</p>
+<p><strong>Миграция:</strong> изменить connection string. Изменений в коде нет. Оценка: минуты.</p>
+<h4 id="28-azure-app-service-вычисления">2.8 Azure App Service (вычисления)<a class="headerlink" href="#28-azure-app-service-вычисления" title="Permanent link">&para;</a></h4>
+<p><strong>Почему только инфраструктурная привязка:</strong>
+- Приложение — стандартный ASP.NET Core бинарник под <code>net10.0</code>
+- <code>Dockerfile</code> добавляется тривиально (базовый образ <code>mcr.microsoft.com/dotnet/aspnet:10.0</code>)
+- В коде приложения нет ни одного вызова Azure App Service-специфичного API</p>
+<p><strong>Пути миграции:</strong>
+| Цель | Усилие |
+|------|--------|
+| Docker на любом Linux VPS | 🟢 Добавить <code>Dockerfile</code> + обновить CI/CD: 1–2 дня |
+| AWS ECS / Fargate | 🟢 Добавить <code>Dockerfile</code> + обновить CI/CD: 2–3 дня |
+| Google Cloud Run | 🟢 Аналогично предыдущему |
+| Kubernetes (любой) | 🟡 Добавить <code>Dockerfile</code> + Helm chart: 3–5 дней |
+| Собственный сервер (bare metal) | 🟢 <code>dotnet publish</code> → systemd-сервис: 1 день |</p>
+<h4 id="29-cicd-github-actions">2.9 CI/CD (GitHub Actions)<a class="headerlink" href="#29-cicd-github-actions" title="Permanent link">&para;</a></h4>
+<p><strong>Azure-специфичные элементы:</strong>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure/login@v2</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure/webapps-deploy@v3</span>
+</code></pre></div></p>
+<p><strong>Портабельные элементы (не зависят от Azure):</strong>
+- Все шаги сборки, тестов, покрытия — стандартные shell-команды Linux
+- <code>dotnet build</code>, <code>dotnet test</code>, <code>dotnet format</code> работают на любом CI</p>
+<p><strong>Миграция:</strong> заменить шаги <code>azure/login</code> и <code>azure/webapps-deploy</code> на аналоги другого провайдера. Оценка: 1–2 часа.</p>
+<h4 id="210-jwt-аутентификация">2.10 JWT-аутентификация<a class="headerlink" href="#210-jwt-аутентификация" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;Jwt&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Authority&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://login.microsoftonline.com/PLACEHOLDER-TENANT-ID/v2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Audience&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api://PLACEHOLDER-CLIENT-ID&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Важное разграничение:</strong>
+- При использовании <strong>Azure Entra ID (Azure AD)</strong> как identity provider → средний lock-in
+- Сам middleware JWT Bearer (<code>Microsoft.AspNetCore.Authentication.JwtBearer</code>) не зависит от вендора
+- Переключение authority на <strong>Keycloak, Auth0, Okta или self-hosted</strong> требует только изменения конфигурации</p>
+<p><strong>Миграция:</strong> изменить <code>Jwt:Authority</code> и <code>Jwt:Audience</code> в конфигурации. Изменений в коде нет.</p>
+<hr />
+<h2 id="3-оценка-lock-in-по-архитектурным-слоям">3. Оценка lock-in по архитектурным слоям<a class="headerlink" href="#3-оценка-lock-in-по-архитектурным-слоям" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>graph LR
+    subgraph ZERO["🟢 Нет зависимостей"]
+        D["Domain\n(бизнес-сущности, правила)"]
+        A["Application\n(MediatR, FluentValidation)"]
+    end
+
+    subgraph MED["🟡 Средние — требует замены SDK"]
+        I["Infrastructure\n(EF Core, Redis, Azure SDKs)"]
+        P["API · Program.cs\n(Key Vault, App Insights)"]
+    end
+
+    subgraph LOW["🟢 Легко заменяемые шаги"]
+        CI["CI/CD · YAML\n(azure/login, webapps-deploy)"]
+    end
+
+    D --&gt;|"зависит от"| A
+    A --&gt;|"зависит от (через интерфейсы)"| I
+    I --&gt; P
+    P --&gt; CI
+
+    style ZERO fill:#1B5E20,color:#fff,stroke:#33691E
+    style MED  fill:#E65100,color:#fff,stroke:#BF360C
+    style LOW  fill:#1565C0,color:#fff,stroke:#0D47A1</code></pre>
+<table>
+<thead>
+<tr>
+<th>Слой</th>
+<th>Azure-зависимости</th>
+<th>Портабельность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain</td>
+<td>Нет</td>
+<td>🟢 100% портабелен</td>
+</tr>
+<tr>
+<td>Application</td>
+<td>Нет</td>
+<td>🟢 100% портабелен</td>
+</tr>
+<tr>
+<td>Infrastructure</td>
+<td>Высокие</td>
+<td>🟡 Требует замены SDK</td>
+</tr>
+<tr>
+<td>API (Program.cs)</td>
+<td>Средние</td>
+<td>🟡 Key Vault + ИИ</td>
+</tr>
+<tr>
+<td>CI/CD (YAML)</td>
+<td>Средние</td>
+<td>🟢 Шаги заменяемы</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Архитектурные решения, снижающие lock-in:</strong>
+1. <strong>Clean Architecture</strong> — слои Domain и Application не имеют абсолютно никаких инфраструктурных импортов
+2. <strong>Интерфейсный подход</strong> — <code>IAppDbContext</code>, <code>ISmsService</code>, <code>ICurrentUserService</code> изолируют реализации
+3. <strong>Конфигурационная абстракция</strong> — все Azure-эндпоинты в <code>appsettings.json</code>, не в коде
+4. <strong>Docker Compose для локальной разработки</strong> — доказывает, что инфраструктура уже сегодня работает вне Azure
+5. <strong>KZ Local DB уже on-prem</strong> — гибридная модель независимо работает без Azure с первого дня</p>
+<hr />
+<h2 id="4-сценарии-миграции">4. Сценарии миграции<a class="headerlink" href="#4-сценарии-миграции" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Обзор четырёх сценариев по осям «усилие соло-разработчика» и «полнота выхода из Azure»:</p>
+</blockquote>
+<pre class="mermaid"><code>quadrantChart
+    title Сценарии миграции — усилие vs полнота выхода из Azure
+    x-axis Низкое усилие --&gt; Высокое усилие
+    y-axis Частичный выход --&gt; Полный выход
+    quadrant-1 Оптимально
+    quadrant-2 Полно, но трудоёмко
+    quadrant-3 Быстро, но частично
+    quadrant-4 Нецелесообразно
+    Сценарий Г - только OpenAI API: [0.05, 0.15]
+    Сценарий В - Google Cloud: [0.42, 0.85]
+    Сценарий Б - AWS: [0.50, 0.88]
+    Сценарий А - On-premise: [0.82, 0.98]</code></pre>
+<h3 id="сценарий-а-переход-на-собственные-серверы-полный-on-premise">Сценарий А: Переход на собственные серверы (полный on-premise)<a class="headerlink" href="#сценарий-а-переход-на-собственные-серверы-полный-on-premise" title="Permanent link">&para;</a></h3>
+<p><strong>Подходит когда:</strong> оптимизация затрат, полный контроль данных, регуляторные требования сверх Закона РК.</p>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Сейчас</th>
+<th>После миграции</th>
+<th>Усилие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Вычисления</td>
+<td>Azure App Service</td>
+<td>Docker + Nginx на Linux VPS</td>
+<td>🟡 2–3 дня</td>
+</tr>
+<tr>
+<td>Фронтенд</td>
+<td>Azure Static Web Apps</td>
+<td>Nginx (статический хостинг)</td>
+<td>🟢 Несколько часов</td>
+</tr>
+<tr>
+<td>База данных</td>
+<td>Azure SQL</td>
+<td>SQL Server на Docker / PostgreSQL</td>
+<td>🟡 1–2 дня</td>
+</tr>
+<tr>
+<td>Кэш</td>
+<td>Azure Cache for Redis</td>
+<td>Redis на Docker</td>
+<td>🟢 Несколько часов</td>
+</tr>
+<tr>
+<td>Хранилище</td>
+<td>Azure Blob Storage</td>
+<td>MinIO (S3-совместимый)</td>
+<td>🟢 2–3 дня</td>
+</tr>
+<tr>
+<td>Секреты</td>
+<td>Azure Key Vault</td>
+<td>HashiCorp Vault</td>
+<td>🟡 3–5 дней</td>
+</tr>
+<tr>
+<td>Мониторинг</td>
+<td>Application Insights</td>
+<td>Prometheus + Grafana + Loki</td>
+<td>🟡 1–2 недели</td>
+</tr>
+<tr>
+<td>ИИ / Поиск</td>
+<td>Azure OpenAI + AI Search</td>
+<td>Ollama + pgvector (компромисс по качеству)</td>
+<td>🔴 3–5 недель</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td>GitHub Actions → Azure</td>
+<td>GitHub Actions → Docker Hub + SSH</td>
+<td>🟢 2–4 часа</td>
+</tr>
+<tr>
+<td>Identity</td>
+<td>Azure Entra ID</td>
+<td>Keycloak (self-hosted)</td>
+<td>🟡 1–2 дня</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Итоговая оценка:</strong> 5–9 недель (соло-разработчик), с сохранением всей бизнес-логики.</p>
+<hr />
+<h3 id="сценарий-б-переход-на-aws">Сценарий Б: Переход на AWS<a class="headerlink" href="#сценарий-б-переход-на-aws" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Сейчас</th>
+<th>Альтернатива AWS</th>
+<th>Усилие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Вычисления</td>
+<td>Azure App Service</td>
+<td>AWS ECS Fargate / Elastic Beanstalk</td>
+<td>🟢 2–3 дня</td>
+</tr>
+<tr>
+<td>Фронтенд</td>
+<td>Azure Static Web Apps</td>
+<td>AWS S3 + CloudFront</td>
+<td>🟢 Несколько часов</td>
+</tr>
+<tr>
+<td>База данных</td>
+<td>Azure SQL</td>
+<td>AWS RDS for SQL Server</td>
+<td>🟢 Несколько часов (connection string)</td>
+</tr>
+<tr>
+<td>Кэш</td>
+<td>Azure Cache for Redis</td>
+<td>AWS ElastiCache for Redis</td>
+<td>🟢 Несколько часов</td>
+</tr>
+<tr>
+<td>Хранилище</td>
+<td>Azure Blob Storage</td>
+<td>AWS S3 (<code>AWSSDK.S3</code>)</td>
+<td>🟡 1–2 дня</td>
+</tr>
+<tr>
+<td>Секреты</td>
+<td>Azure Key Vault</td>
+<td>AWS Secrets Manager</td>
+<td>🟡 2–3 дня</td>
+</tr>
+<tr>
+<td>Мониторинг</td>
+<td>Application Insights</td>
+<td>AWS CloudWatch + X-Ray</td>
+<td>🟡 2–3 дня</td>
+</tr>
+<tr>
+<td>ИИ / Поиск</td>
+<td>Azure OpenAI + AI Search</td>
+<td>Amazon Bedrock + OpenSearch</td>
+<td>🟡 2–3 недели</td>
+</tr>
+<tr>
+<td>CI/CD OIDC</td>
+<td>Azure OIDC</td>
+<td>AWS OIDC для GitHub Actions</td>
+<td>🟢 Несколько часов</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Итоговая оценка:</strong> 3–6 недель (соло-разработчик).</p>
+<hr />
+<h3 id="сценарий-в-переход-на-google-cloud">Сценарий В: Переход на Google Cloud<a class="headerlink" href="#сценарий-в-переход-на-google-cloud" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Сейчас</th>
+<th>Альтернатива GCP</th>
+<th>Усилие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Вычисления</td>
+<td>Azure App Service</td>
+<td>Cloud Run</td>
+<td>🟢 2–3 дня</td>
+</tr>
+<tr>
+<td>База данных</td>
+<td>Azure SQL</td>
+<td>Cloud SQL for SQL Server</td>
+<td>🟢 Несколько часов</td>
+</tr>
+<tr>
+<td>ИИ / Поиск</td>
+<td>Azure OpenAI + AI Search</td>
+<td>Vertex AI + Vertex AI Search</td>
+<td>🟡 2–3 недели</td>
+</tr>
+<tr>
+<td>Мониторинг</td>
+<td>Application Insights</td>
+<td>Cloud Monitoring + Cloud Logging</td>
+<td>🟡 2–3 дня</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Итоговая оценка:</strong> 3–5 недель.</p>
+<blockquote>
+<p><strong>Примечание:</strong> Firebase (запланирован на Q3) — это GCP-продукт. Миграция на Google Cloud была бы <strong>проще</strong> в части пайплайна уведомлений.</p>
+</blockquote>
+<hr />
+<h3 id="сценарий-г-минимальное-изменение-только-выход-из-azure-openai">Сценарий Г: Минимальное изменение (только выход из Azure OpenAI)<a class="headerlink" href="#сценарий-г-минимальное-изменение-только-выход-из-azure-openai" title="Permanent link">&para;</a></h3>
+<p>Если единственная цель — убрать зависимость от Azure OpenAI, оставаясь на Azure-инфраструктуре:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// До (Azure OpenAI)</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AzureOpenAIClient</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">endpoint</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AzureKeyCredential</span><span class="p">(</span><span class="n">apiKey</span><span class="p">));</span>
+
+<span class="c1">// После (OpenAI API напрямую — тот же SDK, другой конструктор)</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClient</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ApiKeyCredential</span><span class="p">(</span><span class="n">apiKey</span><span class="p">));</span>
+</code></pre></div>
+<p><code>Azure.AI.OpenAI</code> v2.x поддерживает оба варианта (Azure и прямой OpenAI) через один пакет.<br />
+<strong>Оценка: 2–3 часа.</strong></p>
+<hr />
+<h2 id="5-реестр-рисков-lock-in">5. Реестр рисков lock-in<a class="headerlink" href="#5-реестр-рисков-lock-in" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Риск</th>
+<th>Вероятность</th>
+<th>Влияние</th>
+<th>Митигация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Повышение цен Azure / прекращение плана</td>
+<td>Низкая</td>
+<td>Высокое</td>
+<td>План портабельности задокументирован; контейнеризация инфраструктуры готова</td>
+</tr>
+<tr>
+<td>Снятие с поддержки модели GPT-4o</td>
+<td>Средняя</td>
+<td>Среднее</td>
+<td>Все AI-вызовы проходят через один сервисный класс; название модели в конфиге</td>
+</tr>
+<tr>
+<td>Резкий рост цен Azure AI Search</td>
+<td>Средняя</td>
+<td>Среднее</td>
+<td>Абстрагировать за <code>ISearchService</code>, переключиться на Elasticsearch / pgvector</td>
+</tr>
+<tr>
+<td>Ограничение DTU Azure SQL тормозит приложение</td>
+<td>Средняя</td>
+<td>Высокое</td>
+<td>EF Core поддерживает PostgreSQL (Npgsql) — миграция 1–2 дня</td>
+</tr>
+<tr>
+<td>Простой региона Azure (Sweden Central)</td>
+<td>Низкая</td>
+<td>Критическое</td>
+<td>KZ Local DB уже независима; HA бизнес-данных зависит от geo-backup Azure SQL</td>
+</tr>
+<tr>
+<td>Требование регулятора убрать данные из Azure</td>
+<td>Низкая→Средняя</td>
+<td>Критическое</td>
+<td>Архитектура это поддерживает: KZ Local DB уже не в Azure; бизнес-данные могут переехать на self-hosted SQL Server</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-рекомендации-по-снижению-lock-in">6. Рекомендации по снижению lock-in<a class="headerlink" href="#6-рекомендации-по-снижению-lock-in" title="Permanent link">&para;</a></h2>
+<h3 id="приоритет-1--сделать-сейчас-без-затрат-архитектурные-улучшения">Приоритет 1 — Сделать сейчас (без затрат, архитектурные улучшения)<a class="headerlink" href="#приоритет-1--сделать-сейчас-без-затрат-архитектурные-улучшения" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Ввести интерфейс <code>IBlobStorageService</code></strong> для всех операций с блобами. Зарегистрировать <code>AzureBlobStorageService</code> как реализацию. Переход на MinIO/S3 станет изменением одного класса.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Ввести интерфейс <code>ISearchService</code></strong> для вызовов Azure AI Search. Открывает возможность подмены на Elasticsearch, Typesense или pgvector.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Ввести интерфейс <code>IAiService</code></strong> для вызовов OpenAI. Изолирует AI SDK от логики приложения.</li>
+</ul>
+<h3 id="приоритет-2--до-q2-низкое-усилие-высокое-значение">Приоритет 2 — До Q2 (низкое усилие, высокое значение)<a class="headerlink" href="#приоритет-2--до-q2-низкое-усилие-высокое-значение" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Добавить <code>Dockerfile</code></strong> — у приложения его нет. Это единственный шаг, который позволит деплоить на любой Docker-хост.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Заменить <code>Serilog.Sinks.ApplicationInsights</code> на OpenTelemetry</strong> (уже в роадмапе). OTLP — вендор-нейтральный протокол, экспортируется в Grafana, Datadog, Jaeger, Seq, self-hosted стеки.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Сделать <code>OpenTelemetry:OtlpEndpoint</code></strong> основным путём наблюдаемости в <code>appsettings.json</code>, App Insights — вторичным.</li>
+</ul>
+<h3 id="приоритет-3--до-q3-среднее-усилие">Приоритет 3 — До Q3 (среднее усилие)<a class="headerlink" href="#приоритет-3--до-q3-среднее-усилие" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Переключить JWT authority на Keycloak или self-hosted OIDC</strong>, если нет жёсткого требования использовать Azure Entra ID. Keycloak работает на Docker, бесплатен, полностью OIDC-совместим.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Создать IaC-шаблон для non-Azure хостинга</strong> (продакшн-версия Docker Compose) в дополнение к существующему Bicep-шаблону.</li>
+</ul>
+<h3 id="приоритет-4--резервное-планирование">Приоритет 4 — Резервное планирование<a class="headerlink" href="#приоритет-4--резервное-планирование" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Задокументировать runbook для каждого сценария миграции</strong> из раздела 4, чтобы любой разработчик мог выполнить его без участия автора.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Держать работающую ветку с миграциями PostgreSQL</strong> — если цены Azure SQL вырастут, переход на Npgsql можно валидировать в CI без затрагивания продакшна.</li>
+</ul>
+<hr />
+<h2 id="7-итоговая-оценка">7. Итоговая оценка<a class="headerlink" href="#7-итоговая-оценка" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>graph TD
+    subgraph HIGH["🔴 Сильный lock-in — замена SDK / API"]
+        OAI["Azure OpenAI Service\nпроприетарный враппер GPT API"]
+        AIS["Azure AI Search\nпроприетарный API индекса и запросов"]
+        KV["Azure Key Vault\nпроприетарный провайдер секретов"]
+    end
+
+    subgraph MED["🟡 Средний lock-in — конфиг + незначительный код"]
+        APM["Azure Application Insights\nзаменить на OTel — уже запланировано"]
+        BLOB["Azure Blob Storage\nабстрагировать за IBlobStorageService"]
+        ENTRA["Azure Entra ID / JWT\nтолько конфиг — нет AD-специфичных claims"]
+    end
+
+    subgraph LOW["🟢 Низкий / нулевой lock-in — connection string или шаг CI/CD"]
+        AAS["Azure App Service\nстандартный .NET бинарник — добавить Dockerfile"]
+        SQL["Azure SQL\nSQL Server работает везде — или перейти на PG"]
+        REDIS["Azure Cache for Redis\nRedis есть Redis — одинаковый протокол везде"]
+        SWA["Azure Static Web Apps\nAngular dist — обычные HTML/JS/CSS файлы"]
+        CDN["Azure CDN\nлюбой CDN или Nginx решает задачу"]
+    end
+
+    style HIGH  fill:#B71C1C,color:#fff,stroke:#7F0000
+    style MED   fill:#E65100,color:#fff,stroke:#BF360C
+    style LOW   fill:#1B5E20,color:#fff,stroke:#33691E</code></pre>
+<p><strong>Общий вывод:</strong> текущая архитектура имеет <strong>умеренный, а не критический</strong> уровень зависимости от Azure. Clean Architecture гарантирует отсутствие Azure-импортов в бизнес-логике. Lock-in ограничен инфраструктурным слоем и сосредоточен в AI-сервисах и мониторинге.</p>
+<p>Полная миграция на альтернативный хостинг (другое облако или собственные серверы) <strong>реалистично достижима за 5–9 недель</strong> для соло-разработчика, при этом AI/LLM-часть является наиболее сложной. Миграция только инфраструктуры (вычисления + БД + кэш + хранилище + CI/CD) занимает <strong>2–3 недели</strong> при сохранении Azure AI-сервисов или замене их облако-нейтральными альтернативами.</p>
+<hr />
+<p><em>Документ создан: Май 2026. Пересматривать ежеквартально или при оценке изменений инфраструктуры.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Нижний колонтитул" >
+        
+          
+          <a href="../LEGAL_REQUIREMENTS/" class="md-footer__link md-footer__link--prev" aria-label="Назад: Правовые требования">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Назад
+              </span>
+              <div class="md-ellipsis">
+                Правовые требования
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../BRAND_GUIDELINES/" class="md-footer__link md-footer__link--next" aria-label="Вперед: Гайдлайны бренда">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Вперед
+              </span>
+              <div class="md-ellipsis">
+                Гайдлайны бренда
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Dark Store. Все права защищены.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com" target="_blank" rel="noopener" title="GitHub репозиторий" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.suggest", "search.share", "content.tabs.link", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
