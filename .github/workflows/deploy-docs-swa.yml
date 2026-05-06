@@ -1,0 +1,77 @@
+name: Deploy Docs — Azure Static Web Apps
+
+# Builds the MkDocs Material site and deploys it to Azure Static Web Apps.
+#
+# Required secret:
+#   AZURE_STATIC_WEB_APPS_API_TOKEN — deployment token from the Azure SWA resource
+#     (Azure Portal → your SWA → Overview → "Manage deployment token")
+#
+# Trigger paths are scoped to docs only — backend changes do not redeploy the site.
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/deploy-docs-swa.yml'
+  pull_request:
+    types: [ opened, synchronize, reopened, closed ]
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/deploy-docs-swa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_and_deploy:
+    name: 📤 Build & Deploy Docs
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+          submodules: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
+
+      - name: Build site (strict)
+        run: mkdocs build --strict --clean
+
+      - name: Deploy to Azure Static Web Apps
+        id: deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: site
+          skip_app_build: true
+          skip_api_build: true
+
+  close_pull_request:
+    name: 🧹 Close PR Preview Environment
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Close PR preview
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: close
