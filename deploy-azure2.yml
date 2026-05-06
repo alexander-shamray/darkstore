@@ -73,6 +73,16 @@ jobs:
       - name: Check for vulnerable packages
         run: dotnet list package --vulnerable --include-transitive 2>&1 | tee vuln.txt; grep -q "has the following vulnerable packages" vuln.txt && exit 1 || exit 0
 
+      - name: Check comments language (English only)
+        run: |
+          npx cspell lint \
+            --config .cspell.json \
+            --no-progress \
+            --show-suggestions \
+            "src/**/*.cs" "tests/**/*.cs"
+        # Fails if non-English words are found in source files.
+        # Add project-specific terms to .cspell.json → "words" array.
+
       - name: Build backend
         run: dotnet build src/DarkStore.API/DarkStore.API.csproj --configuration Release --no-restore
 

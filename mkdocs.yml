@@ -109,6 +109,7 @@ nav:
   - ⚖️ Риски и право:
     - Риски и митигация: RISKS_AND_MITIGATION.md
     - Правовые требования: LEGAL_REQUIREMENTS.md
+    - Azure Lock-In Analysis: AZURE_LOCK_IN_ANALYSIS.md
 
   - 🎨 Бренд:
     - Гайдлайны бренда: BRAND_GUIDELINES.md

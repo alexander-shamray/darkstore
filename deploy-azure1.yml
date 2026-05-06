@@ -48,6 +48,24 @@ jobs:
       - name: Enforce code formatting (dotnet format)
         run: dotnet format --verify-no-changes --verbosity diagnostic
 
+      - name: Setup Node.js (for cspell)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install cspell
+        run: npm install -g cspell@latest
+
+      - name: Check comments language (English only)
+        run: |
+          cspell lint \
+            --config .cspell.json \
+            --no-progress \
+            --show-suggestions \
+            "src/**/*.cs" "tests/**/*.cs"
+        # Fails if non-English words are found in source files.
+        # Add words to .cspell.json → "words" array to whitelist project-specific terms.
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
 

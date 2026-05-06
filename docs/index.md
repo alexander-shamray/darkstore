@@ -50,10 +50,11 @@ hide:
 
     ---
 
-    15 ключевых рисков с митигацией, правовые требования РК (ОФД, ПДн, ТК).
+    15 ключевых рисков с митигацией, правовые требования РК (ОФД, ПДн, ТК), анализ зависимости от Azure.
 
     [:octicons-arrow-right-24: Риски и митигация](RISKS_AND_MITIGATION.md)  
-    [:octicons-arrow-right-24: Правовые требования](LEGAL_REQUIREMENTS.md)
+    [:octicons-arrow-right-24: Правовые требования](LEGAL_REQUIREMENTS.md)  
+    [:octicons-arrow-right-24: Azure Lock-In Analysis](AZURE_LOCK_IN_ANALYSIS.md)
 
 -   :art:{ .lg .middle } **Бренд**
 
@@ -95,7 +96,7 @@ hide:
 === "👔 Заказчик / Инвестор"
 
     ```
-    Обзор проекта → Анализ конкурентов → Финансовая модель → Роадмап → Риски и митигация
+    Обзор проекта → Анализ конкурентов → Финансовая модель → Роадмап → Риски → Azure Lock-In
     ```
 
     1. [Обзор проекта](DARK_STORE_PROJECT_SUMMARY.md) — суть и УТП за 5 минут
@@ -104,6 +105,7 @@ hide:
     4. [Финансовая модель](FINANCIAL_MODEL.md) — деньги и точка безубыточности
     5. [Роадмап на 12 месяцев](ROADMAP_12_MONTHS.md) — что и когда
     6. [Риски и митигация](RISKS_AND_MITIGATION.md) — что может пойти не так и как управляем
+    7. [Azure Lock-In Analysis](AZURE_LOCK_IN_ANALYSIS.md) — насколько мы привязаны к Azure и как уйти
 
 === "⚙️ Операционный менеджер"
 
@@ -121,7 +123,7 @@ hide:
 === "💻 Разработчик"
 
     ```
-    Обзор → Стек → База данных → Аутентификация → Конфигурация → Создание проекта
+    Обзор → Стек → База данных → Аутентификация → Конфигурация → Lock-In → Создание проекта
     ```
 
     1. [Обзор проекта](DARK_STORE_PROJECT_SUMMARY.md)
@@ -130,7 +132,8 @@ hide:
     4. [Аутентификация](AUTH_AND_IDENTITY.md)
     5. [Интеграции](INTEGRATIONS.md)
     6. [Конфигурация](CONFIGURATION_GUIDE.md)
-    7. [Создание проекта](PROJECT_CREATION_STEPS.md)
+    7. [Azure Lock-In Analysis](AZURE_LOCK_IN_ANALYSIS.md) — карта зависимостей и сценарии миграции
+    8. [Создание проекта](PROJECT_CREATION_STEPS.md)
 
 === "📣 Маркетолог / Партнёр"
 

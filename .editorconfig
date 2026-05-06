@@ -1,7 +1,11 @@
 ﻿# ──────────────────────────────────────────────────────────────────────────────
 # .editorconfig — DarkStore project coding style
-# Derived from the actual source code conventions in src/and tests/.
+# Derived from the actual source code conventions in src/ and tests/.
 # Targets: net10.0 · C# 13 · ASP.NET Core · Clean Architecture
+# ──────────────────────────────────────────────────────────────────────────────
+# POLICY: All code comments, XML doc comments, TODO/FIXME notes, and inline
+#         remarks MUST be written in English only. Comments in any other
+#         language are not permitted and will be rejected during code review.
 # ──────────────────────────────────────────────────────────────────────────────
 root = true
 
@@ -13,6 +17,8 @@ indent_style             = space
 indent_size              = 4
 trim_trailing_whitespace = true
 insert_final_newline     = true
+# Spell-checker language hint — comments must be in English only
+spelling_language        = en-US
 
 # ── C# source files ───────────────────────────────────────────────────────────
 [*.cs]

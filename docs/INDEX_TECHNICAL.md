@@ -79,6 +79,7 @@
 |---|---------|---------|
 | 7.1 | [RISKS_AND_MITIGATION.md](./RISKS_AND_MITIGATION.md) | 15 рисков с вероятностью, влиянием и стратегией снижения (в т.ч. KZ Local DB SPOF, ОФД/ККМ, payment fraud) |
 | 7.2 | [LEGAL_REQUIREMENTS.md](./LEGAL_REQUIREMENTS.md) | ОФД/ККМ, юрлицо (ИП/ТОО), Закон о ПДн, трудоустройство курьеров, СанПиН, чеклист перед запуском |
+| 7.3 | [AZURE_LOCK_IN_ANALYSIS.md](./AZURE_LOCK_IN_ANALYSIS.md) | Анализ зависимости от Azure: карта всех SDK и сервисов, степень lock-in по каждому компоненту, 4 сценария миграции (on-premise / AWS / GCP / минимальная) с оценкой усилий, рекомендации по снижению привязки |
 
 ---
 
@@ -118,5 +119,5 @@ dotnet run --project src/DarkStore.API   # запустить API
 
 ---
 
-*Обновлён: Май 2026 — добавлены COMPETITOR_ANALYSIS, BRAND_GUIDELINES, LEGAL_REQUIREMENTS, IMPROVEMENT_PLAN, MANUAL_ACTIONS, rollback.yml, LOGGING_AND_AUDIT_STRATEGY, **AUTH_AND_IDENTITY**, **SOLUTION_COMPARISON**; обновлены CI/CD (CodeQL SAST + npm audit + dotnet format gate), стек (async Serilog, JWT + OAuth 2.0/OIDC + 2FA + семейные подписки, Rate Limiting, HSTS, Security Headers, Output Cache, Response Compression, OpenTelemetry, @ngrx/signals, @angular/google-maps, azure-key-vault); добавлены Directory.Build.props, global.json, docker-compose.yml*
+*Обновлён: Май 2026 — добавлены COMPETITOR_ANALYSIS, BRAND_GUIDELINES, LEGAL_REQUIREMENTS, IMPROVEMENT_PLAN, MANUAL_ACTIONS, rollback.yml, LOGGING_AND_AUDIT_STRATEGY, **AUTH_AND_IDENTITY**, **SOLUTION_COMPARISON**, **AZURE_LOCK_IN_ANALYSIS**; обновлены CI/CD (CodeQL SAST + npm audit + dotnet format gate + cspell English-only check), стек (async Serilog, JWT + OAuth 2.0/OIDC + 2FA + семейные подписки, Rate Limiting, HSTS, Security Headers, Output Cache, Response Compression, OpenTelemetry, @ngrx/signals, @angular/google-maps, azure-key-vault); добавлены Directory.Build.props, global.json, docker-compose.yml*
 
