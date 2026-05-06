@@ -5,6 +5,7 @@
   <Folder Name="/docs/">
     <File Path="docs/ANALYSIS_AND_CHANGES.md" />
     <File Path="docs/AUTH_AND_IDENTITY.md" />
+    <File Path="docs/AZURE_LOCK_IN_ANALYSIS.md" />
     <File Path="docs/BRAND_GUIDELINES.md" />
     <File Path="docs/COMPETITOR_ANALYSIS.md" />
     <File Path="docs/CONFIGURATION_GUIDE.md" />
@@ -12,6 +13,7 @@
     <File Path="docs/CUSTOMER_SUPPORT_GUIDE.md" />
     <File Path="docs/DARK_STORE_PROJECT_SUMMARY.md" />
     <File Path="docs/DATABASE_SCHEMA.md" />
+    <File Path="docs/DOCS_DEPLOY.md" />
     <File Path="docs/FINANCIAL_MODEL.md" />
     <File Path="docs/GROWTH_HACKS.md" />
     <File Path="docs/IMPROVEMENT_PLAN.md" />
