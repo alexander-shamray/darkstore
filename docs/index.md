@@ -32,9 +32,10 @@ hide:
 
     ---
 
-    Квартальный план на 12 месяцев: от MVP до масштабирования.
+    Квартальный план на 12 месяцев и пошаговый план MVP по вехам.
 
-    [:octicons-arrow-right-24: Роадмап Q1–Q4 2026](ROADMAP_12_MONTHS.md)
+    [:octicons-arrow-right-24: Роадмап Q1–Q4 2026](ROADMAP_12_MONTHS.md)  
+    [:octicons-arrow-right-24: План MVP по вехам](MVP_PLAN.md)
 
 -   :gear:{ .lg .middle } **Операции**
 
@@ -104,6 +105,7 @@ hide:
     3. [Сравнение решений](SOLUTION_COMPARISON.md) — почему собственная разработка выгоднее
     4. [Финансовая модель](FINANCIAL_MODEL.md) — деньги и точка безубыточности
     5. [Роадмап на 12 месяцев](ROADMAP_12_MONTHS.md) — что и когда
+    5a. [План MVP по вехам](MVP_PLAN.md) — критерии приёмки M0–M5 и gate публичного запуска
     6. [Риски и митигация](RISKS_AND_MITIGATION.md) — что может пойти не так и как управляем
     7. [Azure Lock-In Analysis](AZURE_LOCK_IN_ANALYSIS.md) — насколько мы привязаны к Azure и как уйти
 
